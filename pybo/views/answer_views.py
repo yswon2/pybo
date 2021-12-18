@@ -50,7 +50,7 @@ def answer_modify(request, answer_id):
             answer = form.save(commit=False)
             answer.modify_date = timezone.now()
             answer.save()
-            return redirect('{}answer_{}'.format(resolve_url('pybo:detail', question_id=answer.question.id), answer.id))
+            return redirect('{}#answer_{}'.format(resolve_url('pybo:detail', question_id=answer.question.id), answer.id))
             #return redirect('pybo:detail', question_id=answer.question.id)
     else:
         form = AnswerForm(instance=answer)
