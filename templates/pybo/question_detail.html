@@ -24,7 +24,7 @@
             <div class="card">
                 <div class="card-body">
                     <!-- 질문 Start  -->
-                    <div class="card-text" >{{question.content|mark}}</div>
+                    <div class="card-text" >{{ question.content|mark }}</div>
                     <div class="d-flex justify-content-end">
                         {% if question.modify_date %}
                         <div class="badge badge-light p-2 text-left mx-3">
@@ -55,7 +55,7 @@
                         <div class="comment py-2 text-muted">
                             <span style="white-space: pre-line;">{{ comment.content }}</span>
                             <span>
-                                - {{ comment.author }}, {{comment.create_date }}
+                                - {{ comment.author }}, {{ comment.create_date }}
                                 {% if comment.modify_date %}
                                 (수정:{{ comment.modify_date }})
                                 {% endif %}
@@ -88,10 +88,9 @@
                 class="recommend btn btn-sm btn-secondary btn-block my-1">추천</a>
         </div>
         <div class="col-11">    <!-- 답변 영역 -->
-            <!-- 기존 내용 -->
-            <div class="card">
+            <div class="card">                <!-- 기존 내용 -->
                 <div class="card-body">
-                    <div class="card-text" >{{ answer.content|mark }}</div>
+                    <div class="card-text">{{ answer.content|mark }}</div>
                     <div class="d-flex justify-content-end">
                         {% if answer.modify_date %}
                             <div class="badge badge-light p-2 text-left mx-3">
@@ -103,7 +102,6 @@
                             <div class="mb-2">{{ answer.author.username }}</div>
                             <div>{{ answer.create_date }}</div>
                         </div>
-
                     </div>
                     {% if request.user == answer.author %}
                     <div class="my-3">
@@ -122,7 +120,7 @@
                         <div class="comment py-2 text-muted">
                             <span style="white-space: pre-line;">{{ comment.content }} </span>
                             <span>
-                                - {{ comment.author }}. {{comment.creat_date }}
+                                - {{ comment.author }}. {{comment.create_date }}
                                 {% if comment.modify_date %}
                                 (수정:{{ comment.modify_date }})
                                 {% endif %}
