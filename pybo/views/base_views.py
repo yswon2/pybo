@@ -9,6 +9,7 @@ def index(request):
     '''
      pybo 목록 출력
     '''
+    3/0
 
     #입력 파라미터
     page = request.GET.get('page', '1')
