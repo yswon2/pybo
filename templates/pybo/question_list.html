@@ -2,6 +2,7 @@
 {% load pybo_filter %}
 {% block content %}
 
+
 <div class="container my-3">
     <div class="row justify-content-end my-3">
         <div class="col-4 input-group">
@@ -12,9 +13,9 @@
         </div>
     </div>
 
-    <table class="table">
+    <table class="table table-striped" >
         <thead>
-        <tr class="thead-dark">
+        <tr class="thead-dark text-center">
             <th>번호</th>
             <th>추천</th>
             <th style="width:50%" >제목</th>
@@ -36,7 +37,7 @@
                 {% endif %}
             </td>
             <td class="text-left">
-                <a href="{% url 'pybo:detail' question.id%}">{{question.subject}}</a>
+                <a href="{% url 'pybo:detail' question.id%} " class="text-primary">{{question.subject}}</a>
                 {% if question.answer_set.count > 0 %}
                 <span class="text-danger small ml-2">{{ question.answer_set.count }}</span>
                 {% endif %}
@@ -95,8 +96,11 @@
     </ul>
     <!-- 페이징처리 끝 -->
 
-    <a href="{% url 'pybo:question_create' %}" class="btn btn-primary">질문 등록하기</a>
+    <a href="{% url 'pybo:question_create' %}" class="btn btn-success btn-lg pull-right">질문 등록하기</a>
 </div>
+
+
+
 
 <form id="searchForm" method="get" action="{% url 'index' %}">
     <input type="hidden" id="kw" name="kw" value="{{ kw|default_if_none:'' }}">
