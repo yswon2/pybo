@@ -37,7 +37,7 @@ class Comment(models.Model):
 
 
 class StockBarcodeData(models.Model):
-    trade_date = models.DateTimeField(null=False, blank=False)
+    trade_date = models.DateField(null=False, blank=False)
     StockCode = models.CharField(null=False, blank=False, max_length=45)
     StockName = models.CharField(null=True, blank=True, max_length=100)
     MarketType = models.CharField(null=False, blank=False, max_length=45)
@@ -57,7 +57,7 @@ class StockBarcodeData(models.Model):
 
 
 class StockBarcodePerfReturn(models.Model):
-    TradeDate = models.DateTimeField(null=False, blank=False)
+    TradeDate = models.DateField(null=False, blank=False)
     StockCode = models.CharField(null=False, blank=False,  max_length=45)
     StockName = models.CharField(null=True, blank=True, max_length=100)
     MarketType = models.CharField(null=True, blank=True, max_length=45)
