@@ -15,14 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from pybo.views import base_views
+from pybo.views import base_views, chartfinder_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('pybo/', include('pybo.urls')),
     path('common/', include('common.urls')),
     path('', base_views.index, name='index'),
-    path('extra/', base_views.extra, name='extra'),
+    path('chartfinder/', chartfinder_views.chartfinder, name='chartfinder'),
 ]
 
 
