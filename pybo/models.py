@@ -36,38 +36,16 @@ class Comment(models.Model):
 
 
 
-class StockBarcodeData(models.Model):
+
+class stockbarcodeperfreturn(models.Model):
 
     trade_date = models.DateField(null=False, blank=False)
-    StockCode = models.CharField(null=False, blank=False, max_length=45)
+    StockCode = models.CharField(null=False, blank=False,  max_length=20)
     StockName = models.CharField(null=True, blank=True, max_length=100)
-    MarketType = models.CharField(null=False, blank=False, max_length=45)
+    MarketType = models.CharField(null=False, blank=False, max_length=15)
     ClosePrice = models.FloatField()
-    BarType = models.CharField(null=True, blank=True, max_length=45)
-    BarLengthType = models.CharField(null=True, blank=True, max_length=45)
-    HammerType = models.CharField(null=True, blank=True, max_length=45)
-    StochasticFlag = models.CharField(null=True, blank=True, max_length=45)
-    BolingerBandPos = models.CharField(null=True, blank=True, max_length=45)
-    VolumeFlag = models.CharField(null=True, blank=True, max_length=45)
-    MACDFlag = models.CharField(null=True, blank=True, max_length=45)
-    StrategyCond = models.CharField(null=True, blank=True, max_length=45)
-    STDevStochasticFlag = models.CharField(null=True, blank=True, max_length=45)
-    BarFinalCode = models.CharField(null=True, blank=True, max_length=45)
-    BarFinalCodeDtl = models.CharField(null=True, blank=True, max_length=45)
-    StochasticCrossFlag = models.CharField(null=True, blank=True, max_length=45)
-
-    #StockBarcode_ID = '_'.join(trade_date.strftime('%Y-%m-%d'), StockCode, MarketType)
-    StockBarcode_ID = models.CharField(null=False, blank=False, primary_key=True, max_length=150, default='AAA')
-
-class StockBarcodePerfReturn(models.Model):
-
-    #TradeDate = models.DateField(null=False, blank=False)
-    #StockCode = models.CharField(null=False, blank=False,  max_length=45)
-    #StockName = models.CharField(null=True, blank=True, max_length=100)
-    #MarketType = models.CharField(null=True, blank=True, max_length=45)
-    #ClosePrice = models.FloatField()
-    #BarFinalCode = models.CharField(null=True, blank=True, max_length=45)
-    #BarFinalCodeDtl = models.CharField(null=True, blank=True, max_length=45)
+    BarFinalCode = models.CharField(null=True, blank=True, max_length=20)
+    BarFinalCodeDtl = models.CharField(null=True, blank=True, max_length=20)
     Day1PL = models.FloatField()
     Day1Return = models.FloatField()
     ClosePriceAft1 = models.FloatField()
@@ -81,16 +59,6 @@ class StockBarcodePerfReturn(models.Model):
     Day75Return = models.FloatField()
     ClosePriceAft75 = models.FloatField()
 
-    StockBarcodeData = models.ForeignKey(StockBarcodeData, on_delete=models.CASCADE, default='AAA')
-
-
-class StockBarcodePerfTotal(models.Model):
-
-    #StockBarcodePerfTotal_ID = '_'.join(BarFinalCode, MarketType)
-    StockBarcodePerfTotal_ID = models.CharField(null=False, blank=False, primary_key=True, max_length=150, default='AAA')
-    BarFinalCode = models.CharField(null=False, blank=False, max_length=45)
-    MarketType = models.CharField(null=False, blank=False,  max_length=45)
-    #StockBarcodeData = models.ForeignKey(StockBarcodeData, on_delete=models.CASCADE)
     TotDay1Return = models.FloatField()
     TotDay5Return = models.FloatField()
     TotDay25Return = models.FloatField()
@@ -132,5 +100,34 @@ class StockBarcodePerfTotal(models.Model):
     TotDay75MinReturn = models.FloatField()
     Day5SuccessRate = models.FloatField()
     Day25SuccessRate = models.FloatField()
-    #BarFinalCodeDtl = models.CharField(null=True, blank=True, max_length=45)
     Day1SuccessRate = models.FloatField()
+
+
+    StockBarcode_ID = models.CharField(null=False, blank=False, primary_key=True, max_length=150, default='')
+    #StockBarcodeData = models.ForeignKey(stockbarcodedata, on_delete=models.CASCADE, default='')
+    #StockBarcodePerfTotal = models.ForeignKey(stockbarcodeperftotal, to_field='BarFinalCode', on_delete=models.CASCADE, default='')
+
+
+
+class stockbarcodedata(models.Model):
+
+    trade_date = models.DateField(null=False, blank=False)
+    StockCode = models.CharField(null=False, blank=False, max_length=20)
+    StockName = models.CharField(null=True, blank=True, max_length=100)
+    MarketType = models.CharField(null=False, blank=False, max_length=15)
+    ClosePrice = models.FloatField()
+    BarType = models.CharField(null=True, blank=True, max_length=20)
+    BarLengthType = models.CharField(null=True, blank=True, max_length=20)
+    HammerType = models.CharField(null=True, blank=True, max_length=20)
+    StochasticFlag = models.CharField(null=True, blank=True, max_length=20)
+    BolingerBandPos = models.CharField(null=True, blank=True, max_length=20)
+    VolumeFlag = models.CharField(null=True, blank=True, max_length=20)
+    MACDFlag = models.CharField(null=True, blank=True, max_length=20)
+    StrategyCond = models.CharField(null=True, blank=True, max_length=20)
+    STDevStochasticFlag = models.CharField(null=True, blank=True, max_length=20)
+    BarFinalCode = models.CharField(null=False, blank=False, max_length=20, default='')
+    BarFinalCodeDtl = models.CharField(null=True, blank=True, max_length=20)
+    StochasticCrossFlag = models.CharField(null=True, blank=True, max_length=20)
+
+    StockBarcode_ID = models.CharField(null=False, blank=False, primary_key=True, max_length=150, default='')
+    StockBarcodePerfReturn = models.ForeignKey(stockbarcodeperfreturn, on_delete=models.CASCADE, default='')

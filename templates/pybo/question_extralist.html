@@ -12,6 +12,9 @@
         <div id="page-content-wrapper" class="col-sm-12 col-md-9 col-lg-10 p-2">
             <div class="container my-3">
                 <div class="row justify-content-end my-3">
+                    <div class="col-3 input-group">
+                        <input type="date" class="form-control kw2"  value="{{ kw2|default_if_none:'' }}">
+                    </div>
                     <div class="col-4 input-group">
                         <input type="text" class="form-control kw" value="{{ kw|default_if_none:'' }}">
                         <div class="input-group-append">
@@ -23,39 +26,36 @@
                 <table class="table table-striped" >
                     <thead>
                     <tr class="thead-dark text-center">
-                        <th>번호</th>
-                        <th>추천</th>
-                        <th style="width:50%" >제목</th>
-                        <th>글쓴이</th>
-                        <th>작성일시</th>
+                        <th>날짜</th>
+                        <th>주식코드</th>
+                        <th>주식명</th>
+                        <th>종가</th>
+                        <th>BarFinalCode</th>
+                        <th>7일후수익율</th>
+                        <th>30일후수익율</th>
+                        <th>7일성공율</th>
+                        <th>30일성공율</th>
                     </tr>
                     </thead>
                     <tbody>
-                    {% if question_extralist %}
-                    {% for question in question_extralist %}
+                    {% if stockbarcodedata_list %}
+                    {% for stockbarcodedata in stockbarcodedata_list %}
                     <tr class="text-center">
                         <!-- <td>{{ forloop.counter }}</td>  -->
-                        <td>
-                            {{ question_extralist.paginator.count|sub:question_extralist.start_index|sub:forloop.counter0|add:1 }}
-                        </td>
-                        <td>
-                            {% if question.voter.all.count > 0 %}
-                            <span class="badge badge-warning px-2 py-1">{{ question.voter.all.count }}</span>
-                            {% endif %}
-                        </td>
-                        <td class="text-left">
-                            <a href="{% url 'pybo:detail' question.id%} " class="text-primary">{{question.subject}}</a>
-                            {% if question.answer_set.count > 0 %}
-                            <span class="text-danger small ml-2">{{ question.answer_set.count }}</span>
-                            {% endif %}
-                        </td>
-                        <td>{{ question.author.username }}</td>
-                        <td>{{ question.create_date }}</td>
+                        <td>{{ stockbarcodedata.trade_date }}</td>
+                        <td>{{ stockbarcodedata.StockCode }}</td>
+                        <td>{{ stockbarcodedata.StockName }}</td>
+                        <td>{{ stockbarcodedata.ClosePrice|floatformat:"0" }}</td>
+                        <td>{{ stockbarcodedata.BarFinalCode }}</td>
+                        <td>{{ stockbarcodedata.StockBarcodePerfReturn.Day5Return|floatformat:"4"  }}</td>
+                        <td>{{ stockbarcodedata.StockBarcodePerfReturn.Day25Return|floatformat:"4" }}</td>
+                        <td>{{ stockbarcodedata.StockBarcodePerfReturn.Day5SuccessRate|floatformat:"2" }}</td>
+                        <td>{{ stockbarcodedata.StockBarcodePerfReturn.Day25SuccessRate|floatformat:"2" }}</td>
                     </tr>
                     {% endfor %}
                     {% else %}
                     <tr>
-                        <td colspan="3">질문이 없습니다.</td>
+                        <td colspan="3">데이터가 없습니다.</td>
                     </tr>
                     {% endif %}
                     </tbody>
@@ -63,9 +63,9 @@
 
                 <!-- 페이징처리 시작 -->
                 <ul class="pagination justify-content-center">
-                    {% if question_extralist.has_previous %}
+                    {% if stockbarcodedata_list.has_previous %}
                     <li class="page-item">
-                        <a class="page-link" data-page="{{ question_extralist.previous_page_number }}" href="#">이전</a>
+                        <a class="page-link" data-page="{{ stockbarcodedata_list.previous_page_number }}" href="#">이전</a>
                        <!-- <a class="page-link" href="?page{{ question_extralist.previous_page_number }}">이전</a> -->
                     </li>
                     {% else %}
@@ -74,9 +74,9 @@
                     </li>
                     {% endif %}
                     <!-- 페이지 리스트 -->
-                    {% for page_number in question_extralist.paginator.page_range %}
-                    {% if page_number >= question_extralist.number|add:-5 and page_number <= question_extralist.number|add:5 %}
-                        {% if page_number == question_extralist.number %}
+                    {% for page_number in stockbarcodedata_list.paginator.page_range %}
+                    {% if page_number >= stockbarcodedata_list.number|add:-5 and page_number <= stockbarcodedata_list.number|add:5 %}
+                        {% if page_number == stockbarcodedata_list.number %}
                         <li class="page-item active" aria-current="page">
                             <a class="page-link" data-page="{{ page_number }}" href="#">{{ page_number }}</a>
                             <!--<a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>-->
@@ -90,10 +90,10 @@
                     {% endif %}
                     {% endfor %}
                     <!-- 다음 페이지 -->
-                    {% if question_extralist.has_next %}
+                    {% if stockbarcodedata_list.has_next %}
                     <li class="page-item">
-                        <a class="page-link" data-page="{{ question_extralist.next_page_number }}" href="#" >다음</a>
-                        <!--<a class="page-link" href="?page={{ question_extralist.next_page_number }}">다음</a>-->
+                        <a class="page-link" data-page="{{ stockbarcodedata_list.next_page_number }}" href="#" >다음</a>
+                        <!--<a class="page-link" href="?page={{ stockbarcodedata_list.next_page_number }}">다음</a>-->
                     </li>
                     {% else %}
                     <li class="page-item disabled">
@@ -103,7 +103,6 @@
                 </ul>
                 <!-- 페이징처리 끝 -->
 
-                <a href="{% url 'pybo:question_create' %}" class="btn btn-success btn-lg pull-right">질문 등록하기</a>
             </div>
         </div>
     </div>
@@ -112,6 +111,7 @@
 
 <form id="searchForm" method="get" action="{% url 'chartfinder' %}">
     <input type="hidden" id="kw" name="kw" value="{{ kw|default_if_none:'' }}">
+    <input type="hidden" id="kw2" name="kw2" value="{{ kw2|default_if_none:'' }}">
     <input type="hidden" id="page" name="page" value="{{ page }}">
 </form>
 
@@ -127,6 +127,7 @@ $(document).ready(function(){
 
     $("#btn_search").on('click', function() {
         $("#kw").val($(".kw").val());
+        $("#kw2").val($(".kw2").val());
         $("#page").val(1);
         $("#searchForm").submit();
     });
