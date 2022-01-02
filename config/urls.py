@@ -22,7 +22,8 @@ urlpatterns = [
     path('pybo/', include('pybo.urls')),
     path('common/', include('common.urls')),
     path('', base_views.index, name='index'),
-    path('chartfinder/', chartfinder_views.chartfinder, name='chartfinder'),
+    path('stockbacktest/', chartfinder_views.stockbacktest, name='stockbacktest'),
+    path('stockpathdetail/', chartfinder_views.stockpathdetail, name='stockpathdetail'),
 ]
 
 
