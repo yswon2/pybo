@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% load pybo_filter %}
+{% load mathfilters %}
 {% block content %}
+
 
 <div class="container mt-3">
     <!-- Sidebar -->
@@ -46,11 +48,11 @@
                         <td>{{ stockbarcodedata.StockCode }}</td>
                         <td>{{ stockbarcodedata.StockName }}</td>
                         <td>{{ stockbarcodedata.ClosePrice|floatformat:"0" }}</td>
-                        <td>{{ stockbarcodedata.StockBarcodePerfReturn.Day7Return|floatformat:"3" }} </td>
-                        <td>{{ stockbarcodedata.StockBarcodePerfReturn.Day30Return|floatformat:"3" }}</td>
-                        <td>{{ stockbarcodedata.StockBarcodePerfReturn.Day90Return|floatformat:"3" }}</td>
-                        <td>{{ stockbarcodedata.StockBarcodePerfReturn.Day180Return|floatformat:"3" }}</td>
-                        <td>{{ stockbarcodedata.StockBarcodePerfReturn.Day360Return|floatformat:"3" }}</td>
+                        <td>{{ stockbarcodedata.StockBarcodePerfReturn.Day7Return|mul:100|floatformat:"2" }} % </td>
+                        <td>{{ stockbarcodedata.StockBarcodePerfReturn.Day30Return|mul:100|floatformat:"2" }} % </td>
+                        <td>{{ stockbarcodedata.StockBarcodePerfReturn.Day90Return|mul:100|floatformat:"2" }} % </td>
+                        <td>{{ stockbarcodedata.StockBarcodePerfReturn.Day180Return|mul:100|floatformat:"2" }} % </td>
+                        <td>{{ stockbarcodedata.StockBarcodePerfReturn.Day360Return|mul:100|floatformat:"2" }} % </td>
                     </tr>
                     {% endfor %}
                     {% else %}

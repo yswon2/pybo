@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load pybo_filter %}
+{% load mathfilters %}
 {% block content %}
 
 <div class="container mt-3">
@@ -27,7 +28,6 @@
                         <th>주식코드</th>
                         <th>주식명</th>
                         <th>종가</th>
-                        <th>BarFinalCode</th>
                         <th>유사종목검색수</th>
                         <th>7일평균수익율</th>
                         <th>30일평균수익율</th>
@@ -44,12 +44,11 @@
                         <td>{{ stockpathdetail.StockCode }}</td>
                         <td>{{ stockpathdetail.StockName }}</td>
                         <td>{{ stockpathdetail.ClosePrice|floatformat:"0" }}</td>
-                        <td>{{ stockpathdetail.BarFinalCode }}</td>
                         <td>{{ stockpathdetail.StockBarcodePerfTotal.BarFinalCode_Cnt }}</td>
-                        <td>{{ stockpathdetail.StockBarcodePerfTotal.TotDay7Average|floatformat:"2"  }}</td>
-                        <td>{{ stockpathdetail.StockBarcodePerfTotal.TotDay30Average|floatformat:"2" }}</td>
-                        <td>{{ stockpathdetail.StockBarcodePerfTotal.Day7SuccessRate|floatformat:"2" }}</td>
-                        <td>{{ stockpathdetail.StockBarcodePerfTotal.Day30SuccessRate|floatformat:"2" }}</td>
+                        <td>{{ stockpathdetail.StockBarcodePerfTotal.TotDay7Average|mul:100|floatformat:"2" }} % </td>
+                        <td>{{ stockpathdetail.StockBarcodePerfTotal.TotDay30Average|mul:100|floatformat:"2" }} % </td>
+                        <td>{{ stockpathdetail.StockBarcodePerfTotal.Day7SuccessRate|mul:100|floatformat:"2" }} % </td>
+                        <td>{{ stockpathdetail.StockBarcodePerfTotal.Day30SuccessRate|mul:100|floatformat:"2" }} % </td>
                     </tr>
                     {% endfor %}
                     {% else %}

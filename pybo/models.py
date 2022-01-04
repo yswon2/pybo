@@ -163,4 +163,5 @@ class stockbarcodedata(models.Model):
     StockBarcode_ID = models.CharField(null=False, blank=False, primary_key=True, max_length=150, default='')
 
     StockBarcodePerfReturn = models.ForeignKey(stockbarcodeperfreturn, on_delete=models.CASCADE, default='')
-    StockBarcodePerfTotal = models.ForeignKey(stockbarcodeperftotal, on_delete=models.CASCADE, default='')
+    StockBarcodePerfTotal = models.ForeignKey(stockbarcodeperftotal, on_delete=models.DO_NOTHING, db_constraint=False, null=True)
+    #StockBarcodePerfTotal = models.ForeignKey(stockbarcodeperftotal, on_delete=models.DO_NOTHING, default='')
