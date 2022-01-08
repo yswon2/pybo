@@ -6,17 +6,17 @@
 <div class="container mt-3">
     <!-- Sidebar -->
     <div class="row">
-        <div class="col-sm-12 col-md-3 col-lg-2 p-2">
+        <div class="col-sm-12 col-md-3 col-lg-2 p-1">
             {% include "sidebar.html" %}
         </div>
         <!-- Page Content -->
-        <div id="page-content-wrapper" class="col-sm-12 col-md-9 col-lg-10 p-2">
+        <div id="page-content-wrapper" class="col-sm-12 col-md-9 col-lg-10 p-1">
             <div class="container my-3">
                 <div class="row justify-content-end my-3">
                     <div class="col-4 input-group">
                         <input type="text" style="text-transform: uppercase;" class="form-control kw" value="{{ kw|upper|default_if_none:'' }}">
                         <div class="input-group-append">
-                            <button class="btn btn-online-secondary" type="button" id="btn_search">찾기</button>
+                            <button class="btn btn-primary pull-right" type="button" id="btn_search">찾기</button>
                         </div>
                     </div>
                 </div>
@@ -24,15 +24,15 @@
                 <table class="table table-striped" >
                     <thead>
                     <tr class="thead-dark text-center">
-                        <th>날짜</th>
-                        <th>주식코드</th>
-                        <th>주식명</th>
-                        <th>종가</th>
-                        <th>유사종목검색수</th>
-                        <th>7일평균수익율</th>
-                        <th>30일평균수익율</th>
-                        <th>7일성공율</th>
-                        <th>30일성공율</th>
+                        <th class="col-md-1.3"><font size="2.5">날짜</font></th>
+                        <th class="col-md-1.2"><font size="2">주식코드</font></th>
+                        <th class="col-md-2.5">주식명</th>
+                        <th class="col-md-1">종가</th>
+                        <th class="col-md-1.2"><font size="2">차트유사종목수</font></th>
+                        <th class="col-md-1.2"><font size="2">7일평균수익율</font></th>
+                        <th class="col-md-1.2"><font size="2">30일평균수익율</font></th>
+                        <th class="col-md-1.2"><font size="2">7일성공율</font></th>
+                        <th class="col-md-1.2"><font size="2">30일성공율</font></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -40,20 +40,20 @@
                     {% for stockpathdetail in stockpathdetail_list %}
                     <tr class="text-center">
                         <!-- <td>{{ forloop.counter }}</td>  -->
-                        <td>{{ stockpathdetail.trade_date }}</td>
-                        <td>{{ stockpathdetail.StockCode }}</td>
-                        <td>{{ stockpathdetail.StockName }}</td>
-                        <td>{{ stockpathdetail.ClosePrice|floatformat:"0" }}</td>
-                        <td>{{ stockpathdetail.StockBarcodePerfTotal.BarFinalCode_Cnt }}</td>
-                        <td>{{ stockpathdetail.StockBarcodePerfTotal.TotDay7Average|mul:100|floatformat:"2" }} % </td>
-                        <td>{{ stockpathdetail.StockBarcodePerfTotal.TotDay30Average|mul:100|floatformat:"2" }} % </td>
-                        <td>{{ stockpathdetail.StockBarcodePerfTotal.Day7SuccessRate|mul:100|floatformat:"2" }} % </td>
-                        <td>{{ stockpathdetail.StockBarcodePerfTotal.Day30SuccessRate|mul:100|floatformat:"2" }} % </td>
+                        <td><font size="1.5"><b>{{ stockpathdetail.trade_date }}</b></font></td>
+                        <td><font size="2"><b>{{ stockpathdetail.StockCode }}</b></font></td>
+                        <td><font size="2.5"><b>{{ stockpathdetail.StockName }}</b></font></td>
+                        <td><font size="2"><b>{{ stockpathdetail.ClosePrice|floatformat:"0" }}</b></font></td>
+                        <td><font size="2"><b>{{ stockpathdetail.StockBarcodePerfTotal.BarFinalCode_Cnt }}</b></font></td>
+                        <td><font size="2"><b>{{ stockpathdetail.StockBarcodePerfTotal.TotDay7Average|mul:100|floatformat:"1" }} % </b></font></td>
+                        <td><font size="2"><b>{{ stockpathdetail.StockBarcodePerfTotal.TotDay30Average|mul:100|floatformat:"1" }} % </b></font></td>
+                        <td><font size="2"><b>{{ stockpathdetail.StockBarcodePerfTotal.Day7SuccessRate|mul:100|floatformat:"1" }} % </b></font></td>
+                        <td><font size="2"><b>{{ stockpathdetail.StockBarcodePerfTotal.Day30SuccessRate|mul:100|floatformat:"1" }} % </b></font></td>
                     </tr>
                     {% endfor %}
                     {% else %}
                     <tr>
-                        <td colspan="3">데이터가 없습니다.</td>
+                        <td colspan="12">데이터가 없습니다.</td>
                     </tr>
                     {% endif %}
                     </tbody>

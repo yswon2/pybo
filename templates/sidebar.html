@@ -1,16 +1,10 @@
-<!-- Sidebar  -->
-<nav id="sidebar" class="border-top border-secondary">
-    <div class="list-group">
-        <a class="rounded-0 list-group-item list-group-item-action list-group-item-primary {% if category.name == 'qna'  %}active{% endif %}" href="{%url 'pybo:index' %}">자유게시판</a>
-        <a class="rounded-0 list-group-item list-group-item-action list-group-item-primary {% if category.name == 'free' %}active{% endif %}" href="{%url 'pybo:stockbacktest' %}">StockBacktest</a>
-        <a class="rounded-0 list-group-item list-group-item-action list-group-item-primary {% if category.name == 'tip'  %}active{% endif %}" href="{%url 'pybo:stockpathdetail' %}">StockPathDetail</a>
-        <a class="rounded-0 list-group-item list-group-item-action list-group-item-primary {% if category.name == 'quiz' %}active{% endif %}" href="{%url 'pybo:index' %}">StockPathFinder</a>
-        <a class="rounded-0 list-group-item list-group-item-action list-group-item-primary {% if category.name == 'bug' %}active{% endif %}" href="{%url 'pybo:index' %}">StockPathFinder</a>
+
+<nav id="sidebar" >
+    <div class="col-12 p-0">
+        <div class="list-group" >
+            <a class="border-0 list-group-item list-group-item-action list-group-item-primary {% if category.name == 'free' %}active{% endif %}" href="{%url 'pybo:stockbacktest' %}"><font size="2.7"><b>주식기간수익률조회</b></font></a>
+            <a class="border-0 list-group-item list-group-item-action list-group-item-primary {% if category.name == 'tip' %}active{% endif %}" href="{%url 'pybo:stockpathdetail' %}"><font size="2.7"><b>유사차트검색결과</b></font></a>
+            <a class="border-0 list-group-item list-group-item-action list-group-item-primary {% if category.name == 'qna' %}active{% endif %}" href="{%url 'pybo:index' %}"><font size="2.7"><b>Q & A</b></font></a>
+        </div>
     </div>
 </nav>
-
-<ul class="my-3 small" style="padding-left:2em;">
-    <li class="my-1"><a href="https://wikidocs.net/book/1" target="_blank">점프 투 파이썬</a></li>
-    <li class="my-1"><a href="https://wikidocs.net/book/4223" target="_blank">점프 투 장고</a></li>
-    <li class="my-1"><a href="https://wikidocs.net/book/4542" target="_blank">점프 투 플라스크</a></li>
-</ul>

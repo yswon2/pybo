@@ -7,11 +7,11 @@
 <div class="container mt-3">
     <!-- Sidebar -->
     <div class="row">
-        <div class="col-sm-12 col-md-3 col-lg-2 p-2">
+        <div class="col-sm-12 col-md-3 col-lg-2 p-1">
             {% include "sidebar.html" %}
         </div>
         <!-- Page Content -->
-        <div id="page-content-wrapper" class="col-sm-12 col-md-9 col-lg-10 p-2">
+        <div id="page-content-wrapper" class="col-sm-12 col-md-9 col-lg-10 p-1">
             <div class="container my-3">
                 <div class="row justify-content-end my-3">
                     <div class="col-3 input-group">
@@ -20,7 +20,7 @@
                     <div class="col-4 input-group">
                         <input type="text" style="text-transform: uppercase;" class="form-control kw" value="{{ kw|upper|default_if_none:'' }}">
                         <div class="input-group-append">
-                            <button class="btn btn-online-secondary" type="button" id="btn_search">찾기</button>
+                            <button class="btn btn-primary pull-right" type="button" id="btn_search">찾기</button>
                         </div>
                     </div>
                 </div>
@@ -28,15 +28,16 @@
                 <table class="table table-striped" >
                     <thead>
                     <tr class="thead-dark text-center">
-                        <th>날짜</th>
-                        <th>주식코드</th>
-                        <th>주식명</th>
-                        <th>종가</th>
-                        <th>7일후실현수익율</th>
-                        <th>30일후실현수익율</th>
-                        <th>90일후실현수익율</th>
-                        <th>180일후실현수익율</th>
-                        <th>360일후실현수익율</th>
+                        <!--<th class="col-md-2">날짜</th> -->
+                        <th class="col-md-1.8">날짜</th>
+                        <th class="col-md-1.2">주식코드</th>
+                        <th class="col-md-2">주식명</th>
+                        <th class="col-md-1">종가</th>
+                        <th class="col-md-1.2"><font size="1">7일실현수익율</font></th>
+                        <th class="col-md-1.2"><font size="1">30일실현수익율</font></th>
+                        <th class="col-md-1.2"><font size="1">90일실현수익율</font></th>
+                        <th class="col-md-1.2"><font size="1">180일실현수익율</font></th>
+                        <th class="col-md-1.2"><font size="1">360일실현수익율</font></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -44,20 +45,20 @@
                     {% for stockbarcodedata in stockbarcodedata_list %}
                     <tr class="text-center">
                         <!-- <td>{{ forloop.counter }}</td>  -->
-                        <td>{{ stockbarcodedata.trade_date }}</td>
-                        <td>{{ stockbarcodedata.StockCode }}</td>
-                        <td>{{ stockbarcodedata.StockName }}</td>
-                        <td>{{ stockbarcodedata.ClosePrice|floatformat:"0" }}</td>
-                        <td>{{ stockbarcodedata.StockBarcodePerfReturn.Day7Return|mul:100|floatformat:"2" }} % </td>
-                        <td>{{ stockbarcodedata.StockBarcodePerfReturn.Day30Return|mul:100|floatformat:"2" }} % </td>
-                        <td>{{ stockbarcodedata.StockBarcodePerfReturn.Day90Return|mul:100|floatformat:"2" }} % </td>
-                        <td>{{ stockbarcodedata.StockBarcodePerfReturn.Day180Return|mul:100|floatformat:"2" }} % </td>
-                        <td>{{ stockbarcodedata.StockBarcodePerfReturn.Day360Return|mul:100|floatformat:"2" }} % </td>
+                        <td><font size="1.5"><b>{{ stockbarcodedata.trade_date }}</b></font></td>
+                        <td><font size="2"><b>{{ stockbarcodedata.StockCode }}</b></font></td>
+                        <td><font size="2.5"><b>{{ stockbarcodedata.StockName }}</b></font></td>
+                        <td><font size="2"><b>{{ stockbarcodedata.ClosePrice|floatformat:"0" }}</b></font></td>
+                        <td><font size="2"><b>{{ stockbarcodedata.StockBarcodePerfReturn.Day7Return|mul:100|floatformat:"1" }} % </b></font></td>
+                        <td><font size="2"><b>{{ stockbarcodedata.StockBarcodePerfReturn.Day30Return|mul:100|floatformat:"1" }} % </b></font></td>
+                        <td><font size="2"><b>{{ stockbarcodedata.StockBarcodePerfReturn.Day90Return|mul:100|floatformat:"1" }} % </b></font></td>
+                        <td><font size="2"><b>{{ stockbarcodedata.StockBarcodePerfReturn.Day180Return|mul:100|floatformat:"1" }} % </b></font></td>
+                        <td><font size="2"><b>{{ stockbarcodedata.StockBarcodePerfReturn.Day360Return|mul:100|floatformat:"1" }} % </b></font></td>
                     </tr>
                     {% endfor %}
                     {% else %}
                     <tr>
-                        <td colspan="3">데이터가 없습니다.</td>
+                        <td colspan="12">데이터가 없습니다.</td>
                     </tr>
                     {% endif %}
                     </tbody>
