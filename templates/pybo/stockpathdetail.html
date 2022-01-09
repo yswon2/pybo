@@ -24,15 +24,15 @@
                 <table class="table table-striped" >
                     <thead>
                     <tr class="thead-dark text-center">
-                        <th class="col-md-1.3"><font size="2.5">날짜</font></th>
-                        <th class="col-md-1.2"><font size="2">주식코드</font></th>
-                        <th class="col-md-2.5">주식명</th>
+                        <th class="col-md-1.8"><font size="3">날짜</font></th>
+                        <th class="col-md-1.2"><font size="3">주식코드</font></th>
+                        <th class="col-md-2">주식명</th>
                         <th class="col-md-1">종가</th>
-                        <th class="col-md-1.2"><font size="2">차트유사종목수</font></th>
-                        <th class="col-md-1.2"><font size="2">7일평균수익율</font></th>
-                        <th class="col-md-1.2"><font size="2">30일평균수익율</font></th>
-                        <th class="col-md-1.2"><font size="2">7일성공율</font></th>
-                        <th class="col-md-1.2"><font size="2">30일성공율</font></th>
+                        <th class="col-md-1.2"><font size="2">7일<br>실현수익율</font></th>
+                        <th class="col-md-1.2"><font size="2">30일<br>실현수익율</font></th>
+                        <th class="col-md-1.2"><font size="2">유사차트<br>종목수</font></th>
+                        <th class="col-md-1.2"><font size="2">유사종목7일<br>평균수익률</font></th>
+                        <th class="col-md-1.2"><font size="2">유사종목30일<br>평균수익률</font></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -40,15 +40,15 @@
                     {% for stockpathdetail in stockpathdetail_list %}
                     <tr class="text-center">
                         <!-- <td>{{ forloop.counter }}</td>  -->
-                        <td><font size="1.5"><b>{{ stockpathdetail.trade_date }}</b></font></td>
+                        <td><font size="2"><b>{{ stockpathdetail.trade_date|date:'Y-m-d' }}</b></font></td>
                         <td><font size="2"><b>{{ stockpathdetail.StockCode }}</b></font></td>
                         <td><font size="2.5"><b>{{ stockpathdetail.StockName }}</b></font></td>
                         <td><font size="2"><b>{{ stockpathdetail.ClosePrice|floatformat:"0" }}</b></font></td>
+                        <td><font size="2"><b>{{ stockpathdetail.StockBarcodePerfReturn.Day7Return|mul:100|floatformat:"1" }} % </b></font></td>
+                        <td><font size="2"><b>{{ stockpathdetail.StockBarcodePerfReturn.Day30Return|mul:100|floatformat:"1" }} % </b></font></td>
                         <td><font size="2"><b>{{ stockpathdetail.StockBarcodePerfTotal.BarFinalCode_Cnt }}</b></font></td>
                         <td><font size="2"><b>{{ stockpathdetail.StockBarcodePerfTotal.TotDay7Average|mul:100|floatformat:"1" }} % </b></font></td>
                         <td><font size="2"><b>{{ stockpathdetail.StockBarcodePerfTotal.TotDay30Average|mul:100|floatformat:"1" }} % </b></font></td>
-                        <td><font size="2"><b>{{ stockpathdetail.StockBarcodePerfTotal.Day7SuccessRate|mul:100|floatformat:"1" }} % </b></font></td>
-                        <td><font size="2"><b>{{ stockpathdetail.StockBarcodePerfTotal.Day30SuccessRate|mul:100|floatformat:"1" }} % </b></font></td>
                     </tr>
                     {% endfor %}
                     {% else %}

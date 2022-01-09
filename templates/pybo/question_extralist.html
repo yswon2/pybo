@@ -27,7 +27,7 @@
 
                 <table class="table table-striped" >
                     <thead>
-                    <tr class="thead-dark text-center">
+                    <tr class="thead-dark text-center" >
                         <!--<th class="col-md-2">날짜</th> -->
                         <th class="col-md-1.8">날짜</th>
                         <th class="col-md-1.2">주식코드</th>
@@ -43,9 +43,9 @@
                     <tbody>
                     {% if stockbarcodedata_list %}
                     {% for stockbarcodedata in stockbarcodedata_list %}
-                    <tr class="text-center">
+                    <tr class="text-center" >
                         <!-- <td>{{ forloop.counter }}</td>  -->
-                        <td><font size="1.5"><b>{{ stockbarcodedata.trade_date }}</b></font></td>
+                        <td><font size="1.5"><b>{{ stockbarcodedata.trade_date|date:'Y-m-d'  }}</b></font></td>
                         <td><font size="2"><b>{{ stockbarcodedata.StockCode }}</b></font></td>
                         <td><font size="2.5"><b>{{ stockbarcodedata.StockName }}</b></font></td>
                         <td><font size="2"><b>{{ stockbarcodedata.ClosePrice|floatformat:"0" }}</b></font></td>
