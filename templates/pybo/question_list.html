@@ -26,8 +26,9 @@
                     <tr class="thead-dark text-center">
                         <th>번호</th>
                         <th>추천</th>
-                        <th style="width:50%" >제목</th>
+                        <th style="width:40%" >제목</th>
                         <th>글쓴이</th>
+                        <th>조회수</th>
                         <th>작성일시</th>
                     </tr>
                     </thead>
@@ -51,6 +52,7 @@
                             {% endif %}
                         </td>
                         <td>{{ question.author.username }}</td>
+                        <td>{{ question.view_count }}</td>
                         <td>{{ question.create_date }}</td>
                     </tr>
                     {% endfor %}
@@ -104,7 +106,7 @@
                 </ul>
                 <!-- 페이징처리 끝 -->
             </div>
-            <a href="{% url 'pybo:question_create' %}" class="btn btn-success btn-lg pull-right">질문 등록하기</a>
+            <a href="{% url 'pybo:question_create' %}" class="btn btn-success btn-lg pull-right">질문 등록</a>
         </div>
     </div>
 
