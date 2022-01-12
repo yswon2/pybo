@@ -3,10 +3,13 @@ import logging
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
+from django.utils.dateformat import DateFormat
+from django.utils import timezone
 
 from ..models import Question, QuestionCount
 
 logger = logging.getLogger('pybo')
+
 
 def index(request):
     '''
@@ -19,7 +22,7 @@ def index(request):
     page = request.GET.get('page', '1')
     kw = request.GET.get('kw', '')
 
-    question_list = Question.objects.order_by('-create_date')
+    question_list = Question.objects.order_by('-notice', '-create_date')
     if kw:
         question_list = question_list.filter(
             Q(subject__icontains=kw) |
@@ -35,6 +38,8 @@ def index(request):
     #context = {'question_list':question_list}
 
     return render(request, 'pybo/question_list.html', context)
+
+
 
 def detail(request, question_id):
     """

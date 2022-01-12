@@ -12,6 +12,7 @@ class Question(models.Model):
     modify_date = models.DateTimeField(null=True, blank=True)
     voter = models.ManyToManyField(User, related_name='voter_question')
     view_count = models.IntegerField(default=0)
+    notice = models.CharField(max_length=1, default='N')  # 공지사항 여부
 
     def __str__(self):
         return self.subject
