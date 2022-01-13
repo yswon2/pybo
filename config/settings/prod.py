@@ -1,6 +1,6 @@
 from .base import *
 
-ALLOWED_HOSTS = ['13.124.5.37', 'www.stocktracker.co.kr']
+ALLOWED_HOSTS = ['13.124.5.37', 'stocktracker.co.kr']
 STATIC_ROOT = BASE_DIR / 'static/'
 STATICFILES_DIRS = []
 DEBUG = False
