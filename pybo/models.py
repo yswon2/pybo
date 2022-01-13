@@ -44,6 +44,15 @@ class QuestionCount(models.Model):
         return self.ip
 
 
+
+class PageViewCount(models.Model):
+    ip = models.CharField(max_length=30)
+    create_date = models.DateTimeField()
+    view_count = models.IntegerField(default=0)
+
+    def __unicode__(self):
+        return self.ip
+
 class stockbarcodeperfreturn(models.Model):
 
     trade_date = models.DateField(null=False, blank=False)

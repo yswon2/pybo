@@ -7,8 +7,9 @@ from django.utils.dateformat import DateFormat
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
+from django.utils import timezone
 
-from ..models import stockbarcodedata, stockbarcodeperfreturn, stockbarcodeperftotal
+from ..models import stockbarcodedata, stockbarcodeperfreturn, stockbarcodeperftotal, PageViewCount
 
 logger = logging.getLogger('pybo')
 
@@ -54,6 +55,7 @@ def stockbacktest(request):
     paginator = Paginator(stockbarcodedata_list, 10)
     page_obj = paginator.get_page(page)
 
+
     logger.info("stockbacktest View 끝")
 
     context = {'stockbarcodedata_list':page_obj, 'page': page, 'kw2': kw2, 'kw': kw }
@@ -98,3 +100,5 @@ def stockpathdetail(request):
     logger.info("stockpathdetail View 끝")
 
     return render(request, 'pybo/stockpathdetail.html', context)
+
+
