@@ -1,0 +1,213 @@
+{% extends 'base.html' %}
+{% load pybo_filter %}
+{% load mathfilters %}
+{% block content %}
+
+<div class="loader"></div>
+
+<div class="container mt-3">
+    <!-- Sidebar -->
+    <div class="row">
+        <div class="col-sm-12 col-md-3 col-lg-2 p-0">
+            {% include "sidebar.html" %}
+        </div>
+        <!-- Page Content -->
+        <div id="page-content-wrapper" class="col-sm-12 col-md-9 col-lg-10 p-0">
+            <div class="container my-3">
+                <div class="row justify-content-end my-3">
+                    <div class="col-4 input-group">
+                        <input type="text" style="text-transform: uppercase;" class="form-control kw" value="{{ kw|upper|default_if_none:'' }}">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary pull-right" type="button" id="btn_search">찾기</button>
+                        </div>
+                    </div>
+                </div>
+
+                <table class="table table-striped" >
+                    <thead>
+                    <tr class="thead-dark text-center">
+                        <th>필드명</th>
+                        <th>결과값</th>
+                        <th>필드명</th>
+                        <th>결과값</th>
+                        <th>필드명</th>
+                        <th>결과값</th>
+                    </tr>
+                    </thead>
+                    {% if pathdetailinfo_list %}
+                    {% for pathdetailinfo in pathdetailinfo_list %}
+                    <tbody>
+                    <tr class="thead-dark text-center align-items-center">
+                        <!--<th class="col-md-2">날짜</th> -->
+                        <td class="col-2 align-items-center" ><b>주식코드</b></td>
+                        <td class="col-2 align-items-center" >{{ pathdetailinfo.StockCode }}</td>
+                        <td class="col-2 align-items-center" ><b>주식명</b></td>
+                        <td class="col-2 align-items-center" >{{ pathdetailinfo.StockName }}</td>
+                        <td class="col-2 align-items-center" ><b>시장유형</b></td>
+                        <td class="col-2 align-items-center" >{{ pathdetailinfo.MarketType }}</td>
+                    </tr>
+                    <tr class="thead-dark text-center align-items-center">
+                        <td class="col-2 align-items-center" ><b>종가</b></td>
+                        <td class="col-2 align-items-center" >{{ pathdetailinfo.ClosePrice|floatformat:"0" }}</td>
+                        <td class="col-2 align-items-center" ><b>봉타입</b></td>
+                        <td class="col-2 align-items-center" >{{ pathdetailinfo.BarType }}</td>
+                        <td class="col-2 align-items-center" ><b>봉길이구분</b></td>
+                        <td class="col-2 align-items-center" >{{ pathdetailinfo.BarLengthType }}</td>
+                    </tr>
+                    <tr class="thead-dark text-center align-items-center">
+                        <td class="col-2 align-items-center" ><b>스토캐스틱구분</b></td>
+                        <td class="col-2 align-items-center" >{{ pathdetailinfo.StochasticFlag }}</td>
+                        <td class="col-2 align-items-center" ><b>볼린저밴드위치</b></td>
+                        <td class="col-2 align-items-center" >{{ pathdetailinfo.BolingerBandPos }}</td>
+                        <td class="col-2 align-items-center" ><b>거래량구분</b></td>
+                        <td class="col-2 align-items-center" >{{ pathdetailinfo.VolumeFlag }}</td>
+                    </tr>
+                    <tr class="thead-dark text-center align-items-center">
+                        <td class="col-2 align-items-center" ><b>MACD구분</b></td>
+                        <td class="col-2 align-items-center" >{{ pathdetailinfo.MACDFlag }}</td>
+                        <td class="col-2 align-items-center" ><font size="2"><b>볼린져밴드두께구분</b></font></td>
+                        <td class="col-2 align-items-center" ><font size="2">{{ pathdetailinfo.STDevStochasticFlag }}</font></td>
+                        <td class="col-2 align-items-center" ><font size="2"><b>스토캐스틱전략구분</b></font></td>
+                        <td class="col-2 align-items-center" >{{ pathdetailinfo.StochasticCrossFlag }}</td>
+                    </tr>
+                    <tr class="thead-dark text-center align-items-center">
+                        <!--<th class="col-md-2">날짜</th> -->
+                        <td class="col-2 align-items-center"  colspan='6' ><b>유사차트종목 검색결과(종목수 : {{ pathdetailinfo.StockBarcodePerfTotal.BarFinalCode_Cnt }})</b></td>
+                    </tr>
+                    <tr class="thead-dark text-center align-items-center">
+                        <!--<th class="col-md-2">날짜</th> -->
+                        <td class="col-2 align-items-center" ><b>7일Plus종목수</b></td>
+                        <td class="col-2 align-items-center" >{{ pathdetailinfo.StockBarcodePerfTotal.PlusDay7BarCode_Cnt }}</td>
+                        <td class="col-2 align-items-center" ><b>30일Plus종목수</b></td>
+                        <td class="col-2 align-items-center" >{{ pathdetailinfo.StockBarcodePerfTotal.PlusDay30BarCode_Cnt }}</td>
+                        <td class="col-2 align-items-center" ><b>90일Plus종목수</b></td>
+                        <td class="col-2 align-items-center" >{{ pathdetailinfo.StockBarcodePerfTotal.PlusDay90BarCode_Cnt }}</td>
+                    </tr>
+                    <tr class="thead-dark text-center align-items-center">
+                        <!--<th class="col-md-2">날짜</th> -->
+                        <td class="col-2 align-items-center" ><b>7일기대수익률</b></td>
+                        <td class="col-2 align-items-center" >{{ pathdetailinfo.StockBarcodePerfTotal.TotDay7Average|mul:100|floatformat:"1" }} %</td>
+                        <td class="col-2 align-items-center" ><b>30일기대수익률</b></td>
+                        <td class="col-2 align-items-center" >{{ pathdetailinfo.StockBarcodePerfTotal.TotDay30Average|mul:100|floatformat:"1" }} %</td>
+                        <td class="col-2 align-items-center" ><b>90일기대수익률</b></td>
+                        <td class="col-2 align-items-center" >{{ pathdetailinfo.StockBarcodePerfTotal.TotDay90Average|mul:100|floatformat:"1" }} %</td>
+                    </tr>
+                    <tr class="thead-dark text-center align-items-center">
+                        <!--<th class="col-md-2">날짜</th> -->
+                        <td class="col-2 align-items-center" ><b>7일최대수익률</b></td>
+                        <td class="col-2 align-items-center" >{{ pathdetailinfo.StockBarcodePerfTotal.TotDay7MaxReturn|mul:100|floatformat:"1" }} %</td>
+                        <td class="col-2 align-items-center" ><b>30일최대수익률</b></td>
+                        <td class="col-2 align-items-center" >{{ pathdetailinfo.StockBarcodePerfTotal.TotDay30MaxReturn|mul:100|floatformat:"1" }} %</td>
+                        <td class="col-2 align-items-center" ><b>90일최대수익률</b></td>
+                        <td class="col-2 align-items-center" >{{ pathdetailinfo.StockBarcodePerfTotal.TotDay90MaxReturn|mul:100|floatformat:"1" }} %</td>
+                    </tr>
+                    <tr class="thead-dark text-center align-items-center">
+                        <!--<th class="col-md-2">날짜</th> -->
+                        <td class="col-2 align-items-center" ><b>7일최소수익률</b></td>
+                        <td class="col-2 align-items-center" >{{ pathdetailinfo.StockBarcodePerfTotal.TotDay7MinReturn|mul:100|floatformat:"1" }} %</td>
+                        <td class="col-2 align-items-center" ><b>30일최소수익률</b></td>
+                        <td class="col-2 align-items-center" >{{ pathdetailinfo.StockBarcodePerfTotal.TotDay30MinReturn|mul:100|floatformat:"1" }} %</td>
+                        <td class="col-2 align-items-center" ><b>90일최소수익률</b></td>
+                        <td class="col-2 align-items-center" >{{ pathdetailinfo.StockBarcodePerfTotal.TotDay90MinReturn|mul:100|floatformat:"1" }} %</td>
+                    </tr>
+                    {% endfor %}
+                    {% else %}
+                    <tr>
+                        <td colspan="12">데이터가 없습니다.</td>
+                    </tr>
+                    {% endif %}
+                    </tbody>
+                </table>
+
+                <!--
+                <ul class="pagination justify-content-center">
+                    {% if pathdetailinfo_list.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" data-page="{{ pathdetailinfo_list.previous_page_number }}" href="#">이전</a>
+                    </li>
+                    {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
+                    </li>
+                    {% endif %}
+
+                    {% for page_number in pathdetailinfo_list.paginator.page_range %}
+                    {% if page_number >= pathdetailinfo_list.number|add:-5 and page_number <= pathdetailinfo_list.number|add:5 %}
+                        {% if page_number == pathdetailinfo_list.number %}
+                        <li class="page-item active" aria-current="page">
+                            <a class="page-link" data-page="{{ page_number }}" href="#">{{ page_number }}</a>
+                        </li>
+                        {% else %}
+                        <li class="page-item">
+                            <a class="page-link" data-page="{{ page_number }}" href="#">{{ page_number }}</a>
+                        </li>
+                        {% endif %}
+                    {% endif %}
+                    {% endfor %}
+
+                    {% if pathdetailinfo_list.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" data-page="{{ pathdetailinfo_list.next_page_number }}" href="#" >다음</a>
+                    </li>
+                    {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
+                    </li>
+                    {% endif %}
+                </ul>
+                -->
+            </div>
+
+            <div class="container my-3" p-0>
+                <button class="btn btn-success pull-right" type="button" id="btn_detailsearch">유사차트종목 검색결과</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<form id="searchForm" method="get" action="{% url 'pathdetailinfo' %}">
+    <input type="hidden" id="kw" name="kw" value="{{ kw|upper|default_if_none:'' }}">
+    <input type="hidden" id="page" name="page" value="{{ page }}">
+</form>
+
+<form id="searchdetailForm" method="get" action="{% url 'stockpathdetail' %}">
+    <input type="hidden" id="kw2" name="kw" value="{{ kw|upper|default_if_none:'' }}">
+    <input type="hidden" id="page2" name="page" value="{{ page }}">
+</form>
+
+{% endblock %}
+
+{% block script %}
+<script type='text/javascript'>
+$(document).ready(function(){
+    $(".page-link").on('click', function() {
+        $("#page").val($(this).data("page"));
+        $("#searchForm").submit();
+    });
+
+    $("#btn_search").on('click', function() {
+        $("#kw").val($(".kw").val());
+        $("#page").val(1);
+        $("#searchForm").submit();
+    });
+
+    $("#btn_detailsearch").on('click', function() {
+        $("#kw").val($(".kw2").val());
+        $("#page").val(1);
+        $("#searchdetailForm").submit();
+    });
+});
+
+
+$(window).on('load', function() {
+     $('.loader').hide();
+});
+
+
+
+</script>
+{% endblock %}
+
+
+

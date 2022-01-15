@@ -24,6 +24,7 @@ urlpatterns = [
     path('', base_views.index, name='index'),
     path('stockbacktest/', chartfinder_views.stockbacktest, name='stockbacktest'),
     path('stockpathdetail/', chartfinder_views.stockpathdetail, name='stockpathdetail'),
+    path('pathdetailinfo/', chartfinder_views.pathdetailinfo, name='pathdetailinfo'),
 ]
 
 

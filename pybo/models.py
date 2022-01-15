@@ -152,9 +152,6 @@ class stockbarcodeperftotal(models.Model):
     Day30SuccessRate = models.FloatField()
     Day1SuccessRate = models.FloatField()
 
-    #StockBarcodePerfTotal = models.ForeignKey(stockbarcodeperftotal, to_field='BarFinalCode', on_delete=models.CASCADE, default='')
-
-
 
 class stockbarcodedata(models.Model):
 
@@ -180,4 +177,3 @@ class stockbarcodedata(models.Model):
 
     StockBarcodePerfReturn = models.ForeignKey(stockbarcodeperfreturn, on_delete=models.CASCADE, default='')
     StockBarcodePerfTotal = models.ForeignKey(stockbarcodeperftotal, on_delete=models.DO_NOTHING, db_constraint=False, null=True)
-    #StockBarcodePerfTotal = models.ForeignKey(stockbarcodeperftotal, on_delete=models.DO_NOTHING, default='')

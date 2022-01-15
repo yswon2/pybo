@@ -3,14 +3,16 @@
 {% load mathfilters %}
 {% block content %}
 
+<div class="loader"></div>
+
 <div class="container mt-3">
     <!-- Sidebar -->
     <div class="row">
-        <div class="col-sm-12 col-md-3 col-lg-2 p-1">
+        <div class="col-sm-12 col-md-3 col-lg-2 p-0">
             {% include "sidebar.html" %}
         </div>
         <!-- Page Content -->
-        <div id="page-content-wrapper" class="col-sm-12 col-md-9 col-lg-10 p-1">
+        <div id="page-content-wrapper" class="col-sm-12 col-md-9 col-lg-10 p-0">
             <div class="container my-3">
                 <div class="row justify-content-end my-3">
                     <div class="col-4 input-group">
@@ -21,18 +23,26 @@
                     </div>
                 </div>
 
-                <table class="table table-striped" >
+                <table id="example-table-1" class="table table-striped" >
                     <thead>
+                   <tr class="thead-dark text-center align-items-center">
+                        <!--<th class="col-md-2">날짜</th> -->
+                        <th class="col-1.3 align-items-center" rowspan='2' >
+                            <div height="30%">날짜</div></th>
+                        <th class="col-1.3 align-items-center" rowspan='2' >주식코드</th>
+                        <th class="col-2.2 align-items-center" rowspan='2' >주식명</th>
+                        <th class="col-1.2 align-items-center" rowspan='2' >종가</th>
+                        <th class="col-1.2 align-items-center" colspan='3' >실현수익율</th>
+                        <th class="col-1.2 align-items-center" colspan='1' >유사 종목수</th>
+                        <th class="col-1.2 align-items-center" colspan='2' >평균수익률</th>
+                   </tr>
                     <tr class="thead-dark text-center">
-                        <th class="col-md-1.8"><font size="3">날짜</font></th>
-                        <th class="col-md-1.2"><font size="3">주식코드</font></th>
-                        <th class="col-md-2">주식명</th>
-                        <th class="col-md-1">종가</th>
-                        <th class="col-md-1.2"><font size="2">7일<br>실현수익율</font></th>
-                        <th class="col-md-1.2"><font size="2">30일<br>실현수익율</font></th>
-                        <th class="col-md-1.2"><font size="2">유사차트<br>종목수</font></th>
-                        <th class="col-md-1.2"><font size="2">유사종목7일<br>평균수익률</font></th>
-                        <th class="col-md-1.2"><font size="2">유사종목30일<br>평균수익률</font></th>
+                        <th class="col-md-1.2"><font size="3">7일</font></th>
+                        <th class="col-md-1.2"><font size="3">30일</font></th>
+                        <th class="col-md-1.2"><font size="3">90일</font></th>
+                        <th class="col-md-1.2"><font size="2">전체</font></th>
+                        <th class="col-md-1.2"><font size="3">7일</font></th>
+                        <th class="col-md-1.2"><font size="3">30일</font></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -42,10 +52,11 @@
                         <!-- <td>{{ forloop.counter }}</td>  -->
                         <td><font size="2"><b>{{ stockpathdetail.trade_date|date:'Y-m-d' }}</b></font></td>
                         <td><font size="2"><b>{{ stockpathdetail.StockCode }}</b></font></td>
-                        <td><font size="2.5"><b>{{ stockpathdetail.StockName }}</b></font></td>
+                        <td><font size="2"><b>{{ stockpathdetail.StockName }}</b></font></td>
                         <td><font size="2"><b>{{ stockpathdetail.ClosePrice|floatformat:"0" }}</b></font></td>
                         <td><font size="2"><b>{{ stockpathdetail.StockBarcodePerfReturn.Day7Return|mul:100|floatformat:"1" }} % </b></font></td>
                         <td><font size="2"><b>{{ stockpathdetail.StockBarcodePerfReturn.Day30Return|mul:100|floatformat:"1" }} % </b></font></td>
+                        <td><font size="2"><b>{{ stockpathdetail.StockBarcodePerfReturn.Day90Return|mul:100|floatformat:"1" }} % </b></font></td>
                         <td><font size="2"><b>{{ stockpathdetail.StockBarcodePerfTotal.BarFinalCode_Cnt }}</b></font></td>
                         <td><font size="2"><b>{{ stockpathdetail.StockBarcodePerfTotal.TotDay7Average|mul:100|floatformat:"1" }} % </b></font></td>
                         <td><font size="2"><b>{{ stockpathdetail.StockBarcodePerfTotal.TotDay30Average|mul:100|floatformat:"1" }} % </b></font></td>
@@ -100,8 +111,10 @@
                     {% endif %}
                 </ul>
                 <!-- 페이징처리 끝 -->
-
             </div>
+
+            <div class="col-lg-12" id="ex1_Result1" ></div>
+		    <div class="col-lg-12" id="ex1_Result2" ></div>
         </div>
     </div>
 </div>
@@ -128,6 +141,43 @@ $(document).ready(function(){
         $("#searchForm").submit();
     });
 });
+
+
+$(window).on('load', function() {
+     $('.loader').hide();
+});
+
+
+$("#example-table-1 tr").on('click', function() {
+	var str = ""
+	var tdArr = new Array();
+
+	// 현재 클릭된 Row(<tr>)
+	var tr = $(this);
+	var td = tr.children();
+
+	console.log("클릭한 Row의 모든 데이터 : "+tr.text());
+
+	td.each(function(i){
+		tdArr.push(td.eq(i).text());
+	});
+
+	console.log("배열에 담긴 값 : "+tdArr);
+
+	var trade_date = td.eq(0).text();
+	var stockcode = td.eq(1).text();
+	var stockname = td.eq(2).text();
+
+	str +=	" * 클릭된 Row의 td값 = No. : <font color='red'>" + trade_date + "</font>" +
+			", 아이디 : <font color='red'>" + stockcode + "</font>" +
+			", 이름 : <font color='red'>" + stockname + "</font>";
+
+	$("#ex1_Result1").html(" * 클릭한 Row의 모든 데이터 = " + tr.text());
+	$("#ex1_Result2").html(str);
+    //$("#detailForm").submit();
+
+});
+
 </script>
 {% endblock %}
 

@@ -102,3 +102,40 @@ def stockpathdetail(request):
     return render(request, 'pybo/stockpathdetail.html', context)
 
 
+
+
+def pathdetailinfo(request):
+    '''
+     pathdetailinfo 목록 출력
+    '''
+
+    logger.info("pathdetailinfo View 시작")
+
+    #입력 파라미터
+    page = request.GET.get('page', '1')
+    kw = request.GET.get('kw', '')
+
+    temp_trade_date = stockbarcodedata.objects.all().filter(StockCode='A005930').values_list('trade_date', flat=True).order_by('-trade_date')[:1]
+    kw2 = request.GET.get('kw2', temp_trade_date)
+
+    if kw:
+        if (kw[0:1] != 'A' and kw[0:1] != 'a'):
+            logger.info("주식명 검색 시작")
+            pathdetailinfo_list = stockbarcodedata.objects.select_related('StockBarcodePerfReturn', 'StockBarcodePerfTotal').all().filter(StockName__icontains=kw).filter(trade_date=kw2).order_by('-trade_date')
+        else:
+            logger.info("주식코드 검색 시작")
+            pathdetailinfo_list = stockbarcodedata.objects.select_related('StockBarcodePerfReturn', 'StockBarcodePerfTotal').all().filter(StockCode__icontains=kw).filter(trade_date=kw2).order_by('-trade_date')
+    else:
+        logger.info("Default 검색 시작")
+        pathdetailinfo_list = stockbarcodedata.objects.select_related('StockBarcodePerfReturn', 'StockBarcodePerfTotal').all().filter(StockCode__in='').all()
+
+    paginator = Paginator(pathdetailinfo_list, 10)
+    page_obj = paginator.get_page(page)
+
+    context = {'pathdetailinfo_list':page_obj, 'page': page, 'kw': kw }
+
+    logger.info("pathdetailinfo View 끝")
+
+    return render(request, 'pybo/pathdetailinfo.html', context)
+
+
