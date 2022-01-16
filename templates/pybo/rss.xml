@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/res/preview.xsl"?>
+<rss version="2.0">
+  <channel>
+    <title>StockTracker</title>
+    <link>http://stocktracker.co.kr</link>
+    <description><![CDATA[기간별 실현수익률 화면설명
+주식투자를 하면서 특정한 날, 특정 종목을 샀으면 지금 투자수익률은 얼마정도 될까 이런 궁금점 해결
+주가 백테스트 화면으로 경과일 이후(단순 엑셀 Workday함수 기준 계산) 실현 수익율 계산
+종목코드 or 종목명을 넣고 검색시 해당종목의 과거 실현수익률이 시계열로 조회
+날짜조건만 입력시 해당일의 개별종목별 실현수익률 조회
+날짜, 종목코드 조건 동시 입력시 특정시점, 특정종목의 실현수익률 조회
+주식세부정보 화면설명
+특정 종목의 최신 날짜기준 여러 기술적 지표 특성을 조회
+해당 종목과 유사한 기술적 지표 특성을 갖는 과거 특정 일, 종목의 경과일 기준 실현 수익 집계값 조회
+유사종목 차트 검색결과 버튼 클릭시 세부종목리스트 조회 가능
+유사차트 종목검색 화면설명
+종목코드 or 종목명을 넣고 검색시 최근기준 기술적지표와 유사한 움직임을 갖는 종목들을 과거차트에서 조회 리스트업
+과거 종목별,날짜별 주가데이터의 기술적특성 봉모양, 통계량(거래량 등), 기술적지표(MACD, 스토케스틱, 볼린저밴드 등)
+데이터를 정규화하여 유사종목 추출]]></description>
+    <lastBuildDate>Sun, 16 Jan 2022 09:28:18 GMT</lastBuildDate>
+    <generator>Feed43 Proxy/1.0 (www.feed43.com)</generator>
+    <ttl>360</ttl>
+
+<item>
+<guid isPermaLink="false">b01642eb934708d28f5c29ae6eb0708f</guid>
+<pubDate>Sun, 16 Jan 2022 09:28:18 GMT</pubDate>
+<title>기간별실현수익률조회</title>
+<link>http://stocktracker.co.kr/pybo/stockbacktest</link>
+<description><![CDATA[<p><sub><i>-- Delivered by <a href="http://feed43.com/">Feed43</a> service</i></sub></p>
+]]></description>
+</item>
+<item>
+<guid isPermaLink="false">25ebd23432dcc470f0ef0bb2bd7638ea</guid>
+<pubDate>Sun, 16 Jan 2022 09:28:17 GMT</pubDate>
+<title>기술적지표상세정보</title>
+<link>http://stocktracker.co.kr/pybo/pathdetailinfo</link>
+<description><![CDATA[<p><sub><i>-- Delivered by <a href="http://feed43.com/">Feed43</a> service</i></sub></p>
+]]></description>
+</item>
+<item>
+<guid isPermaLink="false">4dd6a183fa7e8f856831fc9f4e957fe7</guid>
+<pubDate>Sun, 16 Jan 2022 09:28:16 GMT</pubDate>
+<title>기술적지표유사종목</title>
+<link>http://stocktracker.co.kr/pybo/stockpathdetail</link>
+<description><![CDATA[<p><sub><i>-- Delivered by <a href="http://feed43.com/">Feed43</a> service</i></sub></p>
+]]></description>
+</item>
+<item>
+<guid isPermaLink="false">72bbd9e2d76e3a3b55823f9d0896d53e</guid>
+<pubDate>Sun, 16 Jan 2022 09:28:15 GMT</pubDate>
+<title>Q &amp; A</title>
+<link>http://stocktracker.co.kr/pybo/</link>
+<description><![CDATA[<p><sub><i>-- Delivered by <a href="http://feed43.com/">Feed43</a> service</i></sub></p>
+]]></description>
+</item>
+
+
+  </channel>
+</rss>
