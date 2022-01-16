@@ -137,6 +137,7 @@ $(document).ready(function(){
     });
 
     $("#btn_search").on('click', function() {
+        $('.loader').show();
         $("#kw").val($(".kw").val());
         $("#page").val(1);
         $("#searchForm").submit();
@@ -173,8 +174,8 @@ $("#example-table-1 tr").on('click', function() {
 			", 아이디 : <font color='red'>" + stockcode + "</font>" +
 			", 이름 : <font color='red'>" + stockname + "</font>";
 
-	$("#ex1_Result1").html(" * 클릭한 Row의 모든 데이터 = " + tr.text());
-	$("#ex1_Result2").html(str);
+	//$("#ex1_Result1").html(" * 클릭한 Row의 모든 데이터 = " + tr.text());
+	//$("#ex1_Result2").html(str);
     //$("#detailForm").submit();
 
 });

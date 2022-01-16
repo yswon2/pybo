@@ -135,6 +135,7 @@ $(document).ready(function(){
     });
 
     $("#btn_search").on('click', function() {
+        $('.loader').show();
         $("#kw").val($(".kw").val());
         $("#kw2").val($(".kw2").val());
         $("#page").val(1);

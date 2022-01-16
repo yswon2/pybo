@@ -23,7 +23,7 @@
                     </div>
                 </div>
 
-                <table class="table table-striped" >    
+                <table class="table table-striped" >
                     <thead>
                     <tr class="thead-dark text-center">
                         <th><div style="height: 10px; line-height: 10px;">필드명</div></th>
@@ -187,12 +187,14 @@ $(document).ready(function(){
     });
 
     $("#btn_search").on('click', function() {
+        $('.loader').show();
         $("#kw").val($(".kw").val());
         $("#page").val(1);
         $("#searchForm").submit();
     });
 
     $("#btn_detailsearch").on('click', function() {
+        $('.loader').show();
         $("#kw").val($(".kw2").val());
         $("#page").val(1);
         $("#searchdetailForm").submit();
