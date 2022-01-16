@@ -3,8 +3,8 @@
     <div class="col-12 p-0 bg-primary">
         <div class="list-group" >
             <a class="border-0  bg-primary text-white list-group-item list-group-item-action list-group-item-primary {% if category.name == 'free' %}active{% endif %}" href="{%url 'pybo:stockbacktest' %}"><font size="2.7"><b>기간별실현수익률조회</b></font></a>
-            <a class="border-0  bg-primary text-white list-group-item list-group-item-action list-group-item-primary {% if category.name == 'pathdetail' %}active{% endif %}" href="{%url 'pybo:pathdetailinfo' %}"><font size="2.7"><b>주식세부정보</b></font></a>
-            <a class="border-0  bg-primary text-white list-group-item list-group-item-action list-group-item-primary {% if category.name == 'tip' %}active{% endif %}" href="{%url 'pybo:stockpathdetail' %}"><font size="2.7"><b>유사차트종목검색</b></font></a>
+            <a class="border-0  bg-primary text-white list-group-item list-group-item-action list-group-item-primary {% if category.name == 'pathdetail' %}active{% endif %}" href="{%url 'pybo:pathdetailinfo' %}"><font size="2.7"><b>기술적지표상세정보</b></font></a>
+            <a class="border-0  bg-primary text-white list-group-item list-group-item-action list-group-item-primary {% if category.name == 'tip' %}active{% endif %}" href="{%url 'pybo:stockpathdetail' %}"><font size="2.7"><b>기술적지표유사종목</b></font></a>
             <a class="border-0  bg-primary text-white list-group-item list-group-item-action list-group-item-primary {% if category.name == 'qna' %}active{% endif %}" href="{%url 'pybo:index' %}"><font size="2.7"><b>Q & A</b></font></a>
         </div>
     </div>

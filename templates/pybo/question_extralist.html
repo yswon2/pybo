@@ -21,7 +21,7 @@
                         <input type="date" class="form-control kw2"  value="{{ kw2|default_if_none:'' }}">
                     </div>
                     <div class="col-4 input-group">
-                        <input type="text" style="text-transform: uppercase;" class="form-control kw" value="{{ kw|upper|default_if_none:'' }}">
+                        <input type="text"  title="종목코드 또는 종목명" style="text-transform: uppercase;" class="form-control kw" value="{{ kw|upper|default_if_none:'' }}">
                         <div class="input-group-append">
                             <button class="btn btn-primary pull-right" type="button" id="btn_search">찾기</button>
                         </div>
@@ -32,19 +32,19 @@
                    <thead>
                    <tr class="thead-dark text-center align-items-center">
                         <!--<th class="col-md-2">날짜</th> -->
-                        <th class="col-1.3 align-items-center" rowspan='2' >날짜</th>
-                        <th class="col-1.3 align-items-center" rowspan='2' >주식코드</th>
-                        <th class="col-2.2 align-items-center" rowspan='2' >주식명</th>
-                        <th class="col-1.2 align-items-center" rowspan='2' >종가</th>
-                        <th class="col-1.2 align-items-center" colspan='5' ><font size="3">실현수익율</font></th>
+                        <th class="col-1.3 align-items-center" rowspan='2' ><div style="text-align: center; height: 10px; line-height: 5px;">날짜</div></th>
+                        <th class="col-1.3 align-items-center" rowspan='2' ><div style="text-align: center; height: 10px; line-height: 5px;">주식코드</div></th>
+                        <th class="col-2.2 align-items-center" rowspan='2' ><div style="text-align: center; height: 10px; line-height: 5px;">주식명</div></th>
+                        <th class="col-1.2 align-items-center" rowspan='2' ><div style="text-align: center; height: 10px; line-height: 5px;">종가</div></th>
+                        <th class="col-1.2 align-items-center" colspan='5' ><div style="text-align: center; height: 10px; line-height: 5px;"><font size="3">실현수익율</font></div></th>
                    </tr>
                    <tr class="thead-dark text-center align-items-center" >
                         <!--<th class="col-md-2">날짜</th> -->
-                        <th class="col-1.2"><font size="3" >7일</font></th>
-                        <th class="col-1.2"><font size="3" >30일</font></th>
-                        <th class="col-1.2"><font size="3" >90일</font></th>
-                        <th class="col-1.2"><font size="3" >180일</font></th>
-                        <th class="col-1.2"><font size="3" >360일</font></th>
+                        <th class="col-1.2"><div style="height: 10px; line-height: 10px;"><font size="3" >7일</font></div></th>
+                        <th class="col-1.2"><div style="height: 10px; line-height: 10px;"><font size="3" >30일</font></div></th>
+                        <th class="col-1.2"><div style="height: 10px; line-height: 10px;"><font size="3" >90일</font></div></th>
+                        <th class="col-1.2"><div style="height: 10px; line-height: 10px;"><font size="3" >180일</font></div></th>
+                        <th class="col-1.2"><div style="height: 10px; line-height: 10px;"><font size="3" >360일</font></div></th>
                    </tr>
                    </thead>
                    <tbody>
@@ -65,7 +65,7 @@
                    {% endfor %}
                    {% else %}
                    <tr>
-                        <td colspan="12">데이터가 없습니다.</td>
+                        <td colspan="12"><div style="text-align: center; height: 20px; line-height: 20px;">데이터가 없습니다.</div></td>
                    </tr>
                    {% endif %}
                    </tbody>
