@@ -132,6 +132,7 @@
 <script type='text/javascript'>
 $(document).ready(function(){
     $(".page-link").on('click', function() {
+        $('.loader').show();
         $("#page").val($(this).data("page"));
         $("#searchForm").submit();
     });
