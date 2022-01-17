@@ -20,7 +20,7 @@ def question_create(request):
             question.author = request.user
             question.create_date = timezone.now()
             question.save()
-            return redirect('pybo:index')
+            return redirect('pybo:qna')
     else:
         form = QuestionForm()
     context = {'form': form}
