@@ -5,117 +5,118 @@
 
 <div class="loader"></div>
 
-<div class="container mt-3">
-    <!-- Sidebar -->
-    <div class="row">
-        <div class="col-sm-12 col-md-3 col-lg-2 p-0">
-            {% include "sidebar.html" %}
-        </div>
-        <!-- Page Content -->
-        <div id="page-content-wrapper" class="col-sm-12 col-md-9 col-lg-10 p-0">
-            <div class="container my-3">
-                <div class="row justify-content-end my-3">
-                    <div class="col-4 input-group">
-                        <input type="text" title="종목코드 또는 종목명" style="text-transform: uppercase;" class="form-control kw" value="{{ kw|upper|default_if_none:'' }}">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary pull-right" type="button" id="btn_search">찾기</button>
+<div class="container mt-3" id="body-wrapper">
+    <div id="body-content">
+        <!-- Sidebar -->
+        <div class="row">
+            <div class="col-sm-12 col-md-3 col-lg-2 p-0">
+                {% include "sidebar.html" %}
+            </div>
+            <!-- Page Content -->
+            <div id="page-content-wrapper" class="col-sm-12 col-md-9 col-lg-10 p-0">
+                <div class="container my-3">
+                    <div class="row justify-content-end my-3">
+                        <div class="col-4 input-group">
+                            <input type="text" title="종목코드 또는 종목명" style="text-transform: uppercase;" class="form-control kw" value="{{ kw|upper|default_if_none:'' }}">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary pull-right" type="button" id="btn_search">찾기</button>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <table id="example-table-1" class="table table-striped" >
-                    <thead>
-                   <tr class="thead-dark text-center align-items-center">
-                        <!--<th class="col-md-2">날짜</th> -->
-                        <th class="col-1.3 align-items-center" rowspan='2' >
-                            <div style="height: 15px; line-height: 15px;">날짜</div></th>
-                        <th class="col-1.3 align-items-center" rowspan='2' ><div style="height: 10px; line-height: 10px;">주식코드</div></th>
-                        <th class="col-2.2 align-items-center" rowspan='2' ><div style="height: 10px; line-height: 10px;">주식명</div></th>
-                        <th class="col-1.2 align-items-center" rowspan='2' ><div style="height: 10px; line-height: 10px;">종가</div></th>
-                        <th class="col-1.2 align-items-center" colspan='3' ><div style="height: 10px; line-height: 10px;">실현수익율</div></th>
-                        <th class="col-1.2 align-items-center" colspan='1' ><div style="height: 10px; line-height: 10px;">유사종목수</div></th>
-                        <th class="col-1.2 align-items-center" colspan='2' ><div style="height: 10px; line-height: 10px;">평균수익률</div></th>
-                   </tr>
-                    <tr class="thead-dark text-center">
-                        <th class="col-md-1.2"><div style="height: 10px; line-height: 10px;"><font size="3">7일</font></div></th>
-                        <th class="col-md-1.2"><div style="height: 10px; line-height: 10px;"><font size="3">30일</font></div></th>
-                        <th class="col-md-1.2"><div style="height: 10px; line-height: 10px;"><font size="3">90일</font></div></th>
-                        <th class="col-md-1.2"><div style="height: 10px; line-height: 10px;"><font size="2">전체</font></div></th>
-                        <th class="col-md-1.2"><div style="height: 10px; line-height: 10px;"><font size="3">7일</font></div></th>
-                        <th class="col-md-1.2"><div style="height: 10px; line-height: 10px;"><font size="3">30일</font></div></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% if stockpathdetail_list %}
-                    {% for stockpathdetail in stockpathdetail_list %}
-                    <tr class="text-center">
-                        <!-- <td>{{ forloop.counter }}</td>  -->
-                        <td><font size="2"><b>{{ stockpathdetail.trade_date|date:'Y-m-d' }}</b></font></td>
-                        <td><font size="2"><b>{{ stockpathdetail.StockCode }}</b></font></td>
-                        <td><font size="2"><b>{{ stockpathdetail.StockName }}</b></font></td>
-                        <td><font size="2"><b>{{ stockpathdetail.ClosePrice|floatformat:"0" }}</b></font></td>
-                        <td><font size="2"><b>{{ stockpathdetail.StockBarcodePerfReturn.Day7Return|mul:100|floatformat:"1" }} % </b></font></td>
-                        <td><font size="2"><b>{{ stockpathdetail.StockBarcodePerfReturn.Day30Return|mul:100|floatformat:"1" }} % </b></font></td>
-                        <td><font size="2"><b>{{ stockpathdetail.StockBarcodePerfReturn.Day90Return|mul:100|floatformat:"1" }} % </b></font></td>
-                        <td><font size="2"><b>{{ stockpathdetail.StockBarcodePerfTotal.BarFinalCode_Cnt }}</b></font></td>
-                        <td><font size="2"><b>{{ stockpathdetail.StockBarcodePerfTotal.TotDay7Average|mul:100|floatformat:"1" }} % </b></font></td>
-                        <td><font size="2"><b>{{ stockpathdetail.StockBarcodePerfTotal.TotDay30Average|mul:100|floatformat:"1" }} % </b></font></td>
-                    </tr>
-                    {% endfor %}
-                    {% else %}
-                    <tr>
-                        <td colspan="12"><div style="text-align: center; height: 20px; line-height: 20px;">데이터가 없습니다.</div></td>
-                    </tr>
-                    {% endif %}
-                    </tbody>
-                </table>
+                    <table id="example-table-1" class="table table-striped" >
+                        <thead>
+                       <tr class="thead-dark text-center align-items-center">
+                            <!--<th class="col-md-2">날짜</th> -->
+                            <th class="col-1.3 align-items-center" rowspan='2' >
+                                <div style="height: 15px; line-height: 15px;">날짜</div></th>
+                            <th class="col-1.3 align-items-center" rowspan='2' ><div style="height: 10px; line-height: 10px;">주식코드</div></th>
+                            <th class="col-2.2 align-items-center" rowspan='2' ><div style="height: 10px; line-height: 10px;">주식명</div></th>
+                            <th class="col-1.2 align-items-center" rowspan='2' ><div style="height: 10px; line-height: 10px;">종가</div></th>
+                            <th class="col-1.2 align-items-center" colspan='3' ><div style="height: 10px; line-height: 10px;">실현수익율</div></th>
+                            <th class="col-1.2 align-items-center" colspan='1' ><div style="height: 10px; line-height: 10px;">유사종목수</div></th>
+                            <th class="col-1.2 align-items-center" colspan='2' ><div style="height: 10px; line-height: 10px;">평균수익률</div></th>
+                       </tr>
+                        <tr class="thead-dark text-center">
+                            <th class="col-md-1.2"><div style="height: 10px; line-height: 10px;"><font size="3">7일</font></div></th>
+                            <th class="col-md-1.2"><div style="height: 10px; line-height: 10px;"><font size="3">30일</font></div></th>
+                            <th class="col-md-1.2"><div style="height: 10px; line-height: 10px;"><font size="3">90일</font></div></th>
+                            <th class="col-md-1.2"><div style="height: 10px; line-height: 10px;"><font size="2">전체</font></div></th>
+                            <th class="col-md-1.2"><div style="height: 10px; line-height: 10px;"><font size="3">7일</font></div></th>
+                            <th class="col-md-1.2"><div style="height: 10px; line-height: 10px;"><font size="3">30일</font></div></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% if stockpathdetail_list %}
+                        {% for stockpathdetail in stockpathdetail_list %}
+                        <tr class="text-center">
+                            <!-- <td>{{ forloop.counter }}</td>  -->
+                            <td><font size="2"><b>{{ stockpathdetail.trade_date|date:'Y-m-d' }}</b></font></td>
+                            <td><font size="2"><b>{{ stockpathdetail.StockCode }}</b></font></td>
+                            <td><font size="2"><b>{{ stockpathdetail.StockName }}</b></font></td>
+                            <td><font size="2"><b>{{ stockpathdetail.ClosePrice|floatformat:"0" }}</b></font></td>
+                            <td><font size="2"><b>{{ stockpathdetail.StockBarcodePerfReturn.Day7Return|mul:100|floatformat:"1" }} % </b></font></td>
+                            <td><font size="2"><b>{{ stockpathdetail.StockBarcodePerfReturn.Day30Return|mul:100|floatformat:"1" }} % </b></font></td>
+                            <td><font size="2"><b>{{ stockpathdetail.StockBarcodePerfReturn.Day90Return|mul:100|floatformat:"1" }} % </b></font></td>
+                            <td><font size="2"><b>{{ stockpathdetail.StockBarcodePerfTotal.BarFinalCode_Cnt }}</b></font></td>
+                            <td><font size="2"><b>{{ stockpathdetail.StockBarcodePerfTotal.TotDay7Average|mul:100|floatformat:"1" }} % </b></font></td>
+                            <td><font size="2"><b>{{ stockpathdetail.StockBarcodePerfTotal.TotDay30Average|mul:100|floatformat:"1" }} % </b></font></td>
+                        </tr>
+                        {% endfor %}
+                        {% else %}
+                        <tr>
+                            <td colspan="12"><div style="text-align: center; height: 20px; line-height: 20px;">데이터가 없습니다.</div></td>
+                        </tr>
+                        {% endif %}
+                        </tbody>
+                    </table>
 
-                <!-- 페이징처리 시작 -->
-                <ul class="pagination justify-content-center">
-                    {% if stockpathdetail_list.has_previous %}
-                    <li class="page-item">
-                        <a class="page-link" data-page="{{ stockpathdetail_list.previous_page_number }}" href="#">이전</a>
-                       <!-- <a class="page-link" href="?page{{ question_extralist.previous_page_number }}">이전</a> -->
-                    </li>
-                    {% else %}
-                    <li class="page-item disabled">
-                        <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
-                    </li>
-                    {% endif %}
-                    <!-- 페이지 리스트 -->
-                    {% for page_number in stockpathdetail_list.paginator.page_range %}
-                    {% if page_number >= stockpathdetail_list.number|add:-5 and page_number <= stockpathdetail_list.number|add:5 %}
-                        {% if page_number == stockpathdetail_list.number %}
-                        <li class="page-item active" aria-current="page">
-                            <a class="page-link" data-page="{{ page_number }}" href="#">{{ page_number }}</a>
-                            <!--<a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>-->
+                    <!-- 페이징처리 시작 -->
+                    <ul class="pagination justify-content-center">
+                        {% if stockpathdetail_list.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" data-page="{{ stockpathdetail_list.previous_page_number }}" href="#">이전</a>
+                           <!-- <a class="page-link" href="?page{{ question_extralist.previous_page_number }}">이전</a> -->
                         </li>
                         {% else %}
-                        <li class="page-item">
-                            <a class="page-link" data-page="{{ page_number }}" href="#">{{ page_number }}</a>
-                            <!--<a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a> -->
+                        <li class="page-item disabled">
+                            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
                         </li>
                         {% endif %}
-                    {% endif %}
-                    {% endfor %}
-                    <!-- 다음 페이지 -->
-                    {% if stockpathdetail_list.has_next %}
-                    <li class="page-item">
-                        <a class="page-link" data-page="{{ stockpathdetail_list.next_page_number }}" href="#" >다음</a>
-                        <!--<a class="page-link" href="?page={{ stockpathdetail_list.next_page_number }}">다음</a>-->
-                    </li>
-                    {% else %}
-                    <li class="page-item disabled">
-                        <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
-                    </li>
-                    {% endif %}
-                </ul>
-                <!-- 페이징처리 끝 -->
-            </div>
+                        <!-- 페이지 리스트 -->
+                        {% for page_number in stockpathdetail_list.paginator.page_range %}
+                        {% if page_number >= stockpathdetail_list.number|add:-5 and page_number <= stockpathdetail_list.number|add:5 %}
+                            {% if page_number == stockpathdetail_list.number %}
+                            <li class="page-item active" aria-current="page">
+                                <a class="page-link" data-page="{{ page_number }}" href="#">{{ page_number }}</a>
+                                <!--<a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>-->
+                            </li>
+                            {% else %}
+                            <li class="page-item">
+                                <a class="page-link" data-page="{{ page_number }}" href="#">{{ page_number }}</a>
+                                <!--<a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a> -->
+                            </li>
+                            {% endif %}
+                        {% endif %}
+                        {% endfor %}
+                        <!-- 다음 페이지 -->
+                        {% if stockpathdetail_list.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" data-page="{{ stockpathdetail_list.next_page_number }}" href="#" >다음</a>
+                            <!--<a class="page-link" href="?page={{ stockpathdetail_list.next_page_number }}">다음</a>-->
+                        </li>
+                        {% else %}
+                        <li class="page-item disabled">
+                            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                    <!-- 페이징처리 끝 -->
+                </div>
 <!--
-            <div class="col-lg-12" id="ex1_Result1" ></div>
-		    <div class="col-lg-12" id="ex1_Result2" ></div>
--->
+                <div class="col-lg-12" id="ex1_Result1" ></div>
+    		    <div class="col-lg-12" id="ex1_Result2" ></div>
+-->         </div>
         </div>
     </div>
 </div>
