@@ -46,8 +46,8 @@
     }
 
     #body-wrapper {
-        min-height: 100%;
-        position: relative;
+        height : auto;
+        min-height: 82%;
     }
 
     #body-content {
@@ -56,6 +56,18 @@
     }
 
     .footer {
+        height: 100px; /* footer의 높이 */
+        position : relative;
+        transform : translateY(-100%);
+    }
+
+    #body-wrapperbackup {
+        min-height: 100%;
+        position: relative;
+    }
+
+    .footerbackup {
+
         width: 100%;
         height: 100px; /* footer의 높이 */
         position: absolute;
