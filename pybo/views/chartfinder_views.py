@@ -1,7 +1,7 @@
 
 import logging
 
-from datetime import datetime
+from datetime import datetime, timedelta
 from django.utils.dateformat import DateFormat
 
 from django.core.paginator import Paginator
@@ -9,7 +9,7 @@ from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 
-from ..models import stockbarcodedata, stockbarcodeperfreturn, stockbarcodeperftotal, PageViewCount
+from ..models import stockbarcodedata, stockbarcodeperfreturn, stockbarcodeperftotal, listedstockinfo
 
 logger = logging.getLogger('pybo')
 
@@ -30,7 +30,6 @@ def stockbacktest(request):
     if kw and kw2:
         if kw[0:1] != 'A' and kw[0:1] != 'a':
             logger.info("주식명, 거래일 검색 시작")
-            #stockbarcodedata_list = stockbarcodedata.objects.filter(StockName__icontains=kw).filter(trade_date=kw2).order_by('trade_date')
             stockbarcodedata_list = stockbarcodedata.objects.select_related('StockBarcodePerfReturn', 'StockBarcodePerfTotal').filter(StockName__icontains=kw).filter(trade_date=kw2)
         else:
             logger.info("주식코드, 거래일 검색 시작")
@@ -39,18 +38,17 @@ def stockbacktest(request):
         if kw[0:1] != 'A' and kw[0:1] != 'a':
             logger.info("주식명 검색 시작")
             stockbarcodedata_list = stockbarcodedata.objects.select_related('StockBarcodePerfReturn', 'StockBarcodePerfTotal').filter(StockName__icontains=kw).order_by('-trade_date')[:500]
-            #stockbarcodedata_list = stockbarcodedata.objects.filter(StockName__icontains=kw).order_by('trade_date')
         else:
             logger.info("주식코드 검색 시작")
             stockbarcodedata_list = stockbarcodedata.objects.select_related('StockBarcodePerfReturn', 'StockBarcodePerfTotal').all().filter(StockCode__icontains=kw).order_by('-trade_date')[:500]
     elif kw == '' and kw2:
         logger.info("거래일 검색 시작")
-        stockbarcodedata_list = stockbarcodedata.objects.select_related('StockBarcodePerfReturn', 'StockBarcodePerfTotal').all().filter(trade_date=kw2).order_by('StockCode')[:500]
+        stockbarcodedata_list = stockbarcodedata.objects.select_related('StockBarcodePerfReturn', 'StockBarcodePerfTotal', 'ListedStockInfo').all().filter(trade_date=kw2).order_by('-ListedStockInfo__MarketCap')[:500]
     else:
         logger.info("Default 검색 시작")
-        #temp_trade_date = stockbarcodedata.objects.all().filter(StockCode='A005930').values_list('trade_date', flat=True).order_by('-trade_date')[:1]
-        #kw2 = request.GET.get('kw2', temp_trade_date)
-        stockbarcodedata_list = stockbarcodedata.objects.select_related('StockBarcodePerfReturn', 'StockBarcodePerfTotal').all().filter(StockCode='').order_by('-trade_date')[:50]
+        temp_trade_date = datetime.now() - timedelta(days=380)
+        temp_trade_date = DateFormat(temp_trade_date).format('Y-m-d')
+        stockbarcodedata_list = stockbarcodedata.objects.select_related('StockBarcodePerfReturn', 'StockBarcodePerfTotal').all().filter(StockCode='A005930').filter(trade_date__gt=temp_trade_date).order_by('trade_date')[:50]
 
     paginator = Paginator(stockbarcodedata_list, 10)
     page_obj = paginator.get_page(page)

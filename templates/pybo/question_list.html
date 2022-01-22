@@ -59,7 +59,7 @@
                         {% endfor %}
                         {% else %}
                         <tr>
-                            <td colspan="3">질문이 없습니다.</td>
+                            <td colspan="12">질문이 없습니다.</td>
                         </tr>
                         {% endif %}
                         </tbody>
@@ -107,7 +107,7 @@
                     </ul>
                     <!-- 페이징처리 끝 -->
                 </div>
-                <a href="{% url 'pybo:question_create' %}" class="btn btn-success btn-lg pull-right">질문 등록</a>
+                <a href="{% url 'pybo:question_create' %}" class="btn btn-success pull-right">질문 등록</a>
             </div>
         </div>
     </div>

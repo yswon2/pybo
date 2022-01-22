@@ -59,14 +59,14 @@
                             <td class="col-2 align-items-center"  bgcolor="black" ><b><font color="white">스토캐스틱구분</font></b></td>
                             <td class="col-2 align-items-center" >{{ pathdetailinfo.StochasticFlag }}</td>
                             <td class="col-2 align-items-center"  bgcolor="black" ><b><font color="white">볼린저밴드위치</font></b></td>
-                            <td class="col-2 align-items-center" >{{ pathdetailinfo.BolingerBandPos }}</td>
-                            <td class="col-2 align-items-center"  bgcolor="black" ><b><font color="white">거래량구분</font></b></td>
-                            <td class="col-2 align-items-center" >{{ pathdetailinfo.VolumeFlag }}</td>
-                        </tr>
-                        <tr class="thead-dark text-center">
+                            <td class="col-2 align-items-center" ><font size="2">{{ pathdetailinfo.BolingerBandPos }}</font></td>
                             <td class="col-2 align-items-center"  bgcolor="black" ><b><font color="white">MACD구분</b></td>
                             <td class="col-2 align-items-center" >{{ pathdetailinfo.MACDFlag }}</td>
-                            <td class="col-2 align-items-center"  bgcolor="black" ><font size="2"><b><font color="white">볼린져밴드두께구분</b></font></td>
+                        </tr>
+                        <tr class="thead-dark text-center">
+                            <td class="col-2 align-items-center"  bgcolor="black" ><b><font color="white">거래량구분<br><font size="2">(최근30일)</font></font></b></td>
+                            <td class="col-2 align-items-center" >{{ pathdetailinfo.VolumeFlag }}</td>
+                            <td class="col-2 align-items-center"  bgcolor="black" ><font size="2"><b><font color="white">볼린져밴드두께구분<br><font size="2">(최근30일)</font></b></font></td>
                             <td class="col-2 align-items-center" ><font size="2">{{ pathdetailinfo.STDevStochasticFlag }}</font></td>
                             <td class="col-2 align-items-center"  bgcolor="black" ><font size="2"><b><font color="white">스토캐스틱전략구분</b></font></td>
                             <td class="col-2 align-items-center" >{{ pathdetailinfo.StochasticCrossFlag }}</td>
@@ -119,47 +119,9 @@
                         {% endif %}
                         </tbody>
                     </table>
-
-                    <!--
-                    <ul class="pagination justify-content-center">
-                        {% if pathdetailinfo_list.has_previous %}
-                        <li class="page-item">
-                            <a class="page-link" data-page="{{ pathdetailinfo_list.previous_page_number }}" href="#">이전</a>
-                        </li>
-                        {% else %}
-                        <li class="page-item disabled">
-                            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
-                        </li>
-                        {% endif %}
-
-                        {% for page_number in pathdetailinfo_list.paginator.page_range %}
-                        {% if page_number >= pathdetailinfo_list.number|add:-5 and page_number <= pathdetailinfo_list.number|add:5 %}
-                            {% if page_number == pathdetailinfo_list.number %}
-                            <li class="page-item active" aria-current="page">
-                                <a class="page-link" data-page="{{ page_number }}" href="#">{{ page_number }}</a>
-                            </li>
-                            {% else %}
-                            <li class="page-item">
-                                <a class="page-link" data-page="{{ page_number }}" href="#">{{ page_number }}</a>
-                            </li>
-                            {% endif %}
-                        {% endif %}
-                        {% endfor %}
-
-                        {% if pathdetailinfo_list.has_next %}
-                        <li class="page-item">
-                            <a class="page-link" data-page="{{ pathdetailinfo_list.next_page_number }}" href="#" >다음</a>
-                        </li>
-                        {% else %}
-                        <li class="page-item disabled">
-                            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
-                        </li>
-                        {% endif %}
-                    </ul>
-                    -->
                 </div>
 
-                <div class="container my-3" p-0>
+                 <div class="container my-3" p-0>
                     <button class="btn btn-success pull-right" type="button" id="btn_detailsearch">기술적지표 유사종목조회 </button>
                 </div>
             </div>
@@ -184,6 +146,7 @@
 <script type='text/javascript'>
 $(document).ready(function(){
     $(".page-link").on('click', function() {
+        $('.loader').show();
         $("#page").val($(this).data("page"));
         $("#searchForm").submit();
     });
@@ -202,7 +165,6 @@ $(document).ready(function(){
         $("#searchdetailForm").submit();
     });
 });
-
 
 $(window).on('load', function() {
      $('.loader').hide();

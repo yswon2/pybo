@@ -80,6 +80,8 @@ class stockbarcodeperfreturn(models.Model):
     Day360PL = models.FloatField()
     Day360Return = models.FloatField()
     ClosePriceAft360 = models.FloatField()
+    TodayPL = models.FloatField(null=True, blank=True)
+    TodayReturn = models.FloatField(null=True, blank=True)
 
     StockBarcode_ID = models.CharField(null=False, blank=False, primary_key=True, max_length=150, default='')
 
@@ -153,6 +155,15 @@ class stockbarcodeperftotal(models.Model):
     Day1SuccessRate = models.FloatField()
 
 
+class listedstockinfo(models.Model):
+
+    StockCode = models.CharField(null=False, blank=False, primary_key=True, max_length=20)
+    StockName = models.CharField(null=True, blank=True, max_length=100)
+    MarketType = models.CharField(null=False, blank=False, max_length=15)
+    MarketTypeDetail = models.CharField(null=False, blank=False, max_length=15)
+    MarketCap = models.FloatField()
+    StockNum = models.FloatField()
+
 class stockbarcodedata(models.Model):
 
     trade_date = models.DateField(null=False, blank=False)
@@ -177,3 +188,6 @@ class stockbarcodedata(models.Model):
 
     StockBarcodePerfReturn = models.ForeignKey(stockbarcodeperfreturn, on_delete=models.CASCADE, default='')
     StockBarcodePerfTotal = models.ForeignKey(stockbarcodeperftotal, on_delete=models.DO_NOTHING, db_constraint=False, null=True)
+    ListedStockInfo = models.ForeignKey(listedstockinfo, on_delete=models.DO_NOTHING, db_constraint=False, null=True)
+
+
