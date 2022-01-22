@@ -159,8 +159,8 @@ class listedstockinfo(models.Model):
 
     StockCode = models.CharField(null=False, blank=False, primary_key=True, max_length=20)
     StockName = models.CharField(null=True, blank=True, max_length=100)
-    MarketType = models.CharField(null=False, blank=False, max_length=15)
-    MarketTypeDetail = models.CharField(null=False, blank=False, max_length=15)
+    MarketType = models.CharField(null=True, blank=True, max_length=15)
+    MarketTypeDetail = models.CharField(null=True, blank=True, max_length=15)
     MarketCap = models.FloatField()
     StockNum = models.FloatField()
 
