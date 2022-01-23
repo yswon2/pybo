@@ -53,23 +53,64 @@
                             <td class="col-2 align-items-center"  bgcolor="black" ><b><font color="white">봉타입</font></b></td>
                             <td class="col-2 align-items-center" >{{ pathdetailinfo.BarType }}</td>
                             <td class="col-2 align-items-center"  bgcolor="black" ><b><font color="white">봉길이구분</font></b></td>
-                            <td class="col-2 align-items-center" >{{ pathdetailinfo.BarLengthType }}</td>
+                            {% if pathdetailinfo.BarLengthType == None %}
+                                <td class="col-2 align-items-center" >보통</td>
+                            {% else %}
+                                <td class="col-2 align-items-center" >{{ pathdetailinfo.BarLengthType }}</td>
+                            {% endif %}
+
                         </tr>
                         <tr class="thead-dark text-center">
-                            <td class="col-2 align-items-center"  bgcolor="black" ><b><font color="white">스토캐스틱구분</font></b></td>
-                            <td class="col-2 align-items-center" >{{ pathdetailinfo.StochasticFlag }}</td>
+                            <td class="col-2 align-items-center"  bgcolor="black" ><b><font color="white">스토캐스틱지표</font></b></td>
+                            {% if pathdetailinfo.StochasticFlag == None %}
+                                <td class="col-2 align-items-center" ><font size="2.5">과열국면아님</font></td>
+                            {% else %}
+                                 <td class="col-2 align-items-center" >{{ pathdetailinfo.StochasticFlag }}</td>
+                            {% endif %}
                             <td class="col-2 align-items-center"  bgcolor="black" ><b><font color="white">볼린저밴드위치</font></b></td>
-                            <td class="col-2 align-items-center" ><font size="2">{{ pathdetailinfo.BolingerBandPos }}</font></td>
-                            <td class="col-2 align-items-center"  bgcolor="black" ><b><font color="white">MACD구분</b></td>
-                            <td class="col-2 align-items-center" >{{ pathdetailinfo.MACDFlag }}</td>
+                            {% if pathdetailinfo.BolingerBandPos == None %}
+                                <td class="col-2 align-items-center" ><font size="2.5">볼린저밴드 범위안</font></td>
+                            {% else %}
+                                <td class="col-2 align-items-center" ><font size="2">{{ pathdetailinfo.BolingerBandPos }}</font></td>
+                            {% endif %}
+                            <td class="col-2 align-items-center"  bgcolor="black" ><b><font color="white">MACD전략신호</b></td>
+                            {% if pathdetailinfo.MACDFlag == None %}
+                                <td class="col-2 align-items-center" >신호없음</td>
+                            {% else %}
+                                <td class="col-2 align-items-center" >{{ pathdetailinfo.MACDFlag }}</td>
+                            {% endif %}
                         </tr>
                         <tr class="thead-dark text-center">
-                            <td class="col-2 align-items-center"  bgcolor="black" ><b><font color="white">거래량구분<br><font size="2">(최근30일)</font></font></b></td>
-                            <td class="col-2 align-items-center" >{{ pathdetailinfo.VolumeFlag }}</td>
-                            <td class="col-2 align-items-center"  bgcolor="black" ><font size="2"><b><font color="white">볼린져밴드두께구분<br><font size="2">(최근30일)</font></b></font></td>
-                            <td class="col-2 align-items-center" ><font size="2">{{ pathdetailinfo.STDevStochasticFlag }}</font></td>
-                            <td class="col-2 align-items-center"  bgcolor="black" ><font size="2"><b><font color="white">스토캐스틱전략구분</b></font></td>
-                            <td class="col-2 align-items-center" >{{ pathdetailinfo.StochasticCrossFlag }}</td>
+                            <td class="col-2 align-items-center"  bgcolor="black" ><font size="3"><b><font color="white">스토캐스틱<br>전략신호</font></b></font></td>
+                            {% if pathdetailinfo.StochasticCrossFlag == None %}
+                                <td class="col-2 align-items-center" >신호없음</td>
+                            {% else %}
+                                <td class="col-2 align-items-center" >{{ pathdetailinfo.StochasticCrossFlag }}</td>
+                            {% endif %}
+                            <td class="col-2 align-items-center"  bgcolor="black" ><font size="3"><b><font color="white">볼린져밴드두께<br><font size="2">(최근30일)</font></b></font></td>
+                            {% if pathdetailinfo.STDevStochasticFlag == None %}
+                                {% if pathdetailinfo.BarFinalCode|slice:"6:7"  == "4" or pathdetailinfo.BarFinalCode|slice:"6:7"  == "5" %}
+                                    <td class="col-2 align-items-center" ><font size="3">밴드두께 상위</font></td>
+                                {% elif pathdetailinfo.BarFinalCode|slice:"6:7"  == "1" or pathdetailinfo.BarFinalCode|slice:"6:7"  == "2" %}
+                                    <td class="col-2 align-items-center" ><font size="3">밴드두께 하위</font></td>
+                                {% else %}
+                                    <td class="col-2 align-items-center" ><font size="3">밴드두께 보통</font></td>
+                                {% endif %}
+                            {% else %}
+                                <td class="col-2 align-items-center" ><font size="2">{{ pathdetailinfo.STDevStochasticFlag }}</font></td>
+                            {% endif %}
+                            <td class="col-2 align-items-center"  bgcolor="black" ><b><font color="white">거래량지표<br><font size="2">(최근30일)</font></font></b></td>
+                            {% if pathdetailinfo.VolumeFlag == None %}
+                                {% if pathdetailinfo.BarFinalCode|slice:"5:6" == "4" or pathdetailinfo.BarFinalCode|slice:"5:6" == "5" %}
+                                    <td class="col-2 align-items-center" >거래량 상위</td>
+                                {% elif pathdetailinfo.BarFinalCode|slice:"5:6" == "1" or pathdetailinfo.BarFinalCode|slice:"5:6" == "2" %}
+                                    <td class="col-2 align-items-center" >거래량 하위</td>
+                                {% else %}
+                                    <td class="col-2 align-items-center" >거래량 보통</td>
+                                {% endif %}
+                            {% else %}
+                                 <td class="col-2 align-items-center" >{{ pathdetailinfo.VolumeFlag }}</td>
+                            {% endif %}
                         </tr>
                         <tr class="thead-dark text-center">
                             <!--<th class="col-md-2">날짜</th> -->
