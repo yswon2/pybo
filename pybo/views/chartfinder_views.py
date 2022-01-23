@@ -46,7 +46,7 @@ def stockbacktest(request):
         stockbarcodedata_list = stockbarcodedata.objects.select_related('StockBarcodePerfReturn', 'StockBarcodePerfTotal', 'ListedStockInfo').all().filter(trade_date=kw2).order_by('-ListedStockInfo__MarketCap')[:500]
     else:
         logger.info("Default 검색 시작")
-        temp_trade_date = datetime.now() - timedelta(days=380)
+        temp_trade_date = datetime.now() - timedelta(days=410)
         temp_trade_date = DateFormat(temp_trade_date).format('Y-m-d')
         stockbarcodedata_list = stockbarcodedata.objects.select_related('StockBarcodePerfReturn', 'StockBarcodePerfTotal').all().filter(StockCode='A005930').filter(trade_date__gt=temp_trade_date).order_by('trade_date')[:50]
 
@@ -84,11 +84,13 @@ def stockpathdetail(request):
             stockpathdetail_list = stockbarcodedata.objects.select_related('StockBarcodePerfReturn', 'StockBarcodePerfTotal').all().filter(BarFinalCode__in=SelBarFinalCode).all().order_by('-trade_date')
         else:
             logger.info("주식코드, 거래일 검색 시작")
-            SelBarFinalCode = stockbarcodedata.objects.select_related('StockBarcodePerfReturn', 'StockBarcodePerfTotal').all().filter(StockCode__icontains=kw).filter(trade_date=kw2).values_list('BarFinalCode', flat=True).order_by('-trade_date')
+            SelBarFinalCode = stockbarcodedata.objects.select_related('StockBarcodePerfReturn', 'StockBarcodePerfTotal').all().filter(StockCode__icontains=kw).filter(trade_date=kw2).values_list('BarFinalCode', flat=True).order_by('-trade_date')[:1]
             stockpathdetail_list = stockbarcodedata.objects.select_related('StockBarcodePerfReturn', 'StockBarcodePerfTotal').all().filter(BarFinalCode__in=SelBarFinalCode).all().order_by('-trade_date')
+
     else:
         logger.info("Default 검색 시작")
-        stockpathdetail_list = stockbarcodedata.objects.select_related('StockBarcodePerfReturn', 'StockBarcodePerfTotal').all().filter(BarFinalCode__in='').all()
+        SelBarFinalCode = stockbarcodedata.objects.select_related('StockBarcodePerfReturn', 'StockBarcodePerfTotal').all().filter(StockCode__icontains='A005930').filter(trade_date=kw2).values_list('BarFinalCode', flat=True).order_by('-trade_date')[:1]
+        stockpathdetail_list = stockbarcodedata.objects.select_related('StockBarcodePerfReturn', 'StockBarcodePerfTotal').all().filter(BarFinalCode__in=SelBarFinalCode).all().order_by('-trade_date')
 
     paginator = Paginator(stockpathdetail_list, 10)
     page_obj = paginator.get_page(page)
@@ -125,7 +127,8 @@ def pathdetailinfo(request):
             pathdetailinfo_list = stockbarcodedata.objects.select_related('StockBarcodePerfReturn', 'StockBarcodePerfTotal').all().filter(StockCode__icontains=kw).filter(trade_date=kw2).order_by('-trade_date')
     else:
         logger.info("Default 검색 시작")
-        pathdetailinfo_list = stockbarcodedata.objects.select_related('StockBarcodePerfReturn', 'StockBarcodePerfTotal').all().filter(StockCode__in='').all()
+        #pathdetailinfo_list = stockbarcodedata.objects.select_related('StockBarcodePerfReturn', 'StockBarcodePerfTotal').all().filter(StockCode__in='').all()
+        pathdetailinfo_list = stockbarcodedata.objects.select_related('StockBarcodePerfReturn', 'StockBarcodePerfTotal').all().filter(StockCode__icontains='A005930').filter(trade_date=kw2).all()
 
     paginator = Paginator(pathdetailinfo_list, 10)
     page_obj = paginator.get_page(page)
