@@ -63,7 +63,7 @@
                         <tr class="thead-dark text-center">
                             <td class="col-2 align-items-center"  bgcolor="black" ><b><font color="white">스토캐스틱지표</font></b></td>
                             {% if pathdetailinfo.StochasticFlag == None or pathdetailinfo.StochasticFlag == ""  %}
-                                <td class="col-2 align-items-center" ><font size="2.5">과열국면아님</font></td>
+                                <td class="col-2 align-items-center" ><font size="3">과열국면아님</font></td>
                             {% else %}
                                  <td class="col-2 align-items-center" >{{ pathdetailinfo.StochasticFlag }}</td>
                             {% endif %}
@@ -101,7 +101,7 @@
                                 <td class="col-2 align-items-center" ><font size="2">{{ pathdetailinfo.STDevStochasticFlag }}</font></td>
                             {% endif %}
                             -->
-                            <td class="col-2 align-items-center" ><font size="2">{{ pathdetailinfo.STDevStochasticFlag }}</font></td>
+                            <td class="col-2 align-items-center" >{{ pathdetailinfo.STDevStochasticFlag }}</td>
                             <td class="col-2 align-items-center"  bgcolor="black" ><b><font color="white">거래량지표<br><font size="2">(최근30일)</font></font></b></td>
                             <!--
                             {% if pathdetailinfo.VolumeFlag == None or pathdetailinfo.VolumeFlag == "" %}
