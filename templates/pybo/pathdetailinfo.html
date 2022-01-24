@@ -82,7 +82,7 @@
                         </tr>
                         <tr class="thead-dark text-center">
                             <td class="col-2 align-items-center"  bgcolor="black" ><font size="3"><b><font color="white">스토캐스틱<br>전략신호</font></b></font></td>
-                            {% if pathdetailinfo.StochasticCrossFlag == None %}
+                            {% if pathdetailinfo.StochasticCrossFlag == None or pathdetailinfo.StochasticCrossFlag == ""  %}
                                 <td class="col-2 align-items-center" >신호없음</td>
                             {% else %}
                                 <td class="col-2 align-items-center" >{{ pathdetailinfo.StochasticCrossFlag }}</td>
