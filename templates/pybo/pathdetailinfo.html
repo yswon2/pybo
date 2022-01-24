@@ -88,6 +88,7 @@
                                 <td class="col-2 align-items-center" >{{ pathdetailinfo.StochasticCrossFlag }}</td>
                             {% endif %}
                             <td class="col-2 align-items-center"  bgcolor="black" ><font size="3"><b><font color="white">볼린져밴드두께<br><font size="2">(최근30일)</font></b></font></td>
+                            <!--
                             {% if pathdetailinfo.STDevStochasticFlag == None or pathdetailinfo.STDevStochasticFlag == "" %}
                                 {% if pathdetailinfo.BarFinalCode|slice:"6:7" == "4" or pathdetailinfo.BarFinalCode|slice:"6:7" == "5" %}
                                     <td class="col-2 align-items-center" ><font size="3">밴드두께 상위</font></td>
@@ -99,7 +100,10 @@
                             {% else %}
                                 <td class="col-2 align-items-center" ><font size="2">{{ pathdetailinfo.STDevStochasticFlag }}</font></td>
                             {% endif %}
+                            -->
+                            <td class="col-2 align-items-center" ><font size="2">{{ pathdetailinfo.STDevStochasticFlag }}</font></td>
                             <td class="col-2 align-items-center"  bgcolor="black" ><b><font color="white">거래량지표<br><font size="2">(최근30일)</font></font></b></td>
+                            <!--
                             {% if pathdetailinfo.VolumeFlag == None or pathdetailinfo.VolumeFlag == "" %}
                                 {% if pathdetailinfo.BarFinalCode|slice:"5:6" == "4" or pathdetailinfo.BarFinalCode|slice:"5:6" == "5" %}
                                     <td class="col-2 align-items-center" >거래량 상위</td>
@@ -111,6 +115,8 @@
                             {% else %}
                                  <td class="col-2 align-items-center" >{{ pathdetailinfo.VolumeFlag }}</td>
                             {% endif %}
+                            -->
+                            <td class="col-2 align-items-center" >{{ pathdetailinfo.VolumeFlag }}</td>
                         </tr>
                         <tr class="thead-dark text-center">
                             <!--<th class="col-md-2">날짜</th> -->
