@@ -40,54 +40,54 @@
                         <tbody>
                         <tr class="thead-dark text-center">
                             <!--<th class="col-md-2">날짜</th> -->
-                            <td class="col-2 align-items-center"  bgcolor="black" ><b><font color="white">주식코드</font></b></td>
-                            <td class="col-2 align-items-center" >{{ pathdetailinfo.StockCode }}</td>
-                            <td class="col-2 align-items-center"  bgcolor="black" ><b><font color="white">주식명</font></b></td>
-                            <td class="col-2 align-items-center" >{{ pathdetailinfo.StockName }}</td>
-                            <td class="col-2 align-items-center"  bgcolor="black" ><b><font color="white">시장유형</font></b></td>
-                            <td class="col-2 align-items-center" >{{ pathdetailinfo.MarketType }}</td>
+                            <td class="col-2 align-items-center" bgcolor="black"><div style="height: 20px; line-height: 20px; font-size:1em;"><b><font color="white">주식코드</font></b></div></td>
+                            <td class="col-2 align-items-center"><div style="height: 20px; line-height: 20px; font-size:1em;">{{ pathdetailinfo.StockCode }}</div></td>
+                            <td class="col-2 align-items-center" bgcolor="black"><div style="height: 20px; line-height: 20px; font-size:1em;"><b><font color="white">주식명</font></b></div></td>
+                            <td class="col-2 align-items-center"><div style="height: 20px; line-height: 20px; font-size:0.8em;">{{ pathdetailinfo.StockName }}</div></td>
+                            <td class="col-2 align-items-center" bgcolor="black"><div style="height: 20px; line-height: 20px; font-size:1em;"><b><font color="white">시장유형</font></b></div></td>
+                            <td class="col-2 align-items-center"><div style="height: 20px; line-height: 20px; font-size:1em;">{{ pathdetailinfo.MarketType }}</div></td>
                         </tr>
                         <tr class="thead-dark text-center">
-                            <td class="col-2 align-items-center"  bgcolor="black" ><b><font color="white">종가</font></b></td>
-                            <td class="col-2 align-items-center" >{{ pathdetailinfo.ClosePrice|floatformat:"0" }}</td>
-                            <td class="col-2 align-items-center"  bgcolor="black" ><b><font color="white">봉타입</font></b></td>
-                            <td class="col-2 align-items-center" >{{ pathdetailinfo.BarType }}</td>
-                            <td class="col-2 align-items-center"  bgcolor="black" ><b><font color="white">봉길이구분</font></b></td>
+                            <td class="col-2 align-items-center" bgcolor="black"><div style="height: 20px; line-height: 20px; font-size:1em;"><b><font color="white">종가</font></b></div></td>
+                            <td class="col-2 align-items-center"><div style="height: 20px; line-height: 20px; font-size:1em;">{{ pathdetailinfo.ClosePrice|floatformat:"0" }}</div></td>
+                            <td class="col-2 align-items-center" bgcolor="black"><div style="height: 20px; line-height: 20px; font-size:1em;"><b><font color="white">봉타입</font></b></div></td>
+                            <td class="col-2 align-items-center"><div style="height: 20px; line-height: 20px; font-size:1em;">{{ pathdetailinfo.BarType }}</div></td>
+                            <td class="col-2 align-items-center" bgcolor="black"><div style="height: 20px; line-height: 20px; font-size:1em;"><b><font color="white">봉길이구분</font></b></div</td>
                             {% if pathdetailinfo.BarLengthType == None or pathdetailinfo.BarLengthType == ""  %}
-                                <td class="col-2 align-items-center" >보통</td>
+                                <td class="col-2 align-items-center" ><div style="height: 20px; line-height: 20px; font-size:1em;">보통</div></td>
                             {% else %}
-                                <td class="col-2 align-items-center" >{{ pathdetailinfo.BarLengthType }}</td>
+                                <td class="col-2 align-items-center" ><div style="height: 20px; line-height: 20px; font-size:1em;">{{ pathdetailinfo.BarLengthType }}</div>/td>
                             {% endif %}
 
                         </tr>
                         <tr class="thead-dark text-center">
-                            <td class="col-2 align-items-center"  bgcolor="black" ><b><font color="white">스토캐스틱지표</font></b></td>
+                            <td class="col-2 align-items-center"  bgcolor="black" ><div style="height: 20px; line-height: 20px; font-size:1em;"><b><font color="white">스토캐스틱지표</font></b></div></td>
                             {% if pathdetailinfo.StochasticFlag == None or pathdetailinfo.StochasticFlag == ""  %}
-                                <td class="col-2 align-items-center" ><font size="3">과열국면아님</font></td>
+                                <td class="col-2 align-items-center" ><div style="height: 20px; line-height: 20px; font-size:1em;">과열국면아님</div></td>
                             {% else %}
-                                 <td class="col-2 align-items-center" >{{ pathdetailinfo.StochasticFlag }}</td>
+                                 <td class="col-2 align-items-center" ><div style="height: 20px; line-height: 20px; font-size:1em;">{{ pathdetailinfo.StochasticFlag }}</div></td>
                             {% endif %}
-                            <td class="col-2 align-items-center"  bgcolor="black" ><b><font color="white">볼린저밴드위치</font></b></td>
+                            <td class="col-2 align-items-center"  bgcolor="black" ><div style="height: 20px; line-height: 20px; font-size:1em;"><b><font color="white">볼린저밴드위치</font></b></div></td>
                             {% if pathdetailinfo.BolingerBandPos == None or pathdetailinfo.BolingerBandPos == ""  %}
-                                <td class="col-2 align-items-center" ><font size="2.5">볼린저밴드 범위안</font></td>
+                                <td class="col-2 align-items-center" ><div style="height: 20px; line-height: 20px; font-size:0.8em;">볼린저밴드 범위안</div></td>
                             {% else %}
-                                <td class="col-2 align-items-center" ><font size="2">{{ pathdetailinfo.BolingerBandPos }}</font></td>
+                                <td class="col-2 align-items-center" ><div style="height: 20px; line-height: 20px; font-size:0.8em;">{{ pathdetailinfo.BolingerBandPos }}</div></td>
                             {% endif %}
-                            <td class="col-2 align-items-center"  bgcolor="black" ><b><font color="white">MACD전략신호</b></td>
+                            <td class="col-2 align-items-center"  bgcolor="black" ><div style="height: 20px; line-height: 20px; font-size:1em;"><b><font color="white">MACD전략신호</b></div></td>
                             {% if pathdetailinfo.MACDFlag == None or pathdetailinfo.MACDFlag == ""  %}
-                                <td class="col-2 align-items-center" >신호없음</td>
+                                <td class="col-2 align-items-center" ><div style="height: 20px; line-height: 20px; font-size:1em;">신호없음</div></td>
                             {% else %}
-                                <td class="col-2 align-items-center" >{{ pathdetailinfo.MACDFlag }}</td>
+                                <td class="col-2 align-items-center" ><div style="height: 20px; line-height: 20px; font-size:1em;">{{ pathdetailinfo.MACDFlag }}</div></td>
                             {% endif %}
                         </tr>
                         <tr class="thead-dark text-center">
-                            <td class="col-2 align-items-center"  bgcolor="black" ><font size="3"><b><font color="white">스토캐스틱<br>전략신호</font></b></font></td>
+                            <td class="col-2 align-items-center"  bgcolor="black" ><div style="height: 40px; line-height: 20px; font-size:1em;"><font color="white"><b>스토캐스틱<br>전략신호</b></font></div></td>
                             {% if pathdetailinfo.StochasticCrossFlag == None or pathdetailinfo.StochasticCrossFlag == ""  %}
-                                <td class="col-2 align-items-center" >신호없음</td>
+                                <td class="col-2 align-items-center" ><div style="height: 40px; line-height: 20px; font-size:1em;">신호없음</div></td>
                             {% else %}
-                                <td class="col-2 align-items-center" >{{ pathdetailinfo.StochasticCrossFlag }}</td>
+                                <td class="col-2 align-items-center" ><div style="height: 40px; line-height: 20px; font-size:1em;">{{ pathdetailinfo.StochasticCrossFlag }}</div></td>
                             {% endif %}
-                            <td class="col-2 align-items-center"  bgcolor="black" ><font size="3"><b><font color="white">볼린져밴드두께<br><font size="2">(최근30일)</font></b></font></td>
+                            <td class="col-2 align-items-center"  bgcolor="black" ><div style="height: 40px; line-height: 20px; font-size:1em;"><b><font color="white">볼린져밴드두께<br>(최근30일)</font></b></div></td>
                             <!--
                             {% if pathdetailinfo.STDevStochasticFlag == None or pathdetailinfo.STDevStochasticFlag == "" %}
                                 {% if pathdetailinfo.BarFinalCode|slice:"6:7" == "4" or pathdetailinfo.BarFinalCode|slice:"6:7" == "5" %}
@@ -101,8 +101,8 @@
                                 <td class="col-2 align-items-center" ><font size="2">{{ pathdetailinfo.STDevStochasticFlag }}</font></td>
                             {% endif %}
                             -->
-                            <td class="col-2 align-items-center" >{{ pathdetailinfo.STDevStochasticFlag }}</td>
-                            <td class="col-2 align-items-center"  bgcolor="black" ><b><font color="white">거래량지표<br><font size="2">(최근30일)</font></font></b></td>
+                            <td class="col-2 align-items-center" ><div style="height: 40px; line-height: 20px; font-size:1em;">{{ pathdetailinfo.STDevStochasticFlag }}</div></td>
+                            <td class="col-2 align-items-center" bgcolor="black" ><div style="height: 40px; line-height: 20px; font-size:1em;"><b><font color="white">거래량지표<br>(최근30일)</font></b></div></td>
                             <!--
                             {% if pathdetailinfo.VolumeFlag == None or pathdetailinfo.VolumeFlag == "" %}
                                 {% if pathdetailinfo.BarFinalCode|slice:"5:6" == "4" or pathdetailinfo.BarFinalCode|slice:"5:6" == "5" %}
@@ -116,47 +116,47 @@
                                  <td class="col-2 align-items-center" >{{ pathdetailinfo.VolumeFlag }}</td>
                             {% endif %}
                             -->
-                            <td class="col-2 align-items-center" >{{ pathdetailinfo.VolumeFlag }}</td>
+                            <td class="col-2 align-items-center" ><div style="height: 20px; line-height: 40px; font-size:1em;">{{ pathdetailinfo.VolumeFlag }}</div></td>
                         </tr>
                         <tr class="thead-dark text-center">
                             <!--<th class="col-md-2">날짜</th> -->
-                            <td class="col-2 align-items-center" bgcolor="black" colspan='6' ><b><font color="white">유사차트종목 검색결과(종목수 : {{ pathdetailinfo.StockBarcodePerfTotal.BarFinalCode_Cnt }})</font></b></td>
+                            <td class="col-2 align-items-center" bgcolor="black" colspan='6' ><b><font color="white"> 유사차트종목 검색결과(종목수 : {{ pathdetailinfo.StockBarcodePerfTotal.BarFinalCode_Cnt }}  ,  {{ pathdetailinfo.trade_date }} 기준)</font></b></td>
                         </tr>
                         <tr class="thead-dark text-center">
                             <!--<th class="col-md-2">날짜</th> -->
-                            <td class="col-2 align-items-center" bgcolor="black" ><b><font color="white">7일Plus종목수</font></b></td>
-                            <td class="col-2 align-items-center" >{{ pathdetailinfo.StockBarcodePerfTotal.PlusDay7BarCode_Cnt }}</td>
-                            <td class="col-2 align-items-center" bgcolor="black" ><b><font color="white">30일Plus종목수</font></b></td>
-                            <td class="col-2 align-items-center" >{{ pathdetailinfo.StockBarcodePerfTotal.PlusDay30BarCode_Cnt }}</td>
-                            <td class="col-2 align-items-center" bgcolor="black" ><b><font color="white">90일Plus종목수</font></b></td>
-                            <td class="col-2 align-items-center" >{{ pathdetailinfo.StockBarcodePerfTotal.PlusDay90BarCode_Cnt }}</td>
+                            <td class="col-2 align-items-center" bgcolor="black" ><div style="height: 20px; line-height: 20px; font-size:1em;"><b><font color="white">7일Plus종목수</font></b></div></td>
+                            <td class="col-2 align-items-center" ><div style="height: 20px; line-height: 20px; font-size:1em;">{{ pathdetailinfo.StockBarcodePerfTotal.PlusDay7BarCode_Cnt }}</div></td>
+                            <td class="col-2 align-items-center" bgcolor="black" ><div style="height: 20px; line-height: 20px; font-size:1em;"><b><font color="white">30일Plus종목수</font></b></div></td>
+                            <td class="col-2 align-items-center" ><div style="height: 20px; line-height: 20px; font-size:1em;">{{ pathdetailinfo.StockBarcodePerfTotal.PlusDay30BarCode_Cnt }}</div></td>
+                            <td class="col-2 align-items-center" bgcolor="black" ><div style="height: 20px; line-height: 20px; font-size:1em;"><b><font color="white">90일Plus종목수</font></b></div></td>
+                            <td class="col-2 align-items-center" ><div style="height: 20px; line-height: 20px; font-size:1em;">{{ pathdetailinfo.StockBarcodePerfTotal.PlusDay90BarCode_Cnt }}</div></td>
                         </tr>
                         <tr class="thead-dark text-center">
                             <!--<th class="col-md-2">날짜</th> -->
-                            <td class="col-2 align-items-center" bgcolor="black" ><b><font color="white">7일기대수익률</font></b></td>
-                            <td class="col-2 align-items-center" >{{ pathdetailinfo.StockBarcodePerfTotal.TotDay7Average|mul:100|floatformat:"1" }} %</td>
-                            <td class="col-2 align-items-center" bgcolor="black" ><b><font color="white">30일기대수익률</font></b></td>
-                            <td class="col-2 align-items-center" >{{ pathdetailinfo.StockBarcodePerfTotal.TotDay30Average|mul:100|floatformat:"1" }} %</td>
-                            <td class="col-2 align-items-center" bgcolor="black" ><b><font color="white">90일기대수익률</font></b></td>
-                            <td class="col-2 align-items-center" >{{ pathdetailinfo.StockBarcodePerfTotal.TotDay90Average|mul:100|floatformat:"1" }} %</td>
+                            <td class="col-2 align-items-center" bgcolor="black" ><div style="height: 20px; line-height: 20px; font-size:1em;"><b><font color="white">7일기대수익률</font></b></div></td>
+                            <td class="col-2 align-items-center" ><div style="height: 20px; line-height: 20px; font-size:1em;">{{ pathdetailinfo.StockBarcodePerfTotal.TotDay7Average|mul:100|floatformat:"1" }} %</div></td>
+                            <td class="col-2 align-items-center" bgcolor="black" ><div style="height: 20px; line-height: 20px; font-size:1em;"><b><font color="white">30일기대수익률</font></b></div></td>
+                            <td class="col-2 align-items-center" ><div style="height: 20px; line-height: 20px; font-size:1em;">{{ pathdetailinfo.StockBarcodePerfTotal.TotDay30Average|mul:100|floatformat:"1" }} %</div></td>
+                            <td class="col-2 align-items-center" bgcolor="black" ><div style="height: 20px; line-height: 20px; font-size:1em;"><b><font color="white">90일기대수익률</font></b></div></td>
+                            <td class="col-2 align-items-center" ><div style="height: 20px; line-height: 20px; font-size:1em;">{{ pathdetailinfo.StockBarcodePerfTotal.TotDay90Average|mul:100|floatformat:"1" }} %</div></td>
                         </tr>
                         <tr class="thead-dark text-center">
                             <!--<th class="col-md-2">날짜</th> -->
-                            <td class="col-2 align-items-center" bgcolor="black" ><b><font color="white">7일최대수익률</font></b></td>
-                            <td class="col-2 align-items-center" >{{ pathdetailinfo.StockBarcodePerfTotal.TotDay7MaxReturn|mul:100|floatformat:"1" }} %</td>
-                            <td class="col-2 align-items-center" bgcolor="black" ><b><font color="white">30일최대수익률</font></b></td>
-                            <td class="col-2 align-items-center" >{{ pathdetailinfo.StockBarcodePerfTotal.TotDay30MaxReturn|mul:100|floatformat:"1" }} %</td>
-                            <td class="col-2 align-items-center" bgcolor="black" ><b><font color="white">90일최대수익률</font></b></td>
-                            <td class="col-2 align-items-center" >{{ pathdetailinfo.StockBarcodePerfTotal.TotDay90MaxReturn|mul:100|floatformat:"1" }} %</td>
+                            <td class="col-2 align-items-center" bgcolor="black" ><div style="height: 20px; line-height: 20px; font-size:1em;"><b><font color="white">7일최대수익률</font></b></div></td>
+                            <td class="col-2 align-items-center" ><div style="height: 20px; line-height: 20px; font-size:1em;">{{ pathdetailinfo.StockBarcodePerfTotal.TotDay7MaxReturn|mul:100|floatformat:"1" }} %</div></td>
+                            <td class="col-2 align-items-center" bgcolor="black" ><div style="height: 20px; line-height: 20px; font-size:1em;"><b><font color="white">30일최대수익률</font></b></div></td>
+                            <td class="col-2 align-items-center" ><div style="height: 20px; line-height: 20px; font-size:1em;">{{ pathdetailinfo.StockBarcodePerfTotal.TotDay30MaxReturn|mul:100|floatformat:"1" }} %</div></td>
+                            <td class="col-2 align-items-center" bgcolor="black" ><div style="height: 20px; line-height: 20px; font-size:1em;"><b><font color="white">90일최대수익률</font></b></div></td>
+                            <td class="col-2 align-items-center" ><div style="height: 20px; line-height: 20px; font-size:1em;">{{ pathdetailinfo.StockBarcodePerfTotal.TotDay90MaxReturn|mul:100|floatformat:"1" }} %</div></td>
                         </tr>
                         <tr class="thead-dark text-center">
                             <!--<th class="col-md-2">날짜</th> -->
-                            <td class="col-2 align-items-center" bgcolor="black" ><b><font color="white">7일최소수익률</font></b></td>
-                            <td class="col-2 align-items-center" >{{ pathdetailinfo.StockBarcodePerfTotal.TotDay7MinReturn|mul:100|floatformat:"1" }} %</td>
-                            <td class="col-2 align-items-center" bgcolor="black" ><b><font color="white">30일최소수익률</font></b></td>
-                            <td class="col-2 align-items-center" >{{ pathdetailinfo.StockBarcodePerfTotal.TotDay30MinReturn|mul:100|floatformat:"1" }} %</td>
-                            <td class="col-2 align-items-center" bgcolor="black" ><b><font color="white">90일최소수익률</font></b></td>
-                            <td class="col-2 align-items-center" >{{ pathdetailinfo.StockBarcodePerfTotal.TotDay90MinReturn|mul:100|floatformat:"1" }} %</td>
+                            <td class="col-2 align-items-center" bgcolor="black" ><div style="height: 20px; line-height: 20px; font-size:1em;"><b><font color="white">7일최소수익률</font></b></div></td>
+                            <td class="col-2 align-items-center" ><div style="height: 20px; line-height: 20px; font-size:1em;">{{ pathdetailinfo.StockBarcodePerfTotal.TotDay7MinReturn|mul:100|floatformat:"1" }} %</div></td>
+                            <td class="col-2 align-items-center" bgcolor="black" ><div style="height: 20px; line-height: 20px; font-size:1em;"><b><font color="white">30일최소수익률</font></b></div></td>
+                            <td class="col-2 align-items-center" ><div style="height: 20px; line-height: 20px; font-size:1em;">{{ pathdetailinfo.StockBarcodePerfTotal.TotDay30MinReturn|mul:100|floatformat:"1" }} %</div></td>
+                            <td class="col-2 align-items-center" bgcolor="black" ><div style="height: 20px; line-height: 20px; font-size:1em;"><b><font color="white">90일최소수익률</font></b></div></td>
+                            <td class="col-2 align-items-center" ><div style="height: 20px; line-height: 20px; font-size:1em;">{{ pathdetailinfo.StockBarcodePerfTotal.TotDay90MinReturn|mul:100|floatformat:"1" }} %</div></td>
                         </tr>
                         {% endfor %}
                         {% else %}

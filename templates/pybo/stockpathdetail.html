@@ -25,25 +25,24 @@
                     </div>
 
                     <table id="example-table-1" class="table table-striped" >
-                        <thead>
+                       <thead>
                        <tr class="thead-dark text-center align-items-center">
                             <!--<th class="col-md-2">날짜</th> -->
-                            <th class="col-1.3 align-items-center" rowspan='2' >
-                                <div style="height: 15px; line-height: 15px;">날짜</div></th>
-                            <th class="col-1.3 align-items-center" rowspan='2' ><div style="height: 10px; line-height: 10px;">주식코드</div></th>
-                            <th class="col-2.2 align-items-center" rowspan='2' ><div style="height: 10px; line-height: 10px;">주식명</div></th>
-                            <th class="col-1.2 align-items-center" rowspan='2' ><div style="height: 10px; line-height: 10px;">종가</div></th>
-                            <th class="col-1.2 align-items-center" colspan='6' ><div style="height: 10px; line-height: 10px;">실현수익율</div></th>
-                            <th class="col-1.2 align-items-center" colspan='1' ><div style="height: 10px; line-height: 10px;">유사종목수</div></th>
+                            <th class="col-1.0 align-items-center" rowspan='2' ><div style="height: 10px; line-height: 10px; font-size:1em;">날짜</div></th>
+                            <th class="col-1.0 align-items-center" rowspan='2' ><div style="height: 10px; line-height: 10px; font-size:1em;">주식코드</div></th>
+                            <th class="col-2.0 align-items-center" rowspan='2' ><div style="height: 10px; line-height: 10px; font-size:1em;">주식명</div></th>
+                            <th class="col-1.0 align-items-center" rowspan='2' ><div style="height: 10px; line-height: 10px; font-size:1em;">종가</div></th>
+                            <th class="col-1.0 align-items-center" colspan='6' ><div style="height: 10px; line-height: 10px; font-size:1em;">실현수익율</div></th>
+                            <th class="col-1.0 align-items-center" colspan='1' ><div style="height: 10px; line-height: 10px; font-size:1em;">유사종목수</div></th>
                        </tr>
-                        <tr class="thead-dark text-center">
-                            <th class="col-md-1.2"><div style="height: 10px; line-height: 10px;"><font size="3">최근</font></div></th>
-                            <th class="col-md-1.2"><div style="height: 10px; line-height: 10px;"><font size="3">7일</font></div></th>
-                            <th class="col-md-1.2"><div style="height: 10px; line-height: 10px;"><font size="3">30일</font></div></th>
-                            <th class="col-md-1.2"><div style="height: 10px; line-height: 10px;"><font size="3">90일</font></div></th>
-                            <th class="col-md-1.2"><div style="height: 10px; line-height: 10px;"><font size="3">180일</font></div></th>
-                            <th class="col-md-1.2"><div style="height: 10px; line-height: 10px;"><font size="3">360일</font></div></th>
-                            <th class="col-md-1.2"><div style="height: 10px; line-height: 10px;"><font size="2">전체</font></div></th>
+                        <tr class="thead-dark text-center align-items-center">
+                            <th class="col-1.0"><div style="height: 10px; line-height: 10px; font-size:1em;">최근</div></th>
+                            <th class="col-1.0"><div style="height: 10px; line-height: 10px; font-size:1em;">7일</div></th>
+                            <th class="col-1.0"><div style="height: 10px; line-height: 10px; font-size:1em;">30일</div></th>
+                            <th class="col-1.0"><div style="height: 10px; line-height: 10px; font-size:1em;">90일</div></th>
+                            <th class="col-1.0"><div style="height: 10px; line-height: 10px; font-size:1em;">180일</div></th>
+                            <th class="col-1.0"><div style="height: 10px; line-height: 10px; font-size:1em;">360일</div></th>
+                            <th class="col-1.0"><div style="height: 10px; line-height: 10px; font-size:1em;">전체</div></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -51,17 +50,17 @@
                         {% for stockpathdetail in stockpathdetail_list %}
                         <tr class="text-center">
                             <!-- <td>{{ forloop.counter }}</td>  -->
-                            <td><font size="2"><b>{{ stockpathdetail.trade_date|date:'Y-m-d' }}</b></font></td>
-                            <td><font size="2"><b>{{ stockpathdetail.StockCode }}</b></font></td>
-                            <td><font size="2"><b>{{ stockpathdetail.StockName }}</b></font></td>
-                            <td><font size="2"><b>{{ stockpathdetail.ClosePrice|floatformat:"0" }}</b></font></td>
-                            <td><font size="2"><b>{{ stockpathdetail.StockBarcodePerfReturn.TodayReturn|mul:100|floatformat:"1" }} % </b></font></td>
-                            <td><font size="2"><b>{{ stockpathdetail.StockBarcodePerfReturn.Day7Return|mul:100|floatformat:"1" }} % </b></font></td>
-                            <td><font size="2"><b>{{ stockpathdetail.StockBarcodePerfReturn.Day30Return|mul:100|floatformat:"1" }} % </b></font></td>
-                            <td><font size="2"><b>{{ stockpathdetail.StockBarcodePerfReturn.Day90Return|mul:100|floatformat:"1" }} % </b></font></td>
-                            <td><font size="2"><b>{{ stockpathdetail.StockBarcodePerfReturn.Day180Return|mul:100|floatformat:"1" }} % </b></font></td>
-                            <td><font size="2"><b>{{ stockpathdetail.StockBarcodePerfReturn.Day360Return|mul:100|floatformat:"1" }} % </b></font></td>
-                            <td><font size="2"><b>{{ stockpathdetail.StockBarcodePerfTotal.BarFinalCode_Cnt }}</b></font></td>
+                            <td><div style="height: 20px; line-height: 20px; font-size:0.8em;">{{ stockpathdetail.trade_date|date:'Y-m-d' }}</div></td>
+                            <td><div style="height: 20px; line-height: 20px; font-size:0.8em;">{{ stockpathdetail.StockCode }}</div></td>
+                            <td><div style="height: 20px; line-height: 20px; font-size:0.8em;">{{ stockpathdetail.StockName }}</div></td>
+                            <td><div style="height: 20px; line-height: 20px; font-size:0.8em;">{{ stockpathdetail.ClosePrice|floatformat:"0" }}</div></td>
+                            <td><div style="height: 20px; line-height: 20px; font-size:0.8em;">{{ stockpathdetail.StockBarcodePerfReturn.TodayReturn|mul:100|floatformat:"1" }} % </div></td>
+                            <td><div style="height: 20px; line-height: 20px; font-size:0.8em;">{{ stockpathdetail.StockBarcodePerfReturn.Day7Return|mul:100|floatformat:"1" }} % </div></td>
+                            <td><div style="height: 20px; line-height: 20px; font-size:0.8em;">{{ stockpathdetail.StockBarcodePerfReturn.Day30Return|mul:100|floatformat:"1" }} % </div></td>
+                            <td><div style="height: 20px; line-height: 20px; font-size:0.8em;">{{ stockpathdetail.StockBarcodePerfReturn.Day90Return|mul:100|floatformat:"1" }} % </div></td>
+                            <td><div style="height: 20px; line-height: 20px; font-size:0.8em;">{{ stockpathdetail.StockBarcodePerfReturn.Day180Return|mul:100|floatformat:"1" }} % </div></td>
+                            <td><div style="height: 20px; line-height: 20px; font-size:0.8em;">{{ stockpathdetail.StockBarcodePerfReturn.Day360Return|mul:100|floatformat:"1" }} % </div></td>
+                            <td><div style="height: 20px; line-height: 20px; font-size:0.8em;">{{ stockpathdetail.StockBarcodePerfTotal.BarFinalCode_Cnt }}</div></td>
                         </tr>
                         {% endfor %}
                         {% else %}
