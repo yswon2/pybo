@@ -31,19 +31,19 @@
                        <thead>
                        <tr class="thead-dark text-center align-items-center">
                             <!--<th class="col-md-2">날짜</th> -->
-                            <th class="col-1.3 align-items-center" rowspan='2' ><div style="text-align: center; height: 10px; line-height: 5px; font-size:1em;" >날짜</div></th>
-                            <th class="col-1.3 align-items-center" rowspan='2' ><div style="text-align: center; height: 10px; line-height: 5px; font-size:1em;">주식코드</div></th>
-                            <th class="col-2.2 align-items-center" rowspan='2' ><div style="text-align: center; height: 10px; line-height: 5px; font-size:1em;">주식명</div></th>
-                            <th class="col-1.2 align-items-center" rowspan='2' ><div style="text-align: center; height: 10px; line-height: 5px; font-size:1em;">종가</div></th>
-                            <th class="col-1.0 align-items-center" colspan='6' ><div style="text-align: center; height: 10px; line-height: 5px; font-size:1em;">실현수익율</div></th>
+                            <th class="col-1.3 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:1em;">날짜</div></th>
+                            <th class="col-1.3 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:1em;">주식코드</div></th>
+                            <th class="col-2.2 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:1em;">주식명</div></th>
+                            <th class="col-1.2 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:1em;">종가</div></th>
+                            <th class="col-1.0 align-items-center" colspan='6'><div style="text-align: center; height: 100%; line-height: 100%; font-size:1em;">실현수익율</div></th>
                        </tr>
-                       <tr class="thead-dark text-center align-items-center" >
-                            <th class="col-1.0"><div style="height: 10px; line-height: 10px; font-size:1em;">최근일</div></th>
-                            <th class="col-1.0"><div style="height: 10px; line-height: 10px; font-size:1em;">7일</div></th>
-                            <th class="col-1.0"><div style="height: 10px; line-height: 10px; font-size:1em;">30일</div></th>
-                            <th class="col-1.0"><div style="height: 10px; line-height: 10px; font-size:1em;">90일</div></th>
-                            <th class="col-1.0"><div style="height: 10px; line-height: 10px; font-size:1em;">180일</div></th>
-                            <th class="col-1.0"><div style="height: 10px; line-height: 10px; font-size:1em;">360일</div></th>
+                       <tr class="thead-dark text-center align-items-center">
+                            <th class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:1em;">최근일</div></th>
+                            <th class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:1em;">7일</div></th>
+                            <th class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:1em;">30일</div></th>
+                            <th class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:1em;">90일</div></th>
+                            <th class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:1em;">180일</div></th>
+                            <th class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:1em;">360일</div></th>
                            <!--
                             <th class="col-1.2"><div style="height: 10px; line-height: 10px; font-size:2em;"><font size="3" >최근일</font></div></th>
                             <th class="col-1.2"><div style="height: 10px; line-height: 10px;"><font size="3" >7일</font></div></th>
@@ -56,17 +56,17 @@
                        <tbody>
                        {% if stockbarcodedata_list %}
                        {% for stockbarcodedata in stockbarcodedata_list %}
-                       <tr class="text-center align-items-center" >
-                            <td><div style="height: 20px; line-height: 20px; font-size:1em;">{{ stockbarcodedata.trade_date|date:'Y-m-d'  }}</div></td>
-                            <td><div style="height: 20px; line-height: 20px; font-size:1em;">{{ stockbarcodedata.StockCode }}</div></td>
-                            <td><div style="height: 20px; line-height: 20px; font-size:1em;">{{ stockbarcodedata.StockName }}</div></td>
-                            <td><div style="height: 20px; line-height: 20px; font-size:1em;">{{ stockbarcodedata.ClosePrice|floatformat:"0" }}</div></td>
-                            <td><div style="height: 20px; line-height: 20px; font-size:1em;">{{ stockbarcodedata.StockBarcodePerfReturn.TodayReturn|mul:100|floatformat:"1" }} % </div></td>
-                            <td><div style="height: 20px; line-height: 20px; font-size:1em;">{{ stockbarcodedata.StockBarcodePerfReturn.Day7Return|mul:100|floatformat:"1" }} % </div></td>
-                            <td><div style="height: 20px; line-height: 20px; font-size:1em;">{{ stockbarcodedata.StockBarcodePerfReturn.Day30Return|mul:100|floatformat:"1" }} % </div></td>
-                            <td><div style="height: 20px; line-height: 20px; font-size:1em;">{{ stockbarcodedata.StockBarcodePerfReturn.Day90Return|mul:100|floatformat:"1" }} % </div></td>
-                            <td><div style="height: 20px; line-height: 20px; font-size:1em;">{{ stockbarcodedata.StockBarcodePerfReturn.Day180Return|mul:100|floatformat:"1" }} % </div></td>
-                            <td><div style="height: 20px; line-height: 20px; font-size:1em;">{{ stockbarcodedata.StockBarcodePerfReturn.Day360Return|mul:100|floatformat:"1" }} % </div></td>
+                       <tr class="text-center align-items-center">
+                            <td><div style="height: 100%; line-height: 100%; font-size:1em;">{{ stockbarcodedata.trade_date|date:'Y-m-d'  }}</div></td>
+                            <td><div style="height: 100%; line-height: 100%; font-size:1em;">{{ stockbarcodedata.StockCode }}</div></td>
+                            <td><div style="height: 100%; line-height: 100%; font-size:1em;">{{ stockbarcodedata.StockName }}</div></td>
+                            <td><div style="height: 100%; line-height: 100%; font-size:1em;">{{ stockbarcodedata.ClosePrice|floatformat:"0" }}</div></td>
+                            <td><div style="height: 100%; line-height: 100%; font-size:1em;">{{ stockbarcodedata.StockBarcodePerfReturn.TodayReturn|mul:100|floatformat:"1" }} % </div></td>
+                            <td><div style="height: 100%; line-height: 100%; font-size:1em;">{{ stockbarcodedata.StockBarcodePerfReturn.Day7Return|mul:100|floatformat:"1" }} % </div></td>
+                            <td><div style="height: 100%; line-height: 100%; font-size:1em;">{{ stockbarcodedata.StockBarcodePerfReturn.Day30Return|mul:100|floatformat:"1" }} % </div></td>
+                            <td><div style="height: 100%; line-height: 100%; font-size:1em;">{{ stockbarcodedata.StockBarcodePerfReturn.Day90Return|mul:100|floatformat:"1" }} % </div></td>
+                            <td><div style="height: 100%; line-height: 100%; font-size:1em;">{{ stockbarcodedata.StockBarcodePerfReturn.Day180Return|mul:100|floatformat:"1" }} % </div></td>
+                            <td><div style="height: 100%; line-height: 100%; font-size:1em;">{{ stockbarcodedata.StockBarcodePerfReturn.Day360Return|mul:100|floatformat:"1" }} % </div></td>
 <!--
                             <td><font size="2"><b>{{ stockbarcodedata.trade_date|date:'Y-m-d'  }}</b></font></td>
                             <td><font size="2"><b>{{ stockbarcodedata.StockCode }}</b></font></td>
