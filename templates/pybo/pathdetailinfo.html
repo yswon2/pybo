@@ -81,13 +81,13 @@
                             {% endif %}
                         </tr>
                         <tr class="thead-dark text-center">
-                            <td class="col-2 align-items-center" bgcolor="black"><div style="height: 100%; line-height: 100%; font-size:0.8em;"><font color="white"><b>스토캐스틱<br>전략신호</b></font></div></td>
+                            <td class="col-2 align-items-center" bgcolor="black"><div style="height: 100%; line-height: 100%; font-size:0.9em;"><font color="white"><b>스토캐스틱<br>전략신호</b></font></div></td>
                             {% if pathdetailinfo.StochasticCrossFlag == None or pathdetailinfo.StochasticCrossFlag == ""  %}
                                 <td class="col-2 align-items-center"><div style="height: 100%; line-height: 100%; font-size:1em;">신호없음</div></td>
                             {% else %}
                                 <td class="col-2 align-items-center"><div style="height: 100%; line-height: 100%; font-size:1em;">{{ pathdetailinfo.StochasticCrossFlag }}</div></td>
                             {% endif %}
-                            <td class="col-2 align-items-center" bgcolor="black"><div style="height: 100%; line-height: 100%; font-size:0.8em;"><b><font color="white">볼린저밴드두께<br>(최근30일)</font></b></div></td>
+                            <td class="col-2 align-items-center" bgcolor="black"><div style="height: 100%; line-height: 100%; font-size:0.9em;"><b><font color="white">볼린저밴드두께<br>(최근20일)</font></b></div></td>
                             <!--
                             {% if pathdetailinfo.STDevStochasticFlag == None or pathdetailinfo.STDevStochasticFlag == "" %}
                                 {% if pathdetailinfo.BarFinalCode|slice:"6:7" == "4" or pathdetailinfo.BarFinalCode|slice:"6:7" == "5" %}
@@ -102,7 +102,7 @@
                             {% endif %}
                             -->
                             <td class="col-2 align-items-center"><div style="height: 100%; line-height: 100%; font-size:1em;">{{ pathdetailinfo.STDevStochasticFlag }}</div></td>
-                            <td class="col-2 align-items-center" bgcolor="black"><div style="height: 100%; line-height: 100%; font-size:0.8em;"><b><font color="white">거래량지표<br>(최근30일)</font></b></div></td>
+                            <td class="col-2 align-items-center" bgcolor="black"><div style="height: 100%; line-height: 100%; font-size:0.9em;"><b><font color="white">거래량지표<br>(최근20일)</font></b></div></td>
                             <!--
                             {% if pathdetailinfo.VolumeFlag == None or pathdetailinfo.VolumeFlag == "" %}
                                 {% if pathdetailinfo.BarFinalCode|slice:"5:6" == "4" or pathdetailinfo.BarFinalCode|slice:"5:6" == "5" %}
@@ -187,11 +187,6 @@
 {% block script %}
 <script type='text/javascript'>
 $(document).ready(function(){
-    $(".page-link").on('click', function() {
-        $('.loader').show();
-        $("#page").val($(this).data("page"));
-        $("#searchForm").submit();
-    });
 
     $("#btn_search").on('click', function() {
         $('.loader').show();
@@ -211,8 +206,6 @@ $(document).ready(function(){
 $(window).on('load', function() {
      $('.loader').hide();
 });
-
-
 
 </script>
 {% endblock %}

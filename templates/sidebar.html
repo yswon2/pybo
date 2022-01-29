@@ -1,11 +1,86 @@
+{% load static %}
+<!doctype html>
+<html lang="ko">
+<head>
 
-<nav id="sidebar" >
-    <div class="col-12 p-0 bg-primary">
-        <div class="list-group" >
-            <a class="border-0  bg-primary text-white list-group-item list-group-item-action list-group-item-primary {% if category.name == 'pathdetail' %}active{% endif %}" href="{%url 'pybo:pathdetailinfo' %}"><font size="2.7"><b>기술적지표 상세정보</b></font></a>
-            <a class="border-0  bg-primary text-white list-group-item list-group-item-action list-group-item-primary {% if category.name == 'tip' %}active{% endif %}" href="{%url 'pybo:stockpathdetail' %}"><font size="2.7"><b>기술적지표 유사종목</b></font></a>
-            <a class="border-0  bg-primary text-white list-group-item list-group-item-action list-group-item-primary {% if category.name == 'free' %}active{% endif %}" href="{%url 'pybo:stockbacktest' %}"><font size="2.7"><b>기간별 실현수익률 조회</b></font></a>
-            <a class="border-0  bg-primary text-white list-group-item list-group-item-action list-group-item-primary {% if category.name == 'qna' %}active{% endif %}" href="{%url 'pybo:qna' %}"><font size="2.7"><b>Q & A</b></font></a>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+
+    <style>
+    .loader {
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #3498db;
+    width: 120px;
+    height: 120px;
+    opacity: 0.5;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    box-shadow: rgba(0, 0, 0, 0.7) 0 0 0 9999px;
+    }
+
+    /* Safari */
+    @-webkit-keyframes spin {
+        0% { -webkit-transform: rotate(0deg); }
+        100% { -webkit-transform: rotate(360deg); }
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    </style>
+</head>
+
+<body>
+    <nav id="sidebar" >
+        <div class="col-12 p-0 bg-primary">
+            <div class="list-group" >
+            <!--
+                <a class="border-0  bg-primary text-white list-group-item list-group-item-action list-group-item-primary {% if category.name == 'pathdetail' %}active{% endif %}" href="{%url 'pybo:pathdetailinfo' %}"><font size="2.7"><b>기술적지표 상세정보</b></font></a>
+                <a class="border-0  bg-primary text-white list-group-item list-group-item-action list-group-item-primary {% if category.name == 'tip' %}active{% endif %}" href="{%url 'pybo:stockpathdetail' %}"><font size="2.7"><b>기술적지표 유사종목</b></font></a>
+                <a class="border-0  bg-primary text-white list-group-item list-group-item-action list-group-item-primary {% if category.name == 'free' %}active{% endif %}" href="{%url 'pybo:stockbacktest' %}"><font size="2.7"><b>기간별 실현수익률 조회</b></font></a>
+                <a class="border-0  bg-primary text-white list-group-item list-group-item-action list-group-item-primary {% if category.name == 'qna' %}active{% endif %}" href="{%url 'pybo:qna' %}"><font size="2.7"><b>Q & A</b></font></a>
+            -->
+                <a class="page-link border-0  bg-primary text-white list-group-item list-group-item-action list-group-item-primary " href="{%url 'pybo:pathdetailinfo' %}" ><font size="2.7"><b>기술적지표 상세정보</b></font></a>
+                <a class="page-link border-0  bg-primary text-white list-group-item list-group-item-action list-group-item-primary " href="{%url 'pybo:stockpathdetail' %}" ><font size="2.7"><b>기술적지표 유사종목</b></font></a>
+                <a class="page-link border-0  bg-primary text-white list-group-item list-group-item-action list-group-item-primary " href="{%url 'pybo:stockbacktest' %}" ><font size="2.7"><b>기간별 실현수익률 조회</b></font></a>
+                <a class="page-link border-0  bg-primary text-white list-group-item list-group-item-action list-group-item-primary " href="{%url 'pybo:qna' %}" ><font size="2.7"><b>Q & A</b></font></a>
+
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
+
+    <script src="{% static 'jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'bootstrap.min.js' %}"></script>
+
+{% block script %}
+<script type='text/javascript'>
+$(document).ready(function(){
+    $(".page-link").on('click', function() {
+        $('.loader').show();
+    });
+
+});
+
+
+$(window).on('load', function() {
+     $('.loader').hide();
+});
+
+</script>
+{% endblock %}
+
+</body>
+
+
+</html>
+
+

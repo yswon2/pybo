@@ -46,9 +46,10 @@ def index(request):
 
     ip = get_client_ip(request)
     viewdate = DateFormat(datetime.now()).format('Y-m-d')
+    createtime = datetime.now()
     cnt = PageViewCount.objects.filter(ip=ip, create_date=viewdate).count()
     if cnt == 0:
-        vc = PageViewCount(ip=ip, create_date=viewdate)
+        vc = PageViewCount(ip=ip, create_date=viewdate, create_time=createtime)
         vc.save()
         if vc.view_count:
             vc.view_count += 1

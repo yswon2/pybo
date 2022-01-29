@@ -48,6 +48,7 @@ class QuestionCount(models.Model):
 class PageViewCount(models.Model):
     ip = models.CharField(max_length=30)
     create_date = models.DateField(null=False, blank=False)
+    create_time = models.DateTimeField(null=True, blank=True)
     view_count = models.IntegerField(default=0)
 
     def __unicode__(self):
