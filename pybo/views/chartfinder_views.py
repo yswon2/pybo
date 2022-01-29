@@ -8,8 +8,9 @@ from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
+from django.db.models import Sum
 
-from ..models import stockbarcodedata, stockbarcodeperfreturn, stockbarcodeperftotal, listedstockinfo
+from ..models import stockbarcodedata, stockbarcodeperfreturn, stockbarcodeperftotal, listedstockinfo, PageViewCount
 
 logger = logging.getLogger('pybo')
 
@@ -26,6 +27,9 @@ def stockbacktest(request):
     kw = request.GET.get('kw', '')
     kw2 = request.GET.get('kw2', '')
     #kw2 = request.GET.get('kw2', DateFormat(datetime.now()).format('Y-m-d'))
+    totalvisitcnt = request.GET.get('totalvisitcnt', '0')
+    todayvisitcnt = request.GET.get('todayvisitcnt', '0')
+
 
     if kw and kw2:
         if kw[0:1] != 'A' and kw[0:1] != 'a':
@@ -46,17 +50,21 @@ def stockbacktest(request):
         stockbarcodedata_list = stockbarcodedata.objects.select_related('StockBarcodePerfReturn', 'StockBarcodePerfTotal', 'ListedStockInfo').all().filter(trade_date=kw2).order_by('-ListedStockInfo__MarketCap')[:500]
     else:
         logger.info("Default 검색 시작")
-        temp_trade_date = datetime.now() - timedelta(days=410)
+        temp_trade_date = timezone.now() - timedelta(days=410)
         temp_trade_date = DateFormat(temp_trade_date).format('Y-m-d')
         stockbarcodedata_list = stockbarcodedata.objects.select_related('StockBarcodePerfReturn', 'StockBarcodePerfTotal').all().filter(StockCode='A005930').filter(trade_date__gt=temp_trade_date).order_by('trade_date')[:50]
 
     paginator = Paginator(stockbarcodedata_list, 10)
     page_obj = paginator.get_page(page)
 
+    viewdate = DateFormat(timezone.now()).format('Y-m-d')
+    totalvisitcnt = PageViewCount.objects.aggregate(view_count=Sum('view_count'))
+    todayvisitcnt = PageViewCount.objects.filter(create_date=viewdate).aggregate(view_count=Sum('view_count'))
+
 
     logger.info("stockbacktest View 끝")
 
-    context = {'stockbarcodedata_list':page_obj, 'page': page, 'kw2': kw2, 'kw': kw }
+    context = {'stockbarcodedata_list':page_obj, 'page': page, 'kw2': kw2, 'kw': kw, 'totalvisitcnt':totalvisitcnt, 'todayvisitcnt':todayvisitcnt  }
 
     return render(request, 'pybo/question_extralist.html', context)
 
@@ -76,6 +84,8 @@ def stockpathdetail(request):
 
     temp_trade_date = stockbarcodedata.objects.all().filter(StockCode='A005930').values_list('trade_date', flat=True).order_by('-trade_date')[:1]
     kw2 = request.GET.get('kw2', temp_trade_date)
+    totalvisitcnt = request.GET.get('totalvisitcnt', '0')
+    todayvisitcnt = request.GET.get('todayvisitcnt', '0')
 
     if kw:
         if (kw[0:1] != 'A' and kw[0:1] != 'a'):
@@ -95,7 +105,11 @@ def stockpathdetail(request):
     paginator = Paginator(stockpathdetail_list, 10)
     page_obj = paginator.get_page(page)
 
-    context = {'stockpathdetail_list':page_obj, 'page': page, 'kw': kw }
+    viewdate = DateFormat(timezone.now()).format('Y-m-d')
+    totalvisitcnt = PageViewCount.objects.aggregate(view_count=Sum('view_count'))
+    todayvisitcnt = PageViewCount.objects.filter(create_date=viewdate).aggregate(view_count=Sum('view_count'))
+
+    context = {'stockpathdetail_list':page_obj, 'page': page, 'kw': kw, 'totalvisitcnt':totalvisitcnt, 'todayvisitcnt':todayvisitcnt  }
 
     logger.info("stockpathdetail View 끝")
 
@@ -117,6 +131,8 @@ def pathdetailinfo(request):
 
     temp_trade_date = stockbarcodedata.objects.all().filter(StockCode='A005930').values_list('trade_date', flat=True).order_by('-trade_date')[:1]
     kw2 = request.GET.get('kw2', temp_trade_date)
+    totalvisitcnt = request.GET.get('totalvisitcnt', '0')
+    todayvisitcnt = request.GET.get('todayvisitcnt', '0')
 
     if kw:
         if (kw[0:1] != 'A' and kw[0:1] != 'a'):
@@ -133,7 +149,11 @@ def pathdetailinfo(request):
     paginator = Paginator(pathdetailinfo_list, 10)
     page_obj = paginator.get_page(page)
 
-    context = {'pathdetailinfo_list':page_obj, 'page': page, 'kw': kw }
+    viewdate = DateFormat(timezone.now()).format('Y-m-d')
+    totalvisitcnt = PageViewCount.objects.aggregate(view_count=Sum('view_count'))
+    todayvisitcnt = PageViewCount.objects.filter(create_date=viewdate).aggregate(view_count=Sum('view_count'))
+
+    context = {'pathdetailinfo_list':page_obj, 'page': page, 'kw': kw, 'totalvisitcnt':totalvisitcnt, 'todayvisitcnt':todayvisitcnt  }
 
     logger.info("pathdetailinfo View 끝")
 

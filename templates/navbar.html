@@ -57,6 +57,12 @@
                 <li class="nav-item">
                 <a class="nav-link disabled" href="#" >USAStock</a>
                 </li>
+                <li class="nav-item">
+                <a class="nav-link disabled" href="#" ><b><font color="white">Today : {{ todayvisitcnt.view_count }}</font></b></a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link disabled" href="#" ><b><font color="white">Total : {{ totalvisitcnt.view_count }}</font></b></a>
+                </li>
             <!--
             <li class="nav-item">
               <a class="nav-link" href="#">Pricing</a>
@@ -115,6 +121,8 @@ $(document).ready(function(){
         $('.loader').show();
     });
 
+    $(".nav-link1").on('click', function() {
+    });
 
 });
 

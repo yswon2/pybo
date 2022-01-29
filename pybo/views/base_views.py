@@ -5,6 +5,7 @@ from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
 from django.utils.dateformat import DateFormat
 from django.utils import timezone
+from django.db.models import Sum
 
 from datetime import datetime, timedelta
 from ..models import Question, QuestionCount
@@ -23,6 +24,8 @@ def index(request):
     #입력 파라미터
     page = request.GET.get('page', '1')
     kw = request.GET.get('kw', '')
+    totalvisitcnt = request.GET.get('totalvisitcnt', '0')
+    todayvisitcnt = request.GET.get('todayvisitcnt', '0')
 
     temp_trade_date = stockbarcodedata.objects.all().filter(StockCode='A005930').values_list('trade_date', flat=True).order_by('-trade_date')[:1]
     kw2 = request.GET.get('kw2', temp_trade_date)
@@ -41,12 +44,9 @@ def index(request):
     #paginator = Paginator(pathdetailinfo_list, 10)
     #page_obj = paginator.get_page(page)
 
-    #context = {'pathdetailinfo_list':page_obj, 'page': page, 'kw': kw }
-    context = {'pathdetailinfo_list':pathdetailinfo_list, 'kw': kw }
-
     ip = get_client_ip(request)
-    viewdate = DateFormat(datetime.now()).format('Y-m-d')
-    createtime = datetime.now()
+    viewdate = DateFormat(timezone.now()).format('Y-m-d')
+    createtime = timezone.now()
     cnt = PageViewCount.objects.filter(ip=ip, create_date=viewdate).count()
     if cnt == 0:
         vc = PageViewCount(ip=ip, create_date=viewdate, create_time=createtime)
@@ -56,6 +56,13 @@ def index(request):
         else:
             vc.view_count = 1
         vc.save()
+
+    totalvisitcnt = PageViewCount.objects.aggregate(view_count=Sum('view_count'))
+    todayvisitcnt = PageViewCount.objects.filter(create_date=viewdate).aggregate(view_count=Sum('view_count'))
+
+    #context = {'pathdetailinfo_list':page_obj, 'page': page, 'kw': kw }
+    context = {'pathdetailinfo_list':pathdetailinfo_list, 'kw': kw, 'totalvisitcnt':totalvisitcnt, 'todayvisitcnt':todayvisitcnt }
+
 
     logger.info("pathdetailinfo View 끝")
 
@@ -113,7 +120,11 @@ def qna(request):
     paginator = Paginator(question_list, 10)
     page_obj = paginator.get_page(page)
 
-    context = {'question_list':page_obj, 'page': page, 'kw': kw}
+    viewdate = DateFormat(timezone.now()).format('Y-m-d')
+    totalvisitcnt = PageViewCount.objects.aggregate(view_count=Sum('view_count'))
+    todayvisitcnt = PageViewCount.objects.filter(create_date=viewdate).aggregate(view_count=Sum('view_count'))
+
+    context = {'question_list':page_obj, 'page': page, 'kw': kw, 'totalvisitcnt':totalvisitcnt, 'todayvisitcnt':todayvisitcnt}
 
     return render(request, 'pybo/question_list.html', context)
 
