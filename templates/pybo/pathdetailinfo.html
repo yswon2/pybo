@@ -52,7 +52,7 @@
                             <td class="col-2 align-items-center"><div style="height: 100%; line-height: 100%; font-size:1em;">{{ pathdetailinfo.ClosePrice|floatformat:"0" }}</div></td>
                             <td class="col-2 align-items-center" bgcolor="black"><div style="height: 100%; line-height: 100%; font-size:1em;"><b><font color="white">봉타입</font></b></div></td>
                             <td class="col-2 align-items-center"><div style="height: 100%; line-height: 100%; font-size:1em;">{{ pathdetailinfo.BarType }}</div></td>
-                            <td class="col-2 align-items-center" bgcolor="black"><div style="height: 100%; line-height: 100%; font-size:1em;"><b><font color="white">봉길이구분</font></b></div></td>
+                            <td class="col-2 align-items-center" bgcolor="black"><div style="height: 100%; line-height: 100%; font-size:0.9em;"><b><font color="white">봉길이구분<br>(최근20일)</font></b></div></td>
                             {% if pathdetailinfo.BarLengthType == None or pathdetailinfo.BarLengthType == ""  %}
                                 <td class="col-2 align-items-center" ><div style="height: 100%; line-height: 100%; font-size:1em;">보통</div></td>
                             {% else %}
@@ -61,19 +61,19 @@
 
                         </tr>
                         <tr class="thead-dark text-center">
-                            <td class="col-2 align-items-center" bgcolor="black"><div style="height: 100%; line-height: 100%; font-size:1em;"><b><font color="white">스토캐스틱지표</font></b></div></td>
+                            <td class="col-2 align-items-center" bgcolor="black"><div style="height: 100%; line-height: 100%; font-size:0.9em;"><b><font color="white">스토캐스틱지표</font></b></div></td>
                             {% if pathdetailinfo.StochasticFlag == None or pathdetailinfo.StochasticFlag == ""  %}
                                 <td class="col-2 align-items-center"><div style="height: 100%; line-height: 100%; font-size:1em;">과열국면아님</div></td>
                             {% else %}
                                 <td class="col-2 align-items-center"><div style="height: 100%; line-height: 100%; font-size:1em;">{{ pathdetailinfo.StochasticFlag }}</div></td>
                             {% endif %}
-                            <td class="col-2 align-items-center" bgcolor="black"><div style="height: 100%; line-height: 100%; font-size:1em;"><b><font color="white">볼린저밴드위치</font></b></div></td>
+                            <td class="col-2 align-items-center" bgcolor="black"><div style="height: 100%; line-height: 100%; font-size:0.9em;"><b><font color="white">볼린저밴드위치</font></b></div></td>
                             {% if pathdetailinfo.BolingerBandPos == None or pathdetailinfo.BolingerBandPos == ""  %}
                                 <td class="col-2 align-items-center"><div style="height: 100%; line-height: 100%; font-size:0.8em;">볼린저밴드 범위안</div></td>
                             {% else %}
                                 <td class="col-2 align-items-center"><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ pathdetailinfo.BolingerBandPos }}</div></td>
                             {% endif %}
-                            <td class="col-2 align-items-center" bgcolor="black"><div style="height: 100%; line-height: 100%; font-size:1em;"><b><font color="white">MACD전략신호</font></b></div></td>
+                            <td class="col-2 align-items-center" bgcolor="black"><div style="height: 100%; line-height: 100%; font-size:0.9em;"><b><font color="white">MACD전략신호</font></b></div></td>
                             {% if pathdetailinfo.MACDFlag == None or pathdetailinfo.MACDFlag == ""  %}
                                 <td class="col-2 align-items-center"><div style="height: 100%; line-height: 100%; font-size:1em;">신호없음</div></td>
                             {% else %}
