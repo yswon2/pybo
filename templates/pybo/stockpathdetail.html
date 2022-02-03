@@ -134,12 +134,16 @@
 $(document).ready(function(){
     $(".page-link").on('click', function() {
         $('.loader').show();
+        $(".page-link").css({ 'pointer-events': 'none' });
+        $("#btn_search").attr('disabled', true);
         $("#page").val($(this).data("page"));
         $("#searchForm").submit();
     });
 
     $("#btn_search").on('click', function() {
         $('.loader').show();
+        $('#btn_search').attr('disabled', true);
+        $(".page-link").css({ 'pointer-events': 'none' });
         $("#kw").val($(".kw").val());
         $("#page").val(1);
         $("#searchForm").submit();

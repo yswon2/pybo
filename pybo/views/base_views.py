@@ -33,7 +33,7 @@ def index(request):
     if kw:
         if (kw[0:1] != 'A' and kw[0:1] != 'a'):
             logger.info("주식명 검색 시작")
-            pathdetailinfo_list = stockbarcodedata.objects.select_related('StockBarcodePerfReturn', 'StockBarcodePerfTotal').all().filter(StockName__icontains=kw).filter(trade_date=kw2).order_by('-trade_date')
+            pathdetailinfo_list = stockbarcodedata.objects.select_related('StockBarcodePerfReturn', 'StockBarcodePerfTotal').all().filter(StockName__iexact=kw).filter(trade_date=kw2).order_by('-trade_date')
         else:
             logger.info("주식코드 검색 시작")
             pathdetailinfo_list = stockbarcodedata.objects.select_related('StockBarcodePerfReturn', 'StockBarcodePerfTotal').all().filter(StockCode__icontains=kw).filter(trade_date=kw2).order_by('-trade_date')

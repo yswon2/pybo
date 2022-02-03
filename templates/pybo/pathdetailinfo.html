@@ -69,9 +69,9 @@
                             {% endif %}
                             <td class="col-2 align-items-center" bgcolor="black"><div style="height: 100%; line-height: 100%; font-size:0.9em;"><b><font color="white">볼린저밴드위치</font></b></div></td>
                             {% if pathdetailinfo.BolingerBandPos == None or pathdetailinfo.BolingerBandPos == ""  %}
-                                <td class="col-2 align-items-center"><div style="height: 100%; line-height: 100%; font-size:0.8em;">볼린저밴드 범위안</div></td>
+                                <td class="col-2 align-items-center"><div style="height: 100%; line-height: 100%; font-size:0.9em;">볼린저밴드 범위안</div></td>
                             {% else %}
-                                <td class="col-2 align-items-center"><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ pathdetailinfo.BolingerBandPos }}</div></td>
+                                <td class="col-2 align-items-center"><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ pathdetailinfo.BolingerBandPos }}</div></td>
                             {% endif %}
                             <td class="col-2 align-items-center" bgcolor="black"><div style="height: 100%; line-height: 100%; font-size:0.9em;"><b><font color="white">MACD전략신호</font></b></div></td>
                             {% if pathdetailinfo.MACDFlag == None or pathdetailinfo.MACDFlag == ""  %}
@@ -192,6 +192,8 @@ $(document).ready(function(){
 
     $("#btn_search").on('click', function() {
         $('.loader').show();
+        $("#btn_search").attr('disabled', true);
+        $('#btn_detailsearch").attr('disabled', true);
         $("#kw").val($(".kw").val());
         $("#page").val(1);
         $("#searchForm").submit();
@@ -199,9 +201,12 @@ $(document).ready(function(){
 
     $("#btn_detailsearch").on('click', function() {
         $('.loader').show();
+        $("btn_detailsearch").attr('disabled', true);
+        $("#btn_search").attr('disabled', true);
         $("#kw").val($(".kw2").val());
         $("#page").val(1);
         $("#searchdetailForm").submit();
+
     });
 });
 
