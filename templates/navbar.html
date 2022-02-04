@@ -116,17 +116,20 @@ $(document).ready(function(){
     $(".navbar-brand").on('click', function() {
         $('.loader').show();
         $(".navbar-brand").css({ 'pointer-events': 'none' });
+        $(".page-link").css({ 'pointer-events': 'none' });
+        $("#btn_search").attr('disabled', true);
+        $("#btn_detailsearch").attr('disabled', true);
+        $(".nav-link").css({ 'pointer-events': 'none' });
     });
 
     $(".nav-link").on('click', function() {
         $('.loader').show();
         $(".nav-link").css({ 'pointer-events': 'none' });
+        $(".page-link").css({ 'pointer-events': 'none' });
+        $("#btn_search").attr('disabled', true);
+        $("#btn_detailsearch").attr('disabled', true);
+        $(".navbar-brand").css({ 'pointer-events': 'none' });
     });
-
-    $(".nav-link1").on('click', function() {
-        $(".nav-link1").css({ 'pointer-events': 'none' });
-    });
-
 });
 
 $(window).on('load', function() {

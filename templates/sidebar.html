@@ -66,6 +66,10 @@ $(document).ready(function(){
     $(".page-link").on('click', function() {
         $('.loader').show();
         $(".page-link").css({ 'pointer-events': 'none' });
+        $(".nav-link").css({ 'pointer-events': 'none' });
+        $(".navbar-brand").css({ 'pointer-events': 'none' });
+        $("#btn_search").attr('disabled', true);
+        $("#btn_detailsearch").attr('disabled', true);
     });
 
 });

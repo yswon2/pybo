@@ -135,7 +135,7 @@ $(document).ready(function(){
     $(".page-link").on('click', function() {
         $('.loader').show();
         $(".page-link").css({ 'pointer-events': 'none' });
-        $('#btn_search').attr('disabled', true);
+        $("#btn_search").attr('disabled', true);
         $("#page").val($(this).data("page"));
         $("#searchForm").submit();
     });
