@@ -192,21 +192,20 @@ $(document).ready(function(){
 
     $("#btn_search").on('click', function() {
         $('.loader').show();
-        $("#btn_search").attr('disabled', true);
-        $('#btn_detailsearch").attr('disabled', true);
         $("#kw").val($(".kw").val());
         $("#page").val(1);
         $("#searchForm").submit();
+        $('#btn_search').attr('disabled', true);
+        $('#btn_detailsearch').attr('disabled', true);
     });
 
     $("#btn_detailsearch").on('click', function() {
         $('.loader').show();
-        $("btn_detailsearch").attr('disabled', true);
-        $("#btn_search").attr('disabled', true);
         $("#kw").val($(".kw2").val());
         $("#page").val(1);
         $("#searchdetailForm").submit();
-
+        $('#btn_search').attr('disabled', true);
+        $('#btn_detailsearch').attr('disabled', true);
     });
 });
 
