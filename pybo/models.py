@@ -165,6 +165,55 @@ class listedstockinfo(models.Model):
     MarketCap = models.FloatField()
     StockNum = models.FloatField()
 
+
+class stockpriceinfo(models.Model):
+
+    trade_date = models.CharField(null=False, blank=False, max_length=20)
+    MarketType = models.CharField(null=False, blank=False, max_length=15)
+    StockCode = models.CharField(null=False, blank=False, max_length=20)
+    StockName = models.CharField(null=True, blank=True, max_length=100)
+    OpenPrice = models.FloatField()
+    HighPrice = models.FloatField()
+    LowPrice = models.FloatField()
+    ClosePrice = models.FloatField()
+    TradeVolume = models.FloatField()
+    StockPriceInfo_ID = models.CharField(null=False, blank=False, primary_key=True, max_length=150, default='')
+
+
+class stockcalcdata(models.Model):
+
+    trade_date = models.DateField(null=False, blank=False)
+    StockCode = models.CharField(null=False, blank=False,  max_length=20)
+    StockName = models.CharField(null=True, blank=True, max_length=100)
+    MarketType = models.CharField(null=True, blank=True, max_length=15)
+    ClosePrice = models.FloatField()
+    TopBottomRate = models.FloatField()
+    Ave20Volume = models.FloatField()
+    Ave20VolWeight = models.FloatField()
+    Ave12Price = models.FloatField()
+    Ave26Price = models.FloatField()
+    MaxHighPrice = models.FloatField()
+    MinLowPrice = models.FloatField()
+    SlowStoD = models.FloatField()
+    STDevRate = models.FloatField()
+    BolingerBandCenterBarr = models.FloatField()
+    BolingerBandUpBarr = models.FloatField()
+    BolingerBandDownBarr = models.FloatField()
+    MACD = models.FloatField()
+    Ave9MACDSignal = models.FloatField()
+    MACDOsil = models.FloatField()
+    MACDOsilRate = models.FloatField()
+    RSI = models.FloatField()
+    RSI_Flag = models.FloatField()
+    OBV = models.FloatField()
+    OBVSignal = models.FloatField()
+    OBV_Flag = models.FloatField()
+    VR = models.FloatField()
+    VR_Flag = models.FloatField()
+    StockCalcData_ID = models.CharField(null=False, blank=False, primary_key=True, max_length=150, default='')
+
+
+
 class stockbarcodedata(models.Model):
 
     trade_date = models.DateField(null=False, blank=False)
@@ -190,5 +239,7 @@ class stockbarcodedata(models.Model):
     StockBarcodePerfReturn = models.ForeignKey(stockbarcodeperfreturn, on_delete=models.CASCADE, default='')
     StockBarcodePerfTotal = models.ForeignKey(stockbarcodeperftotal, on_delete=models.DO_NOTHING, db_constraint=False, null=True)
     ListedStockInfo = models.ForeignKey(listedstockinfo, on_delete=models.DO_NOTHING, db_constraint=False, null=True)
+    StockPriceInfo = models.ForeignKey(stockpriceinfo, on_delete=models.DO_NOTHING, db_constraint=False, null=True)
+    StockCalcData = models.ForeignKey(stockcalcdata, on_delete=models.DO_NOTHING, db_constraint=False, null=True)
 
 
