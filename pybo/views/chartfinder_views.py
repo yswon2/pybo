@@ -9,6 +9,7 @@ from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 from django.db.models import Sum
+from django.db.models import F
 
 from ..models import stockbarcodedata, stockbarcodeperfreturn, stockbarcodeperftotal, listedstockinfo, PageViewCount
 
@@ -53,7 +54,8 @@ def stockbacktest(request):
             stockbarcodedata_list = stockbarcodedata.objects.select_related('StockBarcodePerfReturn', 'StockBarcodePerfTotal', 'ListedStockInfo').all().filter(StockCode__icontains=kw).order_by('-trade_date')[:500]
     elif kw == '' and kw2:
         logger.info("거래일 검색 시작")
-        stockbarcodedata_list = stockbarcodedata.objects.select_related('StockBarcodePerfReturn', 'StockBarcodePerfTotal', 'ListedStockInfo').all().filter(trade_date=kw2).order_by('-ListedStockInfo__MarketCap')[:500]
+        #stockbarcodedata_list = stockbarcodedata.objects.select_related('StockBarcodePerfReturn', 'StockBarcodePerfTotal', 'ListedStockInfo').all().filter(trade_date=kw2).order_by('-ListedStockInfo__MarketCap')[:500]
+        stockbarcodedata_list = stockbarcodedata.objects.select_related('StockBarcodePerfReturn', 'StockBarcodePerfTotal', 'ListedStockInfo').all().filter(trade_date=kw2).order_by(F('ListedStockInfo__MarketCap').desc(nulls_last=True))[:500]
     else:
         logger.info("Default 검색 시작")
 
