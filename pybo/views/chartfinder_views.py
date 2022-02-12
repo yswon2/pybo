@@ -29,39 +29,38 @@ def stockbacktest(request):
     #kw2 = request.GET.get('kw2', DateFormat(datetime.now()).format('Y-m-d'))
     totalvisitcnt = request.GET.get('totalvisitcnt', '0')
     todayvisitcnt = request.GET.get('todayvisitcnt', '0')
-    finalcloseprice = request.GET.get('finalcloseprice', '0')
+    #ffinalcloseprice = request.GET.get('finalcloseprice', '0')
 
     temp_trade_date = stockbarcodedata.objects.all().filter(StockCode='A005930').values_list('trade_date', flat=True).order_by('-trade_date')[:1]
 
     if kw and kw2:
         if kw[0:1] != 'A' and kw[0:1] != 'a':
             logger.info("주식명, 거래일 검색 시작")
-            finalcloseprice = stockbarcodedata.objects.filter(StockName__iexact=kw).filter(trade_date=temp_trade_date).aggregate(ClosePrice=Sum('ClosePrice'))
-            stockbarcodedata_list = stockbarcodedata.objects.select_related('StockBarcodePerfReturn', 'StockBarcodePerfTotal').filter(StockName__iexact=kw).filter(trade_date=kw2)
+            #ffinalcloseprice = stockbarcodedata.objects.filter(StockName__iexact=kw).filter(trade_date=temp_trade_date).aggregate(ClosePrice=Sum('ClosePrice'))
+            stockbarcodedata_list = stockbarcodedata.objects.select_related('StockBarcodePerfReturn', 'StockBarcodePerfTotal', 'ListedStockInfo').filter(StockName__iexact=kw).filter(trade_date=kw2)
         else:
             logger.info("주식코드, 거래일 검색 시작")
-            finalcloseprice = stockbarcodedata.objects.filter(StockCode__icontains=kw).filter(trade_date=temp_trade_date).aggregate(ClosePrice=Sum('ClosePrice'))
-            stockbarcodedata_list = stockbarcodedata.objects.select_related('StockBarcodePerfReturn', 'StockBarcodePerfTotal').all().filter(StockCode__icontains=kw).filter(trade_date=kw2).order_by('-trade_date')
+            #ffinalcloseprice = stockbarcodedata.objects.filter(StockCode__icontains=kw).filter(trade_date=temp_trade_date).aggregate(ClosePrice=Sum('ClosePrice'))
+            stockbarcodedata_list = stockbarcodedata.objects.select_related('StockBarcodePerfReturn', 'StockBarcodePerfTotal', 'ListedStockInfo').all().filter(StockCode__icontains=kw).filter(trade_date=kw2).order_by('-trade_date')
     elif kw and kw2 == '':
         if kw[0:1] != 'A' and kw[0:1] != 'a':
             logger.info("주식명 검색 시작")
-            finalcloseprice = stockbarcodedata.objects.filter(StockName__iexact=kw).filter(trade_date=temp_trade_date).aggregate(ClosePrice=Sum('ClosePrice'))
-            stockbarcodedata_list = stockbarcodedata.objects.select_related('StockBarcodePerfReturn', 'StockBarcodePerfTotal').filter(StockName__iexact=kw).order_by('-trade_date')[:500]
+            #ffinalcloseprice = stockbarcodedata.objects.filter(StockName__iexact=kw).filter(trade_date=temp_trade_date).aggregate(ClosePrice=Sum('ClosePrice'))
+            stockbarcodedata_list = stockbarcodedata.objects.select_related('StockBarcodePerfReturn', 'StockBarcodePerfTotal', 'ListedStockInfo').filter(StockName__iexact=kw).order_by('-trade_date')[:500]
         else:
             logger.info("주식코드 검색 시작")
-            finalcloseprice = stockbarcodedata.objects.filter(StockCode__icontains=kw).filter(trade_date=temp_trade_date).aggregate(ClosePrice=Sum('ClosePrice'))
-            stockbarcodedata_list = stockbarcodedata.objects.select_related('StockBarcodePerfReturn', 'StockBarcodePerfTotal').all().filter(StockCode__icontains=kw).order_by('-trade_date')[:500]
+            #ffinalcloseprice = stockbarcodedata.objects.filter(StockCode__icontains=kw).filter(trade_date=temp_trade_date).aggregate(ClosePrice=Sum('ClosePrice'))
+            stockbarcodedata_list = stockbarcodedata.objects.select_related('StockBarcodePerfReturn', 'StockBarcodePerfTotal', 'ListedStockInfo').all().filter(StockCode__icontains=kw).order_by('-trade_date')[:500]
     elif kw == '' and kw2:
         logger.info("거래일 검색 시작")
-        finalcloseprice = stockbarcodedata.objects.filter(trade_date=temp_trade_date).values_list('ClosePrice', flat=True)
         stockbarcodedata_list = stockbarcodedata.objects.select_related('StockBarcodePerfReturn', 'StockBarcodePerfTotal', 'ListedStockInfo').all().filter(trade_date=kw2).order_by('-ListedStockInfo__MarketCap')[:500]
     else:
         logger.info("Default 검색 시작")
 
-        finalcloseprice = stockbarcodedata.objects.filter(StockCode__icontains='A005930').filter(trade_date=temp_trade_date).aggregate(ClosePrice=Sum('ClosePrice'))
+        #finalcloseprice = stockbarcodedata.objects.filter(StockCode__icontains='A005930').filter(trade_date=temp_trade_date).aggregate(ClosePrice=Sum('ClosePrice'))
         temp_trade_date = timezone.now() - timedelta(days=410)
         temp_trade_date = DateFormat(temp_trade_date).format('Y-m-d')
-        stockbarcodedata_list = stockbarcodedata.objects.select_related('StockBarcodePerfReturn', 'StockBarcodePerfTotal').all().filter(StockCode='A005930').filter(trade_date__gt=temp_trade_date).order_by('trade_date')[:50]
+        stockbarcodedata_list = stockbarcodedata.objects.select_related('StockBarcodePerfReturn', 'StockBarcodePerfTotal', 'ListedStockInfo').all().filter(StockCode='A005930').filter(trade_date__gt=temp_trade_date).order_by('trade_date')[:50]
 
     paginator = Paginator(stockbarcodedata_list, 10)
     page_obj = paginator.get_page(page)
@@ -73,7 +72,8 @@ def stockbacktest(request):
 
     logger.info("stockbacktest View 끝")
 
-    context = {'stockbarcodedata_list':page_obj, 'page':page, 'kw2':kw2, 'kw':kw, 'totalvisitcnt':totalvisitcnt, 'todayvisitcnt':todayvisitcnt, 'finalcloseprice':finalcloseprice  }
+    #context = {'stockbarcodedata_list':page_obj, 'page':page, 'kw2':kw2, 'kw':kw, 'totalvisitcnt':totalvisitcnt, 'todayvisitcnt':todayvisitcnt, 'finalcloseprice':finalcloseprice  }
+    context = {'stockbarcodedata_list':page_obj, 'page':page, 'kw2':kw2, 'kw':kw, 'totalvisitcnt':totalvisitcnt, 'todayvisitcnt':todayvisitcnt  }
 
     return render(request, 'pybo/question_extralist.html', context)
 
@@ -146,14 +146,13 @@ def pathdetailinfo(request):
     if kw:
         if (kw[0:1] != 'A' and kw[0:1] != 'a'):
             logger.info("주식명 검색 시작")
-            pathdetailinfo_list = stockbarcodedata.objects.select_related('StockBarcodePerfReturn', 'StockBarcodePerfTotal').all().filter(StockName__iexact=kw).filter(trade_date=kw2).order_by('-trade_date')
+            pathdetailinfo_list = stockbarcodedata.objects.select_related('StockBarcodePerfReturn', 'StockBarcodePerfTotal', 'ListedStockInfo', 'AntBuySellInfo', 'ForeignBuySellInfo', 'InstituteBuySellInfo').all().filter(StockName__iexact=kw).filter(trade_date=kw2).order_by('-trade_date')
         else:
             logger.info("주식코드 검색 시작")
-            pathdetailinfo_list = stockbarcodedata.objects.select_related('StockBarcodePerfReturn', 'StockBarcodePerfTotal').all().filter(StockCode__icontains=kw).filter(trade_date=kw2).order_by('-trade_date')
+            pathdetailinfo_list = stockbarcodedata.objects.select_related('StockBarcodePerfReturn', 'StockBarcodePerfTotal', 'ListedStockInfo', 'AntBuySellInfo', 'ForeignBuySellInfo', 'InstituteBuySellInfo').all().filter(StockCode__icontains=kw).filter(trade_date=kw2).order_by('-trade_date')
     else:
         logger.info("Default 검색 시작")
-        #pathdetailinfo_list = stockbarcodedata.objects.select_related('StockBarcodePerfReturn', 'StockBarcodePerfTotal').all().filter(StockCode__in='').all()
-        pathdetailinfo_list = stockbarcodedata.objects.select_related('StockBarcodePerfReturn', 'StockBarcodePerfTotal').all().filter(StockCode__icontains='A005930').filter(trade_date=kw2).all()
+        pathdetailinfo_list = stockbarcodedata.objects.select_related('StockBarcodePerfReturn', 'StockBarcodePerfTotal', 'ListedStockInfo', 'AntBuySellInfo', 'ForeignBuySellInfo', 'InstituteBuySellInfo').all().filter(StockCode__icontains='A005930').filter(trade_date=kw2).order_by('-trade_date')
 
     paginator = Paginator(pathdetailinfo_list, 10)
     page_obj = paginator.get_page(page)
@@ -162,7 +161,7 @@ def pathdetailinfo(request):
     totalvisitcnt = PageViewCount.objects.aggregate(view_count=Sum('view_count'))
     todayvisitcnt = PageViewCount.objects.filter(create_date=viewdate).aggregate(view_count=Sum('view_count'))
 
-    context = {'pathdetailinfo_list':page_obj, 'page': page, 'kw': kw, 'totalvisitcnt':totalvisitcnt, 'todayvisitcnt':todayvisitcnt  }
+    context = {'pathdetailinfo_list':page_obj, 'page': page, 'kw': kw, 'totalvisitcnt':totalvisitcnt, 'todayvisitcnt':todayvisitcnt }
 
     logger.info("pathdetailinfo View 끝")
 

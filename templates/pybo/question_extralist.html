@@ -55,15 +55,8 @@
                             <td><div style="height: 100%; line-height: 100%; font-size:1em;">{{ stockbarcodedata.StockCode }}</div></td>
                             <td><div style="height: 100%; line-height: 100%; font-size:1em;">{{ stockbarcodedata.StockName }}</div></td>
                             <td><div style="height: 100%; line-height: 100%; font-size:1em;">{{ stockbarcodedata.ClosePrice|floatformat:"0" }}</div></td>
-                           <!--
-                            {% if stockbarcodedata.trade_date|date:'Y-m-d' <= tockbarcodedata.trade_date|datediff %}
-                                <td><div style="height: 100%; line-height: 100%; font-size:1em;"></div></td>
-                            {% else %}
-                                <td><div style="height: 100%; line-height: 100%; font-size:1em;">{{ stockbarcodedata.StockBarcodePerfReturn.TodayReturn|mul:100|floatformat:"1" }} % </div></td>
-                            {% endif %}
-                            -->
-                            <td><div style="height: 100%; line-height: 100%; font-size:1em;">{{ finalcloseprice.ClosePrice|sub:stockbarcodedata.ClosePrice|div:stockbarcodedata.ClosePrice|mul:100|floatformat:"1" }} % </div></td>
 
+                            <td><div style="height: 100%; line-height: 100%; font-size:1em;">{{ stockbarcodedata.ListedStockInfo.FinalPriceT|sub:stockbarcodedata.ClosePrice|div:stockbarcodedata.ClosePrice|mul:100|floatformat:"1" }} % </div></td>
                             <td><div style="height: 100%; line-height: 100%; font-size:1em;">{{ stockbarcodedata.StockBarcodePerfReturn.Day7Return|mul:100|floatformat:"1" }} % </div></td>
                             <td><div style="height: 100%; line-height: 100%; font-size:1em;">{{ stockbarcodedata.StockBarcodePerfReturn.Day30Return|mul:100|floatformat:"1" }} % </div></td>
                             <td><div style="height: 100%; line-height: 100%; font-size:1em;">{{ stockbarcodedata.StockBarcodePerfReturn.Day90Return|mul:100|floatformat:"1" }} % </div></td>

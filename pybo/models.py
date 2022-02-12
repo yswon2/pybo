@@ -164,6 +164,44 @@ class listedstockinfo(models.Model):
     MarketTypeDetail = models.CharField(null=True, blank=True, max_length=15)
     MarketCap = models.FloatField()
     StockNum = models.FloatField()
+    FinalPriceT = models.FloatField(default=0)
+    FinalPriceT1 = models.FloatField(default=0)
+
+
+class AntBuySellInfo(models.Model):
+
+    StockCode = models.CharField(null=False, blank=False, primary_key=True, max_length=20)
+    StockName = models.CharField(null=True, blank=True, max_length=100)
+    TradeVolume_Sell = models.FloatField(default=0)
+    TradeVolume_Buy = models.FloatField(default=0)
+    TradeVolume_NetBuy = models.FloatField(default=0)
+    TradeAmount_Sell = models.FloatField(default=0)
+    TradeAmount_Buy = models.FloatField(default=0)
+    TradeAmount_NetBuy = models.FloatField(default=0)
+
+
+class ForeignBuySellInfo(models.Model):
+
+    StockCode = models.CharField(null=False, blank=False, primary_key=True, max_length=20)
+    StockName = models.CharField(null=True, blank=True, max_length=100)
+    TradeVolume_Sell = models.FloatField(default=0)
+    TradeVolume_Buy = models.FloatField(default=0)
+    TradeVolume_NetBuy = models.FloatField(default=0)
+    TradeAmount_Sell = models.FloatField(default=0)
+    TradeAmount_Buy = models.FloatField(default=0)
+    TradeAmount_NetBuy = models.FloatField(default=0)
+
+
+class InstituteBuySellInfo(models.Model):
+
+    StockCode = models.CharField(null=False, blank=False, primary_key=True, max_length=20)
+    StockName = models.CharField(null=True, blank=True, max_length=100)
+    TradeVolume_Sell = models.FloatField(default=0)
+    TradeVolume_Buy = models.FloatField(default=0)
+    TradeVolume_NetBuy = models.FloatField(default=0)
+    TradeAmount_Sell = models.FloatField(default=0)
+    TradeAmount_Buy = models.FloatField(default=0)
+    TradeAmount_NetBuy = models.FloatField(default=0)
 
 
 class stockpriceinfo(models.Model):
@@ -242,4 +280,7 @@ class stockbarcodedata(models.Model):
     StockPriceInfo = models.ForeignKey(stockpriceinfo, on_delete=models.DO_NOTHING, db_constraint=False, null=True)
     StockCalcData = models.ForeignKey(stockcalcdata, on_delete=models.DO_NOTHING, db_constraint=False, null=True)
 
+    AntBuySellInfo = models.ForeignKey(AntBuySellInfo, on_delete=models.DO_NOTHING, db_constraint=False, null=True)
+    ForeignBuySellInfo = models.ForeignKey(ForeignBuySellInfo, on_delete=models.DO_NOTHING, db_constraint=False, null=True)
+    InstituteBuySellInfo = models.ForeignKey(InstituteBuySellInfo, on_delete=models.DO_NOTHING, db_constraint=False, null=True)
 
