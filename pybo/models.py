@@ -166,6 +166,19 @@ class listedstockinfo(models.Model):
     StockNum = models.FloatField()
     FinalPriceT = models.FloatField(default=0)
     FinalPriceT1 = models.FloatField(default=0)
+    FinalPriceT7 = models.FloatField(default=0)
+    FinalPriceT30 = models.FloatField(default=0)
+    FinalPriceT90 = models.FloatField(default=0)
+    EPS = models.FloatField(default=0)
+    PER = models.FloatField(default=0)
+    Forward_EPS = models.FloatField(default=0)
+    Forward_PER = models.FloatField(default=0)
+    BPS = models.FloatField(default=0)
+    PBR = models.FloatField(default=0)
+    DivAmount = models.FloatField(default=0)
+    DivRate = models.FloatField(default=0)
+    IndustryType = models.CharField(null=True, blank=True, max_length=15)
+
 
 
 class AntBuySellInfo(models.Model):

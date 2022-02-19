@@ -1,0 +1,205 @@
+{% extends 'base.html' %}
+{% load pybo_filter %}
+{% load mathfilters %}
+{% block content %}
+
+<div class="loader"></div>
+
+<div class="container mt-3" id="body-wrapper">
+    <div id="body-content">
+        <!-- Sidebar -->
+        <div class="row">
+            <div class="col-sm-12 col-md-3 col-lg-2 p-0">
+                {% include "sidebar.html" %}
+            </div>
+            <!-- Page Content -->
+            <div class="col-sm-12 col-md-9 col-lg-10 p-0">
+                <div class="container my-3">
+                    <div class="row justify-content-end my-3">
+                        <!--
+                        <div class="col-3 input-group">
+                            <input type="text"  title="개인 or 외국인 or 기관" style="text-transform: uppercase;" class="form-control kw" value="{{ kw|upper|default_if_none:'' }}">
+                        </div>
+                        -->
+                        <!--
+                        <div class="col-4 input-group">
+                            <input type="text"  title="순매수 OR 순매도" style="text-transform: uppercase;" class="form-control kw2" value="{{ kw2|upper|default_if_none:'' }}">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary pull-right" type="button" id="btn_search">찾기</button>
+                            </div>
+                        </div>
+                        -->
+                         <div class="col-2 input-group">
+                            <select name="kw" class="form-control kw" value="{{ kw|default_if_none:'' }}">
+                                <option value="0" >거래주체</option>
+                                <option value="개인"  {% if kw == "개인" %} selected {% endif %} >개인</option>
+                                <option value="외국인" {% if kw == "외국인" %} selected {% endif %} >외국인</option>
+                                <option value="기관" {% if kw == "기관" %} selected {% endif %} >기관</option>
+                            </select>
+                        </div>
+
+                        <div class="col-3 input-group">
+                            <select name="kw2" class="form-control kw2" value="{{ kw2|default_if_none:'' }}">
+                                <option value="0" >매수구분</option>
+                                <option value="순매수" {% if kw2 == "순매수" %} selected {% endif %} >순매수 상위</option>
+                                <option value="순매도" {% if kw2 == "순매도" %} selected {% endif %} >순매도 상위</option>
+                            </select>
+
+                            <div class="input-group-append">
+                                <button class="btn btn-primary pull-right" type="button" id="btn_search">찾기</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <table class="table table-striped" >
+                        <thead>
+                        <tr class="thead-dark text-center align-items-center">
+                            <th class="col-1.5 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:1em;">기준일</div></th>
+                            <th class="col-1.5 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:1em;">주식코드</div></th>
+                            <th class="col-1.5 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:1em;">주식명</div></th>
+                            <th class="col-1.5 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:1em;">종가</div></th>
+                            <th class="col-1.5 align-items-center" colspan='3'><div style="text-align: center; height: 100%; line-height: 100%; font-size:1em;">1개월 순매수금액 (원)</div></th>
+                            <th class="col-1.5 align-items-center" colspan='3'><div style="text-align: center; height: 100%; line-height: 100%; font-size:1em;">기간수익율</div></th>
+                        </tr>
+                        <tr class="thead-dark text-center align-items-center">
+                            {% if kw == "개인" %}
+                                <th class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:1em;">개인</div></th>
+                                <th class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:1em;">외국인</div></th>
+                                <th class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:1em;">기관</div></th>
+                            {% elif kw == "외국인" %}
+                                <th class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:1em;">외국인</div></th>
+                                <th class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:1em;">기관</div></th>
+                                <th class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:1em;">개인</div></th>
+                            {% else %}
+                                <th class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:1em;">기관</div></th>
+                                <th class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:1em;">외국인</div></th>
+                                <th class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:1em;">개인</div></th>
+                            {% endif %}
+                            <th class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:1em;">1일</div></th>
+                            <th class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:1em;">7일</div></th>
+                            <th class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:1em;">30일</div></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% if investperfanaly_list %}
+                        {% for investperfanaly in investperfanaly_list %}
+                        <tr class="text-center align-items-center">
+                            <td><div style="height: 100%; line-height: 100%; font-size:1em;">{{ investperfanaly.trade_date|date:'Y-m-d'  }}</div></td>
+                            <td><div style="height: 100%; line-height: 100%; font-size:1em;">{{ investperfanaly.StockCode }}</div></td>
+                            <td><div style="height: 100%; line-height: 100%; font-size:1em;">{{ investperfanaly.StockName }}</div></td>
+                            <td><div style="height: 100%; line-height: 100%; font-size:1em;">{{ investperfanaly.ClosePrice|floatformat:"0" }}</div></td>
+                            {% if kw == "개인" %}
+                                <td><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ investperfanaly.AntBuySellInfo.TradeAmount_NetBuy|div:100000000|floatformat:"0" }} 억</div></td>
+                                <td><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ investperfanaly.ForeignBuySellInfo.TradeAmount_NetBuy|div:100000000|floatformat:"0" }} 억 </div></td>
+                                <td><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ investperfanaly.InstituteBuySellInfo.TradeAmount_NetBuy|div:100000000|floatformat:"0" }} 억 </div></td>
+                            {% elif kw == "외국인" %}
+                                <td><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ investperfanaly.ForeignBuySellInfo.TradeAmount_NetBuy|div:100000000|floatformat:"0" }} 억 </div></td>
+                                <td><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ investperfanaly.InstituteBuySellInfo.TradeAmount_NetBuy|div:100000000|floatformat:"0" }} 억 </div></td>
+                                <td><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ investperfanaly.AntBuySellInfo.TradeAmount_NetBuy|div:100000000|floatformat:"0" }} 억 </div></td>
+                            {% else %}
+                                <td><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ investperfanaly.InstituteBuySellInfo.TradeAmount_NetBuy|div:100000000|floatformat:"0" }} 억 </div></td>
+                                <td><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ investperfanaly.ForeignBuySellInfo.TradeAmount_NetBuy|div:100000000|floatformat:"0" }} 억 </div></td>
+                                <td><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ investperfanaly.AntBuySellInfo.TradeAmount_NetBuy|div:100000000|floatformat:"0" }} 억 </div></td>
+                            {% endif %}
+                            <td><div style="height: 100%; line-height: 100%; font-size:1em;">{{ investperfanaly.ListedStockInfo.FinalPriceT|sub:investperfanaly.ListedStockInfo.FinalPriceT1|div:investperfanaly.ListedStockInfo.FinalPriceT1|mul:100|floatformat:"1" }} % </div></td>
+                            <td><div style="height: 100%; line-height: 100%; font-size:1em;">{{investperfanaly.ListedStockInfo.FinalPriceT|sub:investperfanaly.ListedStockInfo.FinalPriceT7|div:investperfanaly.ListedStockInfo.FinalPriceT7|mul:100|floatformat:"1" }} % </div></td>
+                            <td><div style="height: 100%; line-height: 100%; font-size:1em;">{{investperfanaly.ListedStockInfo.FinalPriceT|sub:investperfanaly.ListedStockInfo.FinalPriceT30|div:investperfanaly.ListedStockInfo.FinalPriceT30|mul:100|floatformat:"1" }} % </div></td>
+
+
+                        </tr>
+                        {% endfor %}
+                        {% else %}
+                        <tr>
+                            <td colspan="12"><div style="text-align: center; height: 20px; line-height: 20px;">데이터가 없습니다.</div></td>
+                        </tr>
+                        {% endif %}
+                        </tbody>
+                    </table>
+
+                    <!-- 페이징처리 시작 -->
+                    <ul class="pagination justify-content-center">
+                        {% if investperfanaly_list.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" data-page="{{ investperfanaly_list.previous_page_number }}" href="#">이전</a>
+                        </li>
+                        {% else %}
+                        <li class="page-item disabled">
+                            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
+                        </li>
+                        {% endif %}
+                        <!-- 페이지 리스트 -->
+                        {% for page_number in investperfanaly_list.paginator.page_range %}
+                        {% if page_number >= investperfanaly_list.number|add:-5 and page_number <= investperfanaly_list.number|add:5 %}
+                            {% if page_number == investperfanaly_list.number %}
+                            <li class="page-item active" aria-current="page">
+                                <a class="page-link" data-page="{{ page_number }}" href="#">{{ page_number }}</a>
+                            </li>
+                            {% else %}
+                            <li class="page-item">
+                                <a class="page-link" data-page="{{ page_number }}" href="#">{{ page_number }}</a>
+                            </li>
+                            {% endif %}
+                        {% endif %}
+                        {% endfor %}
+                        <!-- 다음 페이지 -->
+                        {% if investperfanaly_list.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" data-page="{{ investperfanaly_list.next_page_number }}" href="#" >다음</a>
+                        </li>
+                        {% else %}
+                        <li class="page-item disabled">
+                            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                    <!-- 페이징처리 끝 -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<form id="searchForm" method="get" action="{% url 'investperfanaly' %}">
+    <input type="hidden" id="kw" name="kw" value="{{ kw|default_if_none:'' }}">
+    <input type="hidden" id="kw2" name="kw2" value="{{ kw2|default_if_none:'' }}">
+    <input type="hidden" id="page" name="page" value="{{ page }}">
+</form>
+
+{% endblock %}
+
+{% block script %}
+<script type='text/javascript'>
+$(document).ready(function(){
+    $(".page-link").on('click', function() {
+        $('.loader').show();
+        $(".page-link").css({ 'pointer-events': 'none' });
+        $("#btn_search").attr('disabled', true);
+        $("#page").val($(this).data("page"));
+        $("#searchForm").submit();
+    });
+
+    $("#btn_search").on('click', function() {
+        $('.loader').show();
+        $("#btn_search").attr('disabled', true);
+        $(".page-link").css({ 'pointer-events': 'none' });
+        $("#kw").val($(".kw").val());
+        $("#kw2").val($(".kw2").val());
+        $("#page").val(1);
+        $("#searchForm").submit();
+    });
+
+});
+
+
+
+$(window).on('load', function() {
+     $('.loader').hide();
+});
+
+</script>
+
+{% endblock %}
+
+
+
+

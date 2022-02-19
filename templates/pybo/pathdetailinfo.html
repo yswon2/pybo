@@ -121,13 +121,24 @@
                             <td class="col-2 align-items-center" ><div style="height: 100%; line-height: 100%; font-size:1em;">{{ pathdetailinfo.VolumeFlag }}</div></td>
                         </tr>
                         <tr class="thead-dark text-center">
-                            <td class="col-2 align-items-center" bgcolor="black"><div style="height: 100%; line-height: 100%; font-size:1em;"><b><font color="white">1개월 개인<br>순매수금액</font></b></div></td>
+                            <td class="col-2 align-items-center" bgcolor="black"><div style="height: 100%; line-height: 100%; font-size:0.9em;"><b><font color="white">1개월 개인<br>순매수금액</font></b></div></td>
                             <td class="col-2 align-items-center"><div style="height: 100%; line-height: 100%; font-size:1em;">{{ pathdetailinfo.AntBuySellInfo.TradeAmount_NetBuy|div:100000000|floatformat:"0" }} 억원</div></td>
-                            <td class="col-2 align-items-center" bgcolor="black"><div style="height: 100%; line-height: 100%; font-size:1em;"><b><font color="white">1개월 외국인<br>순매수금액</font></b></div></td>
+                            <td class="col-2 align-items-center" bgcolor="black"><div style="height: 100%; line-height: 100%; font-size:0.9em;"><b><font color="white">1개월 외국인<br>순매수금액</font></b></div></td>
                             <td class="col-2 align-items-center"><div style="height: 100%; line-height: 100%; font-size:1em;">{{ pathdetailinfo.ForeignBuySellInfo.TradeAmount_NetBuy|div:100000000|floatformat:"0" }} 억원</div></td>
-                            <td class="col-2 align-items-center" bgcolor="black"><div style="height: 100%; line-height: 100%; font-size:1em;"><b><font color="white">1개월 기관<br>순매수금액</font></b></div></td>
+                            <td class="col-2 align-items-center" bgcolor="black"><div style="height: 100%; line-height: 100%; font-size:0.9em;"><b><font color="white">1개월 기관<br>순매수금액</font></b></div></td>
                             <td class="col-2 align-items-center"><div style="height: 100%; line-height: 100%; font-size:1em;">{{ pathdetailinfo.InstituteBuySellInfo.TradeAmount_NetBuy|div:100000000|floatformat:"0" }} 억원</div></td>
                         </tr>
+
+                         <tr class="thead-dark text-center">
+                            <td class="col-2 align-items-center" bgcolor="black"><div style="height: 100%; line-height: 100%; font-size:0.9em;"><b><font color="white">PER</font></b></div></td>
+                            <td class="col-2 align-items-center"><div style="height: 100%; line-height: 100%; font-size:1em;">{{ pathdetailinfo.ListedStockInfo.PER|floatformat:"2" }}</div></td>
+                            <td class="col-2 align-items-center" bgcolor="black"><div style="height: 100%; line-height: 100%; font-size:0.9em;"><b><font color="white">PBR</font></b></div></td>
+                            <td class="col-2 align-items-center"><div style="height: 100%; line-height: 100%; font-size:1em;">{{ pathdetailinfo.ListedStockInfo.PBR|floatformat:"2" }}</div></td>
+                            <td class="col-2 align-items-center" bgcolor="black"><div style="height: 100%; line-height: 100%; font-size:0.9em;"><b><font color="white">배당율</font></b></div></td>
+                            <td class="col-2 align-items-center"><div style="height: 100%; line-height: 100%; font-size:1em;">{{ pathdetailinfo.ListedStockInfo.DivRate|floatformat:"2" }} %</div></td>
+                        </tr>
+
+
                         <tr class="thead-dark text-center">
                             <td class="col-2 align-items-center" bgcolor="black" colspan='6' ><b><font color="white"> 유사차트종목 검색결과(종목수 : {{ pathdetailinfo.StockBarcodePerfTotal.BarFinalCode_Cnt }}  ,  {{ pathdetailinfo.trade_date }} 기준)</font></b></td>
                         </tr>

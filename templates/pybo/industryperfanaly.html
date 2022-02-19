@@ -1,0 +1,203 @@
+{% extends 'base.html' %}
+{% load pybo_filter %}
+{% load mathfilters %}
+{% block content %}
+
+<div class="loader"></div>
+
+<div class="container mt-3" id="body-wrapper">
+    <div id="body-content">
+        <!-- Sidebar -->
+        <div class="row">
+            <div class="col-sm-12 col-md-3 col-lg-2 p-0">
+                {% include "sidebar.html" %}
+            </div>
+            <!-- Page Content -->
+            <div class="col-sm-12 col-md-9 col-lg-10 p-0">
+                <div class="container my-3">
+                    <div class="row justify-content-end my-3">
+                         <div class="col-4 input-group">
+                            <select name="kw" class="form-control kw" value="{{ kw|default_if_none:'' }}">
+                                <option value="0" >산업분류</option>
+                                <option value="전기전자"  {% if kw == "전기전자" %} selected {% endif %} >전기전자</option>
+                                <option value="서비스업" {% if kw == "서비스업" %} selected {% endif %} >서비스업</option>
+                                <option value="의약품" {% if kw == "의약품" %} selected {% endif %} >의약품</option>
+                                <option value="화학" {% if kw == "화학" %} selected {% endif %} >화학</option>
+                                <option value="운수장비" {% if kw == "운수장비" %} selected {% endif %} >운수장비</option>
+                                <option value="은행" {% if kw == "은행" %} selected {% endif %} >은행</option>
+                                <option value="철강금속" {% if kw == "철강금속" %} selected {% endif %} >철강금속</option>
+                                <option value="유통업" {% if kw == "유통업" %} selected {% endif %} >유통업</option>
+                                <option value="기타금융" {% if kw == "기타금융" %} selected {% endif %} >기타금융</option>
+                                <option value="통신업" {% if kw == "통신업" %} selected {% endif %} >통신업</option>
+                                <option value="전기가스업" {% if kw == "전기가스업" %} selected {% endif %} >전기가스업</option>
+                                <option value="운수창고업" {% if kw == "운수창고업" %} selected {% endif %} >운수창고업</option>
+                                <option value="기계" {% if kw == "기계" %} selected {% endif %} >기계</option>
+                                <option value="보험" {% if kw == "보험" %} selected {% endif %} >보험</option>
+                                <option value="제약" {% if kw == "제약" %} selected {% endif %} >제약</option>
+                                <option value="의료정밀" {% if kw == "의료정밀" %} selected {% endif %} >의료정밀</option>
+                                <option value="비금속광물" {% if kw == "비금속광물" %} selected {% endif %} >비금속광물</option>
+                                <option value="디지털컨텐츠" {% if kw == "디지털컨텐츠" %} selected {% endif %} >디지털컨텐츠</option>
+                                <option value="증권" {% if kw == "증권" %} selected {% endif %} >증권</option>
+                                <option value="섬유의복" {% if kw == "섬유의복" %} selected {% endif %} >섬유의복</option>
+                                <option value="IT부품" {% if kw == "IT부품" %} selected {% endif %} >IT부품</option>
+                                <option value="방송서비스" {% if kw == "방송서비스" %} selected {% endif %} >방송서비스</option>
+                                <option value="건설업" {% if kw == "건설업" %} selected {% endif %} >건설업</option>
+                                <option value="오락·문화" {% if kw == "오락·문화" %} selected {% endif %} >오락·문화</option>
+                                <option value="통신서비스" {% if kw == "통신서비스" %} selected {% endif %} >통신서비스</option>
+                                <option value="인터넷" {% if kw == "인터넷" %} selected {% endif %} >인터넷</option>
+                                <option value="통신장비" {% if kw == "통신장비" %} selected {% endif %} >통신장비</option>
+                                <option value="반도체" {% if kw == "반도체" %} selected {% endif %} >반도체</option>
+                                <option value="의료·정밀기기" {% if kw == "의료·정밀기기" %} selected {% endif %} >의료·정밀기기</option>
+                                <option value="소프트웨어" {% if kw == "소프트웨어" %} selected {% endif %} >소프트웨어</option>
+                            </select>
+
+                            <div class="input-group-append">
+                                <button class="btn btn-primary pull-right" type="button" id="btn_search">찾기</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <table class="table table-striped" >
+                        <thead>
+                        <tr class="thead-dark text-center align-items-center">
+                            <th class="col-1 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:1em;">주식코드</div></th>
+                            <th class="col-1 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:1em;">주식명</div></th>
+                            <th class="col-1 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:1em;">종가</div></th>
+                            <th class="col-1 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.9em;">시가총액<br>(억)</div></th>
+                            <th class="col-1 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:1em;">PER</div></th>
+                            <th class="col-1 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:1em;">PBR</div></th>
+                            <th class="col-1 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:1em;">배당율</div></th>
+                            <th class="col-1 align-items-center" colspan='4'><div style="text-align: center; height: 100%; line-height: 100%; font-size:1em;">기간수익율</div></th>
+                        </tr>
+                        <tr class="thead-dark text-center align-items-center">
+                            <th class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.8em;">최근</div></th>
+                            <th class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.8em;">7일</div></th>
+                            <th class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.8em;">30일</div></th>
+                            <th class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.8em;">90일</div></th>
+                        </tr>
+                        <tr class="thead-dark text-center align-items-center">
+                            <th class="col-1.0"><div style="height: 90%; line-height: 100%; font-size:0.8em;">업종평균값</div></th>
+                            <th class="col-1.0"><div style="height: 90%; line-height: 100%; font-size:0.8em;">{{ kw }}</div></th>
+                            <th class="col-1.0"><div style="height: 90%; line-height: 100%; font-size:1em;"></div></th>
+                            <th class="col-1.0"><div style="height: 90%; line-height: 100%; font-size:1em;"></div></th>
+                            <th class="col-1.0"><div style="height: 90%; line-height: 100%; font-size:0.8em;">{{ industryPER_Avg.PER|floatformat:"2" }}</div></th>
+                            <th class="col-1.0"><div style="height: 90%; line-height: 100%; font-size:0.8em;">{{ industryPBR_Avg.PBR|floatformat:"2" }}</div></th>
+                            <th class="col-1.0"><div style="height: 90%; line-height: 100%; font-size:0.8em;">{{ industryDivRate_Avg.DivRate|floatformat:"2" }} % </div></th>
+                            <th class="col-1.0"><div style="height: 90%; line-height: 100%; font-size:0.8em;">{{ FinalPriceT1_Avg.FinalPriceT1|floatformat:"2" }} % </div></th>
+                            <th class="col-1.0"><div style="height: 90%; line-height: 100%; font-size:0.8em;">{{ FinalPriceT7_Avg.FinalPriceT7|floatformat:"2" }} % </div></th>
+                            <th class="col-1.0"><div style="height: 90%; line-height: 100%; font-size:0.8em;">{{ FinalPriceT30_Avg.FinalPriceT30|floatformat:"2" }} % </div></th>
+                            <th class="col-1.0"><div style="height: 90%; line-height: 100%; font-size:0.8em;">{{ FinalPriceT90_Avg.FinalPriceT90|floatformat:"2" }} % </div></th>
+                         </tr>
+                        </thead>
+                        <tbody>
+                        {% if industryperfanaly_list %}
+                        {% for industryperfanaly in industryperfanaly_list %}
+                        <tr class="text-center align-items-center">
+                            <td><div style="height: 100%; line-height: 100%; font-size:1em;">{{ industryperfanaly.StockCode }}</div></td>
+                            <td><div style="height: 100%; line-height: 100%; font-size:1em;">{{ industryperfanaly.StockName }}</div></td>
+                            <td><div style="height: 100%; line-height: 100%; font-size:1em;">{{ industryperfanaly.ClosePrice|floatformat:"0" }}</div></td>
+                            <td><div style="height: 100%; line-height: 100%; font-size:1em;">{{ industryperfanaly.ListedStockInfo.MarketCap|div:100000000|floatformat:"0" }}</div></td>
+                            <td><div style="height: 100%; line-height: 100%; font-size:1em;">{{ industryperfanaly.ListedStockInfo.PER|floatformat:"2" }} </div></td>
+                            <td><div style="height: 100%; line-height: 100%; font-size:1em;">{{ industryperfanaly.ListedStockInfo.PBR|floatformat:"2" }} </div></td>
+                            <td><div style="height: 100%; line-height: 100%; font-size:1em;">{{ industryperfanaly.ListedStockInfo.DivRate|floatformat:"2" }} % </div></td>
+                            <td><div style="height: 100%; line-height: 100%; font-size:1em;">{{ industryperfanaly.ListedStockInfo.FinalPriceT|sub:industryperfanaly.ListedStockInfo.FinalPriceT1|div:industryperfanaly.ListedStockInfo.FinalPriceT1|mul:100|floatformat:"1" }} % </div></td>
+                            <td><div style="height: 100%; line-height: 100%; font-size:1em;">{{ industryperfanaly.ListedStockInfo.FinalPriceT|sub:industryperfanaly.ListedStockInfo.FinalPriceT7|div:industryperfanaly.ListedStockInfo.FinalPriceT7|mul:100|floatformat:"1" }} % </div></td>
+                            <td><div style="height: 100%; line-height: 100%; font-size:1em;">{{ industryperfanaly.ListedStockInfo.FinalPriceT|sub:industryperfanaly.ListedStockInfo.FinalPriceT30|div:industryperfanaly.ListedStockInfo.FinalPriceT30|mul:100|floatformat:"1" }} % </div></td>
+                            <td><div style="height: 100%; line-height: 100%; font-size:1em;">{{ industryperfanaly.ListedStockInfo.FinalPriceT|sub:industryperfanaly.ListedStockInfo.FinalPriceT90|div:industryperfanaly.ListedStockInfo.FinalPriceT90|mul:100|floatformat:"1" }} % </div></td>
+                        </tr>
+                        {% endfor %}
+                        {% else %}
+                        <tr>
+                            <td colspan="12"><div style="text-align: center; height: 20px; line-height: 20px;">데이터가 없습니다.</div></td>
+                        </tr>
+                        {% endif %}
+                        </tbody>
+                    </table>
+
+                    <!-- 페이징처리 시작 -->
+                    <ul class="pagination justify-content-center">
+                        {% if industryperfanaly_list.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" data-page="{{ industryperfanaly_list.previous_page_number }}" href="#">이전</a>
+                        </li>
+                        {% else %}
+                        <li class="page-item disabled">
+                            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
+                        </li>
+                        {% endif %}
+                        <!-- 페이지 리스트 -->
+                        {% for page_number in industryperfanaly_list.paginator.page_range %}
+                        {% if page_number >= industryperfanaly_list.number|add:-5 and page_number <= industryperfanaly_list.number|add:5 %}
+                            {% if page_number == industryperfanaly_list.number %}
+                            <li class="page-item active" aria-current="page">
+                                <a class="page-link" data-page="{{ page_number }}" href="#">{{ page_number }}</a>
+                            </li>
+                            {% else %}
+                            <li class="page-item">
+                                <a class="page-link" data-page="{{ page_number }}" href="#">{{ page_number }}</a>
+                            </li>
+                            {% endif %}
+                        {% endif %}
+                        {% endfor %}
+                        <!-- 다음 페이지 -->
+                        {% if industryperfanaly_list.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" data-page="{{ industryperfanaly_list.next_page_number }}" href="#" >다음</a>
+                        </li>
+                        {% else %}
+                        <li class="page-item disabled">
+                            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                    <!-- 페이징처리 끝 -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<form id="searchForm" method="get" action="{% url 'industryperfanaly' %}">
+    <input type="hidden" id="kw" name="kw" value="{{ kw|default_if_none:'' }}">
+    <input type="hidden" id="kw2" name="kw2" value="{{ kw2|default_if_none:'' }}">
+    <input type="hidden" id="page" name="page" value="{{ page }}">
+</form>
+
+{% endblock %}
+
+{% block script %}
+<script type='text/javascript'>
+$(document).ready(function(){
+    $(".page-link").on('click', function() {
+        $('.loader').show();
+        $(".page-link").css({ 'pointer-events': 'none' });
+        $("#btn_search").attr('disabled', true);
+        $("#page").val($(this).data("page"));
+        $("#searchForm").submit();
+    });
+
+    $("#btn_search").on('click', function() {
+        $('.loader').show();
+        $("#btn_search").attr('disabled', true);
+        $(".page-link").css({ 'pointer-events': 'none' });
+        $("#kw").val($(".kw").val());
+        $("#kw2").val($(".kw2").val());
+        $("#page").val(1);
+        $("#searchForm").submit();
+    });
+
+});
+
+
+
+$(window).on('load', function() {
+     $('.loader').hide();
+});
+
+</script>
+
+{% endblock %}
+
+
+
+
