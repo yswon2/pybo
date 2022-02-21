@@ -102,10 +102,8 @@
                                 <td><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ investperfanaly.AntBuySellInfo.TradeAmount_NetBuy|div:100000000|floatformat:"0" }} 억 </div></td>
                             {% endif %}
                             <td><div style="height: 100%; line-height: 100%; font-size:1em;">{{ investperfanaly.ListedStockInfo.FinalPriceT|sub:investperfanaly.ListedStockInfo.FinalPriceT1|div:investperfanaly.ListedStockInfo.FinalPriceT1|mul:100|floatformat:"1" }} % </div></td>
-                            <td><div style="height: 100%; line-height: 100%; font-size:1em;">{{investperfanaly.ListedStockInfo.FinalPriceT|sub:investperfanaly.ListedStockInfo.FinalPriceT7|div:investperfanaly.ListedStockInfo.FinalPriceT7|mul:100|floatformat:"1" }} % </div></td>
-                            <td><div style="height: 100%; line-height: 100%; font-size:1em;">{{investperfanaly.ListedStockInfo.FinalPriceT|sub:investperfanaly.ListedStockInfo.FinalPriceT30|div:investperfanaly.ListedStockInfo.FinalPriceT30|mul:100|floatformat:"1" }} % </div></td>
-
-
+                            <td><div style="height: 100%; line-height: 100%; font-size:1em;">{{ investperfanaly.ListedStockInfo.FinalPriceT|sub:investperfanaly.ListedStockInfo.FinalPriceT7|div:investperfanaly.ListedStockInfo.FinalPriceT7|mul:100|floatformat:"1" }} % </div></td>
+                            <td><div style="height: 100%; line-height: 100%; font-size:1em;">{{ investperfanaly.ListedStockInfo.FinalPriceT|sub:investperfanaly.ListedStockInfo.FinalPriceT30|div:investperfanaly.ListedStockInfo.FinalPriceT30|mul:100|floatformat:"1" }} % </div></td>
                         </tr>
                         {% endfor %}
                         {% else %}

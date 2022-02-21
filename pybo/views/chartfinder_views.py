@@ -31,7 +31,6 @@ def stockbacktest(request):
     #kw2 = request.GET.get('kw2', DateFormat(datetime.now()).format('Y-m-d'))
     totalvisitcnt = request.GET.get('totalvisitcnt', '0')
     todayvisitcnt = request.GET.get('todayvisitcnt', '0')
-    #ffinalcloseprice = request.GET.get('finalcloseprice', '0')
 
     temp_trade_date = stockbarcodedata.objects.all().filter(StockCode='A005930').values_list('trade_date', flat=True).order_by('-trade_date')[:1]
 
@@ -69,7 +68,6 @@ def stockbacktest(request):
 
     logger.info("stockbacktest View 끝")
 
-    #context = {'stockbarcodedata_list':page_obj, 'page':page, 'kw2':kw2, 'kw':kw, 'totalvisitcnt':totalvisitcnt, 'todayvisitcnt':todayvisitcnt, 'finalcloseprice':finalcloseprice  }
     context = {'stockbarcodedata_list':page_obj, 'page':page, 'kw2':kw2, 'kw':kw, 'totalvisitcnt':totalvisitcnt, 'todayvisitcnt':todayvisitcnt  }
 
     return render(request, 'pybo/question_extralist.html', context)
@@ -201,7 +199,7 @@ def investperfanaly(request):
             kw2 = "순매수"
         else:
             logger.info("외국인 순매도 검색시작")
-            investperfanaly_list = stockbarcodedata.objects.select_related('ListedStockInfo', 'ForeignBuySellInfo').filter(trade_date=temp_trade_date).order_by(F('ForeignBuySellInfo__TradeAmount_NetBuy').asc(nulls_last=True))[:30]
+            investperfanaly_list = stockbarcodedata.objects.select_related('ListedStockInfo', 'ForeignBuySellInfo').filter(trade_date=temp_trade_date).order_by(F('ForeignBuySellInfo__TradeAmount_NetBuy').asc())[:30]
             kw = "외국인"
             kw2 = "순매도"
     elif kw == '기관':
