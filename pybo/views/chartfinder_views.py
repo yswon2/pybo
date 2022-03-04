@@ -37,7 +37,12 @@ def stockbacktest(request):
     if kw and kw2:
         if kw[0:1] != 'A' and kw[0:1] != 'a':
             logger.info("주식명, 거래일 검색 시작")
-            stockbarcodedata_list = stockbarcodedata.objects.select_related('StockBarcodePerfReturn', 'ListedStockInfo').filter(StockName__iexact=kw).filter(trade_date__gte=kw2).filter(trade_date__lte=kw3)
+
+            if kw3 == '':
+                stockbarcodedata_list = stockbarcodedata.objects.select_related('StockBarcodePerfReturn', 'ListedStockInfo').filter(StockName__iexact=kw).filter(trade_date__gte=kw2).filter(trade_date__lte=kw2).order_by('-trade_date')
+            else:
+                stockbarcodedata_list = stockbarcodedata.objects.select_related('StockBarcodePerfReturn', 'ListedStockInfo').filter(StockName__iexact=kw).filter(trade_date__gte=kw2).filter(trade_date__lte=kw3).order_by('-trade_date')
+
         else:
             logger.info("주식코드, 거래일 검색 시작")
             stockbarcodedata_list = stockbarcodedata.objects.select_related('StockBarcodePerfReturn', 'ListedStockInfo').all().filter(StockCode__icontains=kw).filter(trade_date__gte=kw2).filter(trade_date__lte=kw3).order_by('-trade_date')
@@ -265,8 +270,9 @@ def industryperfanaly(request):
     totalvisitcnt = request.GET.get('totalvisitcnt', '0')
     todayvisitcnt = request.GET.get('todayvisitcnt', '0')
 
-    temp_trade_date = timezone.now() - timedelta(days=13)
-    temp_trade_date = DateFormat(temp_trade_date).format('Y-m-d')
+    #temp_trade_date = timezone.now() - timedelta(days=13)
+    #temp_trade_date = DateFormat(temp_trade_date).format('Y-m-d')
+    temp_trade_date = stockbarcodedata.objects.all().filter(StockCode='A005930').values_list('trade_date', flat=True).order_by('-trade_date')[:1]
 
     logger.info("업종 성과분석 검색시작")
 
@@ -289,7 +295,7 @@ def industryperfanaly(request):
         logger.info("종목명 검색시작")
 
         #temp_IndustryType = stockbarcodedata.objects.all().select_related('ListedStockInfo').filter(StockName=kw2).values_list('ListedStockInfo__IndustryType', flat=True).order_by('-trade_date')[:1]
-        temp_IndustryType = listedstockinfo.objects.filter(StockName__icontains=kw2).values_list('IndustryType', flat=True).order_by('-IndustryType')[:1]
+        temp_IndustryType = listedstockinfo.objects.filter(StockName__iexact=kw2).values_list('IndustryType', flat=True).order_by('-IndustryType')[:1]
 
 
         industryperfanaly_list = stockbarcodedata.objects.select_related('ListedStockInfo', 'AntBuySellInfo', 'ForeignBuySellInfo', 'InstituteBuySellInfo').filter(trade_date=temp_trade_date).filter(ListedStockInfo__IndustryType=temp_IndustryType).order_by(F('ListedStockInfo__MarketCap').desc(nulls_last=True))
