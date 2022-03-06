@@ -192,7 +192,6 @@
     </div>
 </div>
 
-
 <form id="searchForm" method="get" action="{% url 'pathdetailinfo' %}">
     <input type="hidden" id="kw" name="kw" value="{{ kw|upper|default_if_none:'' }}">
     <input type="hidden" id="page" name="page" value="{{ page }}">
@@ -208,6 +207,8 @@
 {% endblock %}
 
 {% block script %}
+
+
 <script type='text/javascript'>
 $(document).ready(function(){
 
@@ -235,6 +236,7 @@ $(window).on('load', function() {
 });
 
 </script>
+
 {% endblock %}
 
 
