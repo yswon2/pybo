@@ -7,7 +7,7 @@ from ..forms import QuestionForm
 from ..models import Question
 
 
-@login_required(login_url='common:login')
+#@login_required(login_url='common:login')
 def question_create(request):
     """
     pybo 질문등록
@@ -30,7 +30,7 @@ def question_create(request):
     return render(request, 'pybo/question_form.html', {'form': form})
 
 
-@login_required(login_url='common:login')
+#@login_required(login_url='common:login')
 def question_modify(request, question_id):
     '''
     질문수정
