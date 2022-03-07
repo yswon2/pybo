@@ -129,6 +129,8 @@ $(document).ready(function(){
         $('.loader').show();
         $("#page").val($(this).data("page"));
         $("#searchForm").submit();
+        $("#btn_search").attr('disabled', true);
+        $(".page-link").css({ 'pointer-events': 'none' });
     });
 
     $("#btn_search").on('click', function() {
@@ -136,6 +138,8 @@ $(document).ready(function(){
         $("#kw").val($(".kw").val());
         $("#page").val(1);
         $("#searchForm").submit();
+        $("#btn_search").attr('disabled', true);
+        $(".page-link").css({ 'pointer-events': 'none' });
     });
 });
 
