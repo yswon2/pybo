@@ -2,6 +2,8 @@
 {% load pybo_filter %}
 {% block content %}
 
+<div class="loader"></div>
+
 
 <div class="container my-3" id="body-wrapper">
     <div id="body-content">
@@ -124,16 +126,27 @@
 <script type='text/javascript'>
 $(document).ready(function(){
     $(".page-link").on('click', function() {
+        $('.loader').show();
         $("#page").val($(this).data("page"));
         $("#searchForm").submit();
     });
 
     $("#btn_search").on('click', function() {
+        $('.loader').show();
         $("#kw").val($(".kw").val());
         $("#page").val(1);
         $("#searchForm").submit();
     });
 });
+
+
+$(window).on('load', function() {
+     $('.loader').hide();
+});
+
+
+
+
 </script>
 {% endblock %}
 
