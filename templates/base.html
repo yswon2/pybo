@@ -88,13 +88,6 @@
 
 {% include "navbar.html" %}
 
-{% block content %}
-{% endblock %}
-
-
-<script src="{% static 'jquery-3.6.0.min.js' %}"></script>
-<script src="{% static 'bootstrap.min.js' %}"></script>
-
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5997522744771647"
      crossorigin="anonymous"></script>
 <ins class="adsbygoogle"
@@ -104,6 +97,14 @@
 <script>
      (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
+
+{% block content %}
+{% endblock %}
+
+
+<script src="{% static 'jquery-3.6.0.min.js' %}"></script>
+<script src="{% static 'bootstrap.min.js' %}"></script>
+
 
 
 {% block script %}
