@@ -153,7 +153,7 @@
     </div>
 </div>
 
-<form id="searchForm" method="get" action="{% url 'stockbacktest' %}">
+<form id="searchForm" method="get" action="{% url 'pybo:stockbacktest' %}">
     <input type="hidden" id="kw" name="kw" value="{{ kw|upper|default_if_none:'' }}">
     <input type="hidden" id="kw2" name="kw2" value="{{ kw2|default_if_none:'' }}">
     <input type="hidden" id="kw3" name="kw3" value="{{ kw3|default_if_none:'' }}">
