@@ -226,6 +226,7 @@
 $(document).ready(function(){
 
     $("#btn_search").on('click', function() {
+        location.reload();
         $('.loader').show();
         $("#kw").val($(".kw").val());
         $("#page").val(1);
@@ -235,6 +236,7 @@ $(document).ready(function(){
     });
 
     $("#btn_detailsearch").on('click', function() {
+        location.reload();
         $('.loader').show();
         $("#kw").val($(".kw2").val());
         $("#page").val(1);
