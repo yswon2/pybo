@@ -134,9 +134,9 @@ def stockpathdetail(request):
     totalvisitcnt = PageViewCount.objects.aggregate(view_count=Sum('view_count'))
     todayvisitcnt = PageViewCount.objects.filter(create_date=viewdate).aggregate(view_count=Sum('view_count'))
 
-    context = {'stockpathdetail_list':page_obj, 'page': page, 'kw': kw, 'totalvisitcnt':totalvisitcnt, 'todayvisitcnt':todayvisitcnt  }
-
     logger.info("stockpathdetail View 끝")
+
+    context = {'stockpathdetail_list':page_obj, 'page': page, 'kw': kw, 'totalvisitcnt':totalvisitcnt, 'todayvisitcnt':todayvisitcnt }
 
     return render(request, 'pybo/stockpathdetail.html', context)
 
@@ -177,9 +177,9 @@ def pathdetailinfo(request):
     totalvisitcnt = PageViewCount.objects.aggregate(view_count=Sum('view_count'))
     todayvisitcnt = PageViewCount.objects.filter(create_date=viewdate).aggregate(view_count=Sum('view_count'))
 
-    context = {'pathdetailinfo_list':page_obj, 'page': page, 'kw': kw, 'totalvisitcnt':totalvisitcnt, 'todayvisitcnt':todayvisitcnt }
-
     logger.info("pathdetailinfo View 끝")
+
+    context = {'pathdetailinfo_list':page_obj, 'page': page, 'kw': kw, 'totalvisitcnt':totalvisitcnt, 'todayvisitcnt':todayvisitcnt}
 
     return render(request, 'pybo/pathdetailinfo.html', context)
 
@@ -335,7 +335,6 @@ def industryperfanaly(request):
     logger.info("industryperfanaly View 끝")
 
     context = {'industryperfanaly_list':page_obj, 'page':page, 'kw':kw, 'kw2':kw2, 'totalvisitcnt':totalvisitcnt, 'todayvisitcnt':todayvisitcnt, 'industry_Avg':industry_Avg}
-    #context = {'industryperfanaly_list':page_obj, 'page':page, 'kw':kw, 'kw2':kw2, 'totalvisitcnt':totalvisitcnt, 'todayvisitcnt':todayvisitcnt, 'industryPER_Avg':industryPER_Avg, 'industryEPS_Avg':industryEPS_Avg, 'industryPBR_Avg':industryPBR_Avg, 'industryDivRate_Avg':industryDivRate_Avg, 'FinalPriceT1_Avg':FinalPriceT1_Avg, 'FinalPriceT7_Avg':FinalPriceT7_Avg, 'FinalPriceT30_Avg':FinalPriceT30_Avg, 'FinalPriceT90_Avg':FinalPriceT90_Avg }
 
     return render(request, 'pybo/industryperfanaly.html', context)
 
