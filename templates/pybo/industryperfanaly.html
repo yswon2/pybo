@@ -89,14 +89,14 @@
                         <thead>
                         <tr class="thead-dark text-center align-items-center">
                             <th class="col-1 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.9em;">주식코드</div></th>
-                            <th class="col-1.5 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.9em;">주식명</div></th>
+                            <th class="col-1 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.9em;">주식명</div></th>
                             <th class="col-1 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.9em;">종가</div></th>
                             <th class="col-1 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.9em;">시가총액<br>(조)</div></th>
                             <th class="col-1 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:1em;">PER</div></th>
                             <th class="col-1 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:1em;">EPS</div></th>
                             <th class="col-1 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:1em;">PBR</div></th>
                             <th class="col-1 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:1em;">배당율</div></th>
-                            <th class="col-0.5 align-items-center" colspan='4'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.8em;">수익율(기준일대비)</div></th>
+                            <th class="col-1 align-items-center" colspan='4'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.8em;">수익율(기준일대비)</div></th>
                         </tr>
                         <tr class="thead-dark text-center align-items-center">
                             <th class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.8em;">최근</div></th>
@@ -232,10 +232,7 @@ $(document).ready(function(){
         $("#page").val(1);
         $("#searchForm").submit();
     });
-
 });
-
-
 
 $(window).on('load', function() {
      $('.loader').hide();
