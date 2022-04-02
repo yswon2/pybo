@@ -136,7 +136,7 @@ def qna(request):
     paginator = Paginator(question_list, 10)
     page_obj = paginator.get_page(page)
 
-    viewdate = DateFormat(timezone.localtime()).format('Y-m-d')
+    viewdate = DateFormat(timezone.now()).format('Y-m-d')
     totalvisitcnt = PageViewCount.objects.aggregate(view_count=Sum('view_count'))
     todayvisitcnt = PageViewCount.objects.filter(create_date=viewdate).aggregate(view_count=Sum('view_count'))
 

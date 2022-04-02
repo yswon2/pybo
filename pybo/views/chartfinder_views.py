@@ -12,7 +12,7 @@ from django.db.models import Sum
 from django.db.models import Avg
 from django.db.models import F
 
-from ..models import stockbarcodedata, stockbarcodeperfreturn, stockbarcodeperftotal, listedstockinfo, PageViewCount
+from ..models import stockbarcodedata, stockbarcodeperfreturn, stockbarcodeperftotal, listedstockinfo, PageViewCount, stockpriceinfo
 
 logger = logging.getLogger('pybo')
 
@@ -284,15 +284,6 @@ def industryperfanaly(request):
 
         industry_Avg = stockbarcodedata.objects.select_related('ListedStockInfo').filter(trade_date=temp_trade_date).filter(ListedStockInfo__IndustryType__iexact=kw).aggregate(PER=Avg('ListedStockInfo__PER'), EPS=Avg('ListedStockInfo__EPS'), PBR=Avg('ListedStockInfo__PBR'), DivRate=Avg('ListedStockInfo__DivRate'), FinalPriceT1=Avg((F('ListedStockInfo__FinalPriceT') - F('ListedStockInfo__FinalPriceT1')) / F('ListedStockInfo__FinalPriceT1') * 100), FinalPriceT7=Avg((F('ListedStockInfo__FinalPriceT') - F('ListedStockInfo__FinalPriceT7')) / F('ListedStockInfo__FinalPriceT7') * 100), FinalPriceT30=Avg((F('ListedStockInfo__FinalPriceT') - F('ListedStockInfo__FinalPriceT30')) / F('ListedStockInfo__FinalPriceT30') * 100), FinalPriceT90=Avg((F('ListedStockInfo__FinalPriceT') - F('ListedStockInfo__FinalPriceT90')) / F('ListedStockInfo__FinalPriceT90') * 100))
 
-        #industryPER_Avg = stockbarcodedata.objects.select_related('ListedStockInfo').filter(trade_date=temp_trade_date).filter(ListedStockInfo__IndustryType__iexact=kw).aggregate(PER=Avg('ListedStockInfo__PER'))
-        #industryEPS_Avg = stockbarcodedata.objects.select_related('ListedStockInfo').filter(trade_date=temp_trade_date).filter(ListedStockInfo__IndustryType__iexact=kw).aggregate(EPS=Avg('ListedStockInfo__EPS'))
-        #industryPBR_Avg = stockbarcodedata.objects.select_related('ListedStockInfo').filter(trade_date=temp_trade_date).filter(ListedStockInfo__IndustryType__iexact=kw).aggregate(PBR=Avg('ListedStockInfo__PBR'))
-        #industryDivRate_Avg = stockbarcodedata.objects.select_related('ListedStockInfo').filter(trade_date=temp_trade_date).filter(ListedStockInfo__IndustryType__iexact=kw).aggregate(DivRate=Avg('ListedStockInfo__DivRate'))
-        #FinalPriceT1_Avg = stockbarcodedata.objects.select_related('ListedStockInfo').filter(trade_date=temp_trade_date).filter(ListedStockInfo__IndustryType__iexact=kw).aggregate(FinalPriceT1=Avg((F('ListedStockInfo__FinalPriceT') - F('ListedStockInfo__FinalPriceT1')) / F('ListedStockInfo__FinalPriceT1') * 100))
-        #FinalPriceT7_Avg = stockbarcodedata.objects.select_related('ListedStockInfo').filter(trade_date=temp_trade_date).filter(ListedStockInfo__IndustryType__iexact=kw).aggregate(FinalPriceT7=Avg((F('ListedStockInfo__FinalPriceT') - F('ListedStockInfo__FinalPriceT7')) / F('ListedStockInfo__FinalPriceT7') * 100))
-        #FinalPriceT30_Avg = stockbarcodedata.objects.select_related('ListedStockInfo').filter(trade_date=temp_trade_date).filter(ListedStockInfo__IndustryType__iexact=kw).aggregate(FinalPriceT30=Avg((F('ListedStockInfo__FinalPriceT') - F('ListedStockInfo__FinalPriceT30')) / F('ListedStockInfo__FinalPriceT30') * 100))
-        #FinalPriceT90_Avg = stockbarcodedata.objects.select_related('ListedStockInfo').filter(trade_date=temp_trade_date).filter(ListedStockInfo__IndustryType__iexact=kw).aggregate(FinalPriceT90=Avg((F('ListedStockInfo__FinalPriceT') - F('ListedStockInfo__FinalPriceT90')) / F('ListedStockInfo__FinalPriceT90') * 100))
-
     elif kw == '0' and kw2:
 
         logger.info("종목명 검색시작")
@@ -302,16 +293,6 @@ def industryperfanaly(request):
         industryperfanaly_list = stockbarcodedata.objects.select_related('ListedStockInfo', 'AntBuySellInfo', 'ForeignBuySellInfo', 'InstituteBuySellInfo').filter(trade_date=temp_trade_date).filter(ListedStockInfo__IndustryType=temp_IndustryType).order_by(F('ListedStockInfo__MarketCap').desc(nulls_last=True))
 
         industry_Avg = stockbarcodedata.objects.select_related('ListedStockInfo').filter(trade_date=temp_trade_date).filter(ListedStockInfo__IndustryType=temp_IndustryType).aggregate(PER=Avg('ListedStockInfo__PER'), EPS=Avg('ListedStockInfo__EPS'), PBR=Avg('ListedStockInfo__PBR'), DivRate=Avg('ListedStockInfo__DivRate'), FinalPriceT1=Avg((F('ListedStockInfo__FinalPriceT') - F('ListedStockInfo__FinalPriceT1')) / F('ListedStockInfo__FinalPriceT1') * 100), FinalPriceT7=Avg((F('ListedStockInfo__FinalPriceT') - F('ListedStockInfo__FinalPriceT7')) / F('ListedStockInfo__FinalPriceT7') * 100), FinalPriceT30=Avg((F('ListedStockInfo__FinalPriceT') - F('ListedStockInfo__FinalPriceT30')) / F('ListedStockInfo__FinalPriceT30') * 100), FinalPriceT90=Avg((F('ListedStockInfo__FinalPriceT') - F('ListedStockInfo__FinalPriceT90')) / F('ListedStockInfo__FinalPriceT90') * 100))
-
-        #industryPER_Avg = stockbarcodedata.objects.select_related('ListedStockInfo').filter(trade_date=temp_trade_date).filter(ListedStockInfo__IndustryType=temp_IndustryType).aggregate(PER=Avg('ListedStockInfo__PER'))
-        #industryEPS_Avg = stockbarcodedata.objects.select_related('ListedStockInfo').filter(trade_date=temp_trade_date).filter(ListedStockInfo__IndustryType=temp_IndustryType).aggregate(EPS=Avg('ListedStockInfo__EPS'))
-        #industryPBR_Avg = stockbarcodedata.objects.select_related('ListedStockInfo').filter(trade_date=temp_trade_date).filter(ListedStockInfo__IndustryType=temp_IndustryType).aggregate(PBR=Avg('ListedStockInfo__PBR'))
-        #industryDivRate_Avg = stockbarcodedata.objects.select_related('ListedStockInfo').filter(trade_date=temp_trade_date).filter(ListedStockInfo__IndustryType=temp_IndustryType).aggregate(DivRate=Avg('ListedStockInfo__DivRate'))
-        #FinalPriceT1_Avg = stockbarcodedata.objects.select_related('ListedStockInfo').filter(trade_date=temp_trade_date).filter(ListedStockInfo__IndustryType=temp_IndustryType).aggregate(FinalPriceT1=Avg((F('ListedStockInfo__FinalPriceT') - F('ListedStockInfo__FinalPriceT1')) / F('ListedStockInfo__FinalPriceT1') * 100))
-        #FinalPriceT7_Avg = stockbarcodedata.objects.select_related('ListedStockInfo').filter(trade_date=temp_trade_date).filter(ListedStockInfo__IndustryType=temp_IndustryType).aggregate(FinalPriceT7=Avg((F('ListedStockInfo__FinalPriceT') - F('ListedStockInfo__FinalPriceT7')) / F('ListedStockInfo__FinalPriceT7') * 100))
-        #FinalPriceT30_Avg = stockbarcodedata.objects.select_related('ListedStockInfo').filter(trade_date=temp_trade_date).filter(ListedStockInfo__IndustryType=temp_IndustryType).aggregate(FinalPriceT30=Avg((F('ListedStockInfo__FinalPriceT') - F('ListedStockInfo__FinalPriceT30')) / F('ListedStockInfo__FinalPriceT30') * 100))
-        #FinalPriceT90_Avg = stockbarcodedata.objects.select_related('ListedStockInfo').filter(trade_date=temp_trade_date).filter(ListedStockInfo__IndustryType=temp_IndustryType).aggregate(FinalPriceT90=Avg((F('ListedStockInfo__FinalPriceT') - F('ListedStockInfo__FinalPriceT90')) / F('ListedStockInfo__FinalPriceT90') * 100))
-
     else:
         logger.info("Default 검색시작")
         logger.info("종목명 검색시작")
@@ -337,4 +318,73 @@ def industryperfanaly(request):
     context = {'industryperfanaly_list':page_obj, 'page':page, 'kw':kw, 'kw2':kw2, 'totalvisitcnt':totalvisitcnt, 'todayvisitcnt':todayvisitcnt, 'industry_Avg':industry_Avg}
 
     return render(request, 'pybo/industryperfanaly.html', context)
+
+
+
+def stockperfanaly(request):
+    '''
+     stockperfanaly 목록 출력
+    '''
+
+    logger.info("stockperfanaly View 시작")
+
+    #입력 파라미터
+    page = request.GET.get('page', '1')
+    kw = request.GET.get('kw', '')
+    kw2 = request.GET.get('kw2', '')
+
+    totalvisitcnt = request.GET.get('totalvisitcnt', '0')
+    todayvisitcnt = request.GET.get('todayvisitcnt', '0')
+
+    #kw = '수익률상위'
+    #kw2 = '7일'
+
+    temp_trade_date = stockbarcodedata.objects.all().filter(StockCode='A005930').values_list('trade_date', flat=True).order_by('-trade_date')[:1]
+
+    logger.info("주식 수익률 검색시작")
+
+    if kw == '수익률상위':
+
+        if kw2 == '7일':
+            logger.info("수익률상위 7일 검색시작")
+            stockperfanaly_list = stockbarcodedata.objects.select_related('ListedStockInfo', 'StockPriceInfo', 'AntBuySellInfo', 'ForeignBuySellInfo', 'InstituteBuySellInfo').filter(trade_date=temp_trade_date).filter(ListedStockInfo__MarketCap__gt=100000000000).annotate(PriceT7Rtn=(F('ListedStockInfo__FinalPriceT') - F('ListedStockInfo__FinalPriceT7')) / F('ListedStockInfo__FinalPriceT7') * 100).order_by(F('PriceT7Rtn').desc(nulls_last=True))[:50]
+        elif kw2 == '30일':
+            logger.info("수익률상위 30일 검색시작")
+            stockperfanaly_list = stockbarcodedata.objects.select_related('ListedStockInfo', 'StockPriceInfo', 'AntBuySellInfo', 'ForeignBuySellInfo', 'InstituteBuySellInfo').filter(trade_date=temp_trade_date).filter(ListedStockInfo__MarketCap__gt=100000000000).annotate(PriceT30Rtn=(F('ListedStockInfo__FinalPriceT') - F('ListedStockInfo__FinalPriceT30')) / F('ListedStockInfo__FinalPriceT30') * 100).order_by(F('PriceT30Rtn').desc(nulls_last=True))[:50]
+        elif kw2 == '90일':
+            logger.info("수익률상위 90일 검색시작")
+            stockperfanaly_list = stockbarcodedata.objects.select_related('ListedStockInfo', 'StockPriceInfo', 'AntBuySellInfo', 'ForeignBuySellInfo', 'InstituteBuySellInfo').filter(trade_date=temp_trade_date).filter(ListedStockInfo__MarketCap__gt=100000000000).annotate(PriceT90Rtn=(F('ListedStockInfo__FinalPriceT') - F('ListedStockInfo__FinalPriceT90')) / F('ListedStockInfo__FinalPriceT90') * 100).order_by(F('PriceT90Rtn').desc(nulls_last=True))[:50]
+
+    elif kw == '수익률하위':
+
+        if kw2 == '7일':
+            logger.info("수익률하위 7일 검색시작")
+            stockperfanaly_list = stockbarcodedata.objects.select_related('ListedStockInfo', 'StockPriceInfo', 'AntBuySellInfo', 'ForeignBuySellInfo', 'InstituteBuySellInfo').filter(trade_date=temp_trade_date).filter(ListedStockInfo__MarketCap__gt=100000000000).annotate(PriceT7Rtn=(F('ListedStockInfo__FinalPriceT') - F('ListedStockInfo__FinalPriceT7')) / F('ListedStockInfo__FinalPriceT7') * 100).order_by(F('PriceT7Rtn').asc(nulls_last=True))[:50]
+        elif kw2 == '30일':
+            logger.info("수익률하위 30일 검색시작")
+            stockperfanaly_list = stockbarcodedata.objects.select_related('ListedStockInfo', 'StockPriceInfo', 'AntBuySellInfo', 'ForeignBuySellInfo', 'InstituteBuySellInfo').filter(trade_date=temp_trade_date).filter(ListedStockInfo__MarketCap__gt=100000000000).annotate(PriceT30Rtn=(F('ListedStockInfo__FinalPriceT') - F('ListedStockInfo__FinalPriceT30')) / F('ListedStockInfo__FinalPriceT30') * 100).order_by(F('PriceT30Rtn').asc(nulls_last=True))[:50]
+        elif kw2 == '90일':
+            logger.info("수익률하위 90일 검색시작")
+            stockperfanaly_list = stockbarcodedata.objects.select_related('ListedStockInfo', 'StockPriceInfo', 'AntBuySellInfo', 'ForeignBuySellInfo', 'InstituteBuySellInfo').filter(trade_date=temp_trade_date).filter(ListedStockInfo__MarketCap__gt=100000000000).annotate(PriceT90Rtn=(F('ListedStockInfo__FinalPriceT') - F('ListedStockInfo__FinalPriceT90')) / F('ListedStockInfo__FinalPriceT90') * 100).order_by(F('PriceT90Rtn').asc(nulls_last=True))[:50]
+    else:
+        logger.info("Default 검색시작")
+        stockperfanaly_list = stockbarcodedata.objects.select_related('ListedStockInfo', 'StockPriceInfo', 'AntBuySellInfo', 'ForeignBuySellInfo', 'InstituteBuySellInfo').filter(trade_date=temp_trade_date).filter(ListedStockInfo__MarketCap__gt=100000000000).annotate(PriceT7Rtn=(F('ListedStockInfo__FinalPriceT') - F('ListedStockInfo__FinalPriceT7')) / F('ListedStockInfo__FinalPriceT7') * 100).order_by(F('PriceT7Rtn').desc(nulls_last=True))[:50]
+
+        kw2 = '7일'
+        kw = '수익률상위'
+
+    paginator = Paginator(stockperfanaly_list, 10)
+    page_obj = paginator.get_page(page)
+
+    viewdate = DateFormat(timezone.now()).format('Y-m-d')
+    totalvisitcnt = PageViewCount.objects.aggregate(view_count=Sum('view_count'))
+    todayvisitcnt = PageViewCount.objects.filter(create_date=viewdate).aggregate(view_count=Sum('view_count'))
+
+
+    logger.info("stockperfanaly View 끝")
+
+    context = {'stockperfanaly_list':page_obj, 'page':page, 'kw':kw, 'kw2':kw2, 'totalvisitcnt':totalvisitcnt, 'todayvisitcnt':todayvisitcnt}
+
+    return render(request, 'pybo/stockperfanaly.html', context)
+
 
