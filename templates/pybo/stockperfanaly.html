@@ -50,11 +50,11 @@
                         </div>
                     </div>
 
-                    <table class="table table-striped" >
+                    <table class="table table-striped w-auto" >
                         <thead>
                         <tr class="thead-dark text-center align-items-center">
-                            <th class="col-0.5 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.8em;">기준일</div></th>
-                            <th class="col-0.5 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.8em;">주식코드</div></th>
+                            <th class="col-1 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.8em;">기준일</div></th>
+                            <th class="col-1 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.8em;">주식코드</div></th>
                             <th class="col-1 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:1em;">주식명</div></th>
                             <th class="col-1 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:1em;">업종</div></th>
                             <th class="col-1 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.9em;">시가총액(조)</div></th>
@@ -68,8 +68,8 @@
                                  <th class="col-1 align-items-center" rowspan='1'><div style="text-align: center; height: 100%; line-height: 100%; font-size:1em;">90일전</div></th>
                             {% endif %}
 
-                            <th class="col-1.25 align-items-center" colspan='3'><div style="text-align: center; height: 100%; line-height: 100%; font-size:1em;">1개월 순매수금액</div></th>
-                            <th class="col-1.25 align-items-center" rowspan='1'><div style="text-align: center; height: 100%; line-height: 100%; font-size:1em;">수익율</div></th>
+                            <th class="col-1 align-items-center" colspan='3'><div style="text-align: center; height: 100%; line-height: 100%; font-size:1em;">1개월 순매수금액</div></th>
+                            <th class="col-1 align-items-center" rowspan='1'><div style="text-align: center; height: 100%; line-height: 100%; font-size:1em;">수익율</div></th>
                         </tr>
                         <tr class="thead-dark text-center align-items-center">
                             <th class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:1em;">종가</div></th>
@@ -90,30 +90,30 @@
                         {% if stockperfanaly_list %}
                         {% for stockperfanaly in stockperfanaly_list %}
                         <tr class="text-center align-items-center">
-                            <td><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ stockperfanaly.trade_date|date:'Y-m-d'  }}</div></td>
-                            <td><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ stockperfanaly.StockCode }}</div></td>
-                            <td><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ stockperfanaly.StockName }}</div></td>
-                            <td><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ stockperfanaly.ListedStockInfo.IndustryType }}</div></td>
-                            <td><div style="height: 100%; line-height: 100%; font-size:1em;">{{ stockperfanaly.ListedStockInfo.MarketCap|div:1000000000000|floatformat:"2" }}</div></td>
-                            <td><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ stockperfanaly.StockPriceInfo.TradeVolume|div:1000|floatformat:"0" }}</div></td>
-                            <td><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ stockperfanaly.ClosePrice|floatformat:"0" }}</div></td>
+                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ stockperfanaly.trade_date|date:'Y-m-d'  }}</div></td>
+                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ stockperfanaly.StockCode }}</div></td>
+                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ stockperfanaly.StockName }}</div></td>
+                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ stockperfanaly.ListedStockInfo.IndustryType }}</div></td>
+                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:1em;">{{ stockperfanaly.ListedStockInfo.MarketCap|div:1000000000000|floatformat:"2" }}</div></td>
+                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ stockperfanaly.StockPriceInfo.TradeVolume|div:1000|floatformat:"0" }}</div></td>
+                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ stockperfanaly.ClosePrice|floatformat:"0" }}</div></td>
                             {% if kw2 == "7일" %}
-                                <td><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ stockperfanaly.ListedStockInfo.FinalPriceT7|floatformat:"0" }}</div></td>
+                                <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ stockperfanaly.ListedStockInfo.FinalPriceT7|floatformat:"0" }}</div></td>
                             {% elif kw2 == "30일" %}
-                                <td><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ stockperfanaly.ListedStockInfo.FinalPriceT30|floatformat:"0" }}</div></td>
+                                <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ stockperfanaly.ListedStockInfo.FinalPriceT30|floatformat:"0" }}</div></td>
                             {% else %}
-                                 <td><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ stockperfanaly.ListedStockInfo.FinalPriceT90|floatformat:"0" }}</div></td>
+                                 <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ stockperfanaly.ListedStockInfo.FinalPriceT90|floatformat:"0" }}</div></td>
                             {% endif %}
-                            <td><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ stockperfanaly.AntBuySellInfo.TradeAmount_NetBuy|div:100000000|floatformat:"0" }} 억</div></td>
-                            <td><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ stockperfanaly.ForeignBuySellInfo.TradeAmount_NetBuy|div:100000000|floatformat:"0" }} 억 </div></td>
-                            <td><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ stockperfanaly.InstituteBuySellInfo.TradeAmount_NetBuy|div:100000000|floatformat:"0" }} 억 </div></td>
+                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ stockperfanaly.AntBuySellInfo.TradeAmount_NetBuy|div:100000000|floatformat:"0" }} 억</div></td>
+                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ stockperfanaly.ForeignBuySellInfo.TradeAmount_NetBuy|div:100000000|floatformat:"0" }} 억 </div></td>
+                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ stockperfanaly.InstituteBuySellInfo.TradeAmount_NetBuy|div:100000000|floatformat:"0" }} 억 </div></td>
 
                             {% if kw2 == "7일" %}
-                                <td><div style="height: 100%; line-height: 100%; font-size:1em;">{{ stockperfanaly.PriceT7Rtn|floatformat:"1" }} % </div></td>
+                                <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:1em;">{{ stockperfanaly.PriceT7Rtn|floatformat:"1" }} % </div></td>
                             {% elif kw2 == "30일" %}
-                                <td><div style="height: 100%; line-height: 100%; font-size:1em;">{{ stockperfanaly.PriceT30Rtn|floatformat:"1" }} % </div></td>
+                                <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:1em;">{{ stockperfanaly.PriceT30Rtn|floatformat:"1" }} % </div></td>
                             {% else %}
-                                <td><div style="height: 100%; line-height: 100%; font-size:1em;">{{ stockperfanaly.PriceT90Rtn|floatformat:"1" }} % </div></td>
+                                <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:1em;">{{ stockperfanaly.PriceT90Rtn|floatformat:"1" }} % </div></td>
                             {% endif %}
 <!--                            {% if kw2 == "7일" %}
                                 <td><div style="height: 100%; line-height: 100%; font-size:1em;">{{ stockperfanaly.ListedStockInfo.FinalPriceT|sub:stockperfanaly.ListedStockInfo.FinalPriceT7|div:stockperfanaly.ListedStockInfo.FinalPriceT7|mul:100|floatformat:"1" }} % </div></td>
@@ -212,7 +212,7 @@ $(document).ready(function(){
     });
 
     $("#btn_search").on('click', function() {
-        //location.reload();
+        location.reload();
         $('.loader').show();
         $("#btn_search").attr('disabled', true);
         $(".page-link").css({ 'pointer-events': 'none' });
