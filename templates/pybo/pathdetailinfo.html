@@ -24,7 +24,7 @@
                         <p>Bootstrap is the most popular HTML, CSS, and JS framework for developing responsive, mobile-first projects on the web.</p>
                     </div>-->
 
-                    {% if kw != ""  %}
+                    {% if kw == ""  %}
                     <!-- 구글 상단광고  -->
                     <div class="row justify-content-center my-3">
                         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5997522744771647"
@@ -174,7 +174,7 @@
                         </tbody>
                     </table>
 
-                    {% if kw != ""  %}
+                    {% if kw == ""  %}
                     <!-- 구글 하단광고  -->
                     <div class="row justify-content-center my-4">
                         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5997522744771647"
@@ -201,14 +201,14 @@
     </div>
 </div>
 
-<form id="searchForm" method="get" onsubmit="return true;" action="{% url 'pathdetailinfo' %}">
+<form id="searchForm" method="get" action="{% url 'pathdetailinfo' %}">
     <input type="hidden" id="kw" name="kw" value="{{ kw|upper|default_if_none:'' }}">
     <input type="hidden" id="page" name="page" value="{{ page }}">
     <input type="hidden" id="totalvisitcnt" name="totalvisitcnt" value="{{ totalvisitcnt|default_if_none:'' }}">
     <input type="hidden" id="todayvisitcnt" name="todayvisitcnt" value="{{ todayvisitcnt|default_if_none:'' }}">
 </form>
 
-<form id="searchdetailForm" method="get" onsubmit="return true;"  action="{% url 'stockpathdetail' %}">
+<form id="searchdetailForm" method="get" action="{% url 'stockpathdetail' %}">
     <input type="hidden" id="kw2" name="kw" value="{{ kw|upper|default_if_none:'' }}">
     <input type="hidden" id="page2" name="page" value="{{ page }}">
 </form>
