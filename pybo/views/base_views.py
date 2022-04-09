@@ -5,7 +5,7 @@ from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
 from django.utils.dateformat import DateFormat
 from django.utils import timezone
-from django.db.models import Sum
+from django.db.models import Sum, Count
 
 from datetime import datetime, timedelta
 from ..models import Question, QuestionCount
@@ -49,8 +49,10 @@ def index(request):
             vc.view_count = 1
         vc.save()
 
-    totalvisitcnt = PageViewCount.objects.aggregate(view_count=Sum('view_count'))
-    todayvisitcnt = PageViewCount.objects.filter(create_date=viewdate).aggregate(view_count=Sum('view_count'))
+    #totalvisitcnt = PageViewCount.objects.aggregate(view_count=Sum('view_count'))
+    #todayvisitcnt = PageViewCount.objects.filter(create_date=viewdate).aggregate(view_count=Sum('view_count'))
+    totalvisitcnt = PageViewCount.objects.aggregate(view_count=Count('view_count'))
+    todayvisitcnt = PageViewCount.objects.filter(create_date=viewdate).aggregate(view_count=Count('view_count'))
 
     context = {'question_list':page_obj, 'page': page, 'kw': kw, 'totalvisitcnt':totalvisitcnt, 'todayvisitcnt':todayvisitcnt }
     #context = {'question_list':question_list}
@@ -137,8 +139,10 @@ def qna(request):
     page_obj = paginator.get_page(page)
 
     viewdate = DateFormat(timezone.now()).format('Y-m-d')
-    totalvisitcnt = PageViewCount.objects.aggregate(view_count=Sum('view_count'))
-    todayvisitcnt = PageViewCount.objects.filter(create_date=viewdate).aggregate(view_count=Sum('view_count'))
+    totalvisitcnt = PageViewCount.objects.aggregate(view_count=Count('view_count'))
+    todayvisitcnt = PageViewCount.objects.filter(create_date=viewdate).aggregate(view_count=Count('view_count'))
+    #totalvisitcnt = PageViewCount.objects.aggregate(view_count=Sum('view_count'))
+    #todayvisitcnt = PageViewCount.objects.filter(create_date=viewdate).aggregate(view_count=Sum('view_count'))
 
     context = {'question_list':page_obj, 'page': page, 'kw': kw, 'totalvisitcnt':totalvisitcnt, 'todayvisitcnt':todayvisitcnt}
 

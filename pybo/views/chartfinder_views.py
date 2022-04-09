@@ -8,7 +8,7 @@ from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
-from django.db.models import Sum
+from django.db.models import Sum, Count
 from django.db.models import Avg
 from django.db.models import F
 
@@ -83,8 +83,19 @@ def stockbacktest(request):
     page_obj = paginator.get_page(page)
 
     viewdate = DateFormat(timezone.now()).format('Y-m-d')
-    totalvisitcnt = PageViewCount.objects.aggregate(view_count=Sum('view_count'))
-    todayvisitcnt = PageViewCount.objects.filter(create_date=viewdate).aggregate(view_count=Sum('view_count'))
+    #totalvisitcnt = PageViewCount.objects.aggregate(view_count=Sum('view_count'))
+    #todayvisitcnt = PageViewCount.objects.filter(create_date=viewdate).aggregate(view_count=Sum('view_count'))
+    totalvisitcnt = PageViewCount.objects.aggregate(view_count=Count('view_count'))
+    todayvisitcnt = PageViewCount.objects.filter(create_date=viewdate).aggregate(view_count=Count('view_count'))
+
+    # 화면 조회 내역 기록 ==> 기간별 실현수익률 조회화면은 1000단위로 더해짐
+    ip = get_client_ip(request)
+    vc = PageViewCount.objects.get(ip=ip, create_date=viewdate)
+    if vc.view_count > 0:
+        vc.view_count += 1000
+    else:
+        vc.view_count = 1000
+    vc.save()
 
 
     logger.info("stockbacktest View 끝")
@@ -131,8 +142,19 @@ def stockpathdetail(request):
     page_obj = paginator.get_page(page)
 
     viewdate = DateFormat(timezone.now()).format('Y-m-d')
-    totalvisitcnt = PageViewCount.objects.aggregate(view_count=Sum('view_count'))
-    todayvisitcnt = PageViewCount.objects.filter(create_date=viewdate).aggregate(view_count=Sum('view_count'))
+    #totalvisitcnt = PageViewCount.objects.aggregate(view_count=Sum('view_count'))
+    #todayvisitcnt = PageViewCount.objects.filter(create_date=viewdate).aggregate(view_count=Sum('view_count'))
+    totalvisitcnt = PageViewCount.objects.aggregate(view_count=Count('view_count'))
+    todayvisitcnt = PageViewCount.objects.filter(create_date=viewdate).aggregate(view_count=Count('view_count'))
+
+    # 화면 조회 내역 기록 ==> 기술적지표 유사종목 조회화면은 100단위로 더해짐
+    ip = get_client_ip(request)
+    vc = PageViewCount.objects.get(ip=ip, create_date=viewdate)
+    if vc.view_count > 0:
+        vc.view_count += 100
+    else:
+        vc.view_count = 100
+    vc.save()
 
     logger.info("stockpathdetail View 끝")
 
@@ -174,8 +196,20 @@ def pathdetailinfo(request):
     page_obj = paginator.get_page(page)
 
     viewdate = DateFormat(timezone.now()).format('Y-m-d')
-    totalvisitcnt = PageViewCount.objects.aggregate(view_count=Sum('view_count'))
-    todayvisitcnt = PageViewCount.objects.filter(create_date=viewdate).aggregate(view_count=Sum('view_count'))
+    #totalvisitcnt = PageViewCount.objects.aggregate(view_count=Sum('view_count'))
+    #todayvisitcnt = PageViewCount.objects.filter(create_date=viewdate).aggregate(view_count=Sum('view_count'))
+    totalvisitcnt = PageViewCount.objects.aggregate(view_count=Count('view_count'))
+    todayvisitcnt = PageViewCount.objects.filter(create_date=viewdate).aggregate(view_count=Count('view_count'))
+
+    # 화면 조회 내역 기록 ==> 기술적지표 상세조회 화면은 10단위로 더해짐
+    ip = get_client_ip(request)
+    vc = PageViewCount.objects.get(ip=ip, create_date=viewdate)
+    if vc.view_count > 0:
+        vc.view_count += 10
+    else:
+        vc.view_count = 10
+    vc.save()
+
 
     logger.info("pathdetailinfo View 끝")
 
@@ -237,16 +271,24 @@ def investperfanaly(request):
     else:
         logger.info("Default 개인 순매수 검색시작")
         investperfanaly_list = stockbarcodedata.objects.select_related('ListedStockInfo', 'AntBuySellInfo').filter(trade_date=temp_trade_date).order_by(F('AntBuySellInfo__TradeAmount_NetBuy').desc(nulls_last=True))[:30]
-        kw = "개인"
-        kw2 = "순매수"
 
     paginator = Paginator(investperfanaly_list, 10)
     page_obj = paginator.get_page(page)
 
     viewdate = DateFormat(timezone.now()).format('Y-m-d')
-    totalvisitcnt = PageViewCount.objects.aggregate(view_count=Sum('view_count'))
-    todayvisitcnt = PageViewCount.objects.filter(create_date=viewdate).aggregate(view_count=Sum('view_count'))
+    #totalvisitcnt = PageViewCount.objects.aggregate(view_count=Sum('view_count'))
+    #todayvisitcnt = PageViewCount.objects.filter(create_date=viewdate).aggregate(view_count=Sum('view_count'))
+    totalvisitcnt = PageViewCount.objects.aggregate(view_count=Count('view_count'))
+    todayvisitcnt = PageViewCount.objects.filter(create_date=viewdate).aggregate(view_count=Count('view_count'))
 
+    # 화면 조회 내역 기록 ==> 거래주체별 성과분석화면은 10000단위로 더해짐
+    ip = get_client_ip(request)
+    vc = PageViewCount.objects.get(ip=ip, create_date=viewdate)
+    if vc.view_count > 0:
+        vc.view_count += 10000
+    else:
+        vc.view_count = 10000
+    vc.save()
 
     logger.info("investperfanaly View 끝")
 
@@ -303,14 +345,23 @@ def industryperfanaly(request):
 
         industry_Avg = stockbarcodedata.objects.select_related('ListedStockInfo').filter(trade_date=temp_trade_date).filter(ListedStockInfo__IndustryType=temp_IndustryType).aggregate(PER=Avg('ListedStockInfo__PER'), EPS=Avg('ListedStockInfo__EPS'), PBR=Avg('ListedStockInfo__PBR'), DivRate=Avg('ListedStockInfo__DivRate'), FinalPriceT1=Avg((F('ListedStockInfo__FinalPriceT') - F('ListedStockInfo__FinalPriceT1')) / F('ListedStockInfo__FinalPriceT1') * 100), FinalPriceT7=Avg((F('ListedStockInfo__FinalPriceT') - F('ListedStockInfo__FinalPriceT7')) / F('ListedStockInfo__FinalPriceT7') * 100), FinalPriceT30=Avg((F('ListedStockInfo__FinalPriceT') - F('ListedStockInfo__FinalPriceT30')) / F('ListedStockInfo__FinalPriceT30') * 100), FinalPriceT90=Avg((F('ListedStockInfo__FinalPriceT') - F('ListedStockInfo__FinalPriceT90')) / F('ListedStockInfo__FinalPriceT90') * 100))
 
-        kw2 = ""
-
     paginator = Paginator(industryperfanaly_list, 10)
     page_obj = paginator.get_page(page)
 
     viewdate = DateFormat(timezone.now()).format('Y-m-d')
-    totalvisitcnt = PageViewCount.objects.aggregate(view_count=Sum('view_count'))
-    todayvisitcnt = PageViewCount.objects.filter(create_date=viewdate).aggregate(view_count=Sum('view_count'))
+    #totalvisitcnt = PageViewCount.objects.aggregate(view_count=Sum('view_count'))
+    #todayvisitcnt = PageViewCount.objects.filter(create_date=viewdate).aggregate(view_count=Sum('view_count'))
+    totalvisitcnt = PageViewCount.objects.aggregate(view_count=Count('view_count'))
+    todayvisitcnt = PageViewCount.objects.filter(create_date=viewdate).aggregate(view_count=Count('view_count'))
+
+    # 화면 조회 내역 기록 ==> 업종별 성과분석화면은 100000단위로 더해짐
+    ip = get_client_ip(request)
+    vc = PageViewCount.objects.get(ip=ip, create_date=viewdate)
+    if vc.view_count > 0:
+        vc.view_count += 100000
+    else:
+        vc.view_count = 100000
+    vc.save()
 
 
     logger.info("industryperfanaly View 끝")
@@ -370,16 +421,23 @@ def stockperfanaly(request):
         logger.info("Default 검색시작")
         stockperfanaly_list = stockbarcodedata.objects.select_related('ListedStockInfo', 'StockPriceInfo', 'AntBuySellInfo', 'ForeignBuySellInfo', 'InstituteBuySellInfo').filter(trade_date=temp_trade_date).filter(ListedStockInfo__MarketCap__gt=100000000000).annotate(PriceT7Rtn=(F('ListedStockInfo__FinalPriceT') - F('ListedStockInfo__FinalPriceT7')) / F('ListedStockInfo__FinalPriceT7') * 100).order_by(F('PriceT7Rtn').desc(nulls_last=True))[:50]
 
-        kw2 = '7일'
-        kw = '수익률상위'
-
     paginator = Paginator(stockperfanaly_list, 10)
     page_obj = paginator.get_page(page)
 
     viewdate = DateFormat(timezone.now()).format('Y-m-d')
-    totalvisitcnt = PageViewCount.objects.aggregate(view_count=Sum('view_count'))
-    todayvisitcnt = PageViewCount.objects.filter(create_date=viewdate).aggregate(view_count=Sum('view_count'))
+    #totalvisitcnt = PageViewCount.objects.aggregate(view_count=Sum('view_count'))
+    #todayvisitcnt = PageViewCount.objects.filter(create_date=viewdate).aggregate(view_count=Sum('view_count'))
+    totalvisitcnt = PageViewCount.objects.aggregate(view_count=Count('view_count'))
+    todayvisitcnt = PageViewCount.objects.filter(create_date=viewdate).aggregate(view_count=Count('view_count'))
 
+    # 화면 조회 내역 기록 ==> 주식 상승하락율 조회화면은 1000000단위로 더해짐
+    ip = get_client_ip(request)
+    vc = PageViewCount.objects.get(ip=ip, create_date=viewdate)
+    if vc.view_count > 0:
+        vc.view_count += 1000000
+    else:
+        vc.view_count = 1000000
+    vc.save()
 
     logger.info("stockperfanaly View 끝")
 
@@ -387,4 +445,13 @@ def stockperfanaly(request):
 
     return render(request, 'pybo/stockperfanaly.html', context)
 
+
+
+def get_client_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[-1].strip()
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
 

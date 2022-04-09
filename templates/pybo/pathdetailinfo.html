@@ -15,6 +15,17 @@
             <!-- Page Content -->
             <div id="page-content-wrapper" class="col-sm-12 col-md-10 col-lg-10 p-0">
                 <div class="container my-3">
+
+                    <div class="page-header bg-primary text-white" >
+                      <h2><span class="badge badge-pill badge-primary">*</span>기술적지표 상세정보   <small> - 주식정보 조회</small></h2>
+                    </div>
+<!--                    <div class="jumbotron">
+                        <h1>기술적지표 상세정보</h1>
+                        <p>Bootstrap is the most popular HTML, CSS, and JS framework for developing responsive, mobile-first projects on the web.</p>
+                    </div>-->
+
+                    {% if kw != ""  %}
+                    <!-- 구글 상단광고  -->
                     <div class="row justify-content-center my-3">
                         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5997522744771647"
                              crossorigin="anonymous"></script>
@@ -26,6 +37,7 @@
                              (adsbygoogle = window.adsbygoogle || []).push({});
                         </script>
                     </div>
+                    {% endif %}
 
                     <div class="row justify-content-end my-3">
                         <div class="col-4 input-group">
@@ -162,10 +174,8 @@
                         </tbody>
                     </table>
 
-                    <div class="container my-3" p-0>
-                        <button class="btn btn-success pull-right" type="button" id="btn_detailsearch">기술적지표 유사종목조회 </button>
-                    </div>
-
+                    {% if kw != ""  %}
+                    <!-- 구글 하단광고  -->
                     <div class="row justify-content-center my-4">
                         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5997522744771647"
                              crossorigin="anonymous"></script>
@@ -178,6 +188,12 @@
                              (adsbygoogle = window.adsbygoogle || []).push({});
                         </script>
                     </div>
+                    {% endif %}
+
+                    <div class="container my-3" p-0>
+                        <button class="btn btn-success pull-right" type="button" id="btn_detailsearch">기술적지표 유사종목조회 </button>
+                    </div>
+
 
                 </div>
             </div>
