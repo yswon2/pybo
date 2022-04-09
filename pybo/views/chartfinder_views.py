@@ -319,30 +319,23 @@ def industryperfanaly(request):
     logger.info("업종 성과분석 검색시작")
 
     if kw and kw2 == '':
-
         logger.info("업종 검색시작")
 
         industryperfanaly_list = stockbarcodedata.objects.select_related('ListedStockInfo', 'AntBuySellInfo', 'ForeignBuySellInfo', 'InstituteBuySellInfo').filter(trade_date=temp_trade_date).filter(ListedStockInfo__IndustryType__iexact=kw).order_by(F('ListedStockInfo__MarketCap').desc(nulls_last=True))
-
         industry_Avg = stockbarcodedata.objects.select_related('ListedStockInfo').filter(trade_date=temp_trade_date).filter(ListedStockInfo__IndustryType__iexact=kw).aggregate(PER=Avg('ListedStockInfo__PER'), EPS=Avg('ListedStockInfo__EPS'), PBR=Avg('ListedStockInfo__PBR'), DivRate=Avg('ListedStockInfo__DivRate'), FinalPriceT1=Avg((F('ListedStockInfo__FinalPriceT') - F('ListedStockInfo__FinalPriceT1')) / F('ListedStockInfo__FinalPriceT1') * 100), FinalPriceT7=Avg((F('ListedStockInfo__FinalPriceT') - F('ListedStockInfo__FinalPriceT7')) / F('ListedStockInfo__FinalPriceT7') * 100), FinalPriceT30=Avg((F('ListedStockInfo__FinalPriceT') - F('ListedStockInfo__FinalPriceT30')) / F('ListedStockInfo__FinalPriceT30') * 100), FinalPriceT90=Avg((F('ListedStockInfo__FinalPriceT') - F('ListedStockInfo__FinalPriceT90')) / F('ListedStockInfo__FinalPriceT90') * 100))
 
     elif kw == '0' and kw2:
-
         logger.info("종목명 검색시작")
 
         temp_IndustryType = listedstockinfo.objects.filter(StockName__iexact=kw2).values_list('IndustryType', flat=True).order_by('-IndustryType')[:1]
-
         industryperfanaly_list = stockbarcodedata.objects.select_related('ListedStockInfo', 'AntBuySellInfo', 'ForeignBuySellInfo', 'InstituteBuySellInfo').filter(trade_date=temp_trade_date).filter(ListedStockInfo__IndustryType=temp_IndustryType).order_by(F('ListedStockInfo__MarketCap').desc(nulls_last=True))
-
         industry_Avg = stockbarcodedata.objects.select_related('ListedStockInfo').filter(trade_date=temp_trade_date).filter(ListedStockInfo__IndustryType=temp_IndustryType).aggregate(PER=Avg('ListedStockInfo__PER'), EPS=Avg('ListedStockInfo__EPS'), PBR=Avg('ListedStockInfo__PBR'), DivRate=Avg('ListedStockInfo__DivRate'), FinalPriceT1=Avg((F('ListedStockInfo__FinalPriceT') - F('ListedStockInfo__FinalPriceT1')) / F('ListedStockInfo__FinalPriceT1') * 100), FinalPriceT7=Avg((F('ListedStockInfo__FinalPriceT') - F('ListedStockInfo__FinalPriceT7')) / F('ListedStockInfo__FinalPriceT7') * 100), FinalPriceT30=Avg((F('ListedStockInfo__FinalPriceT') - F('ListedStockInfo__FinalPriceT30')) / F('ListedStockInfo__FinalPriceT30') * 100), FinalPriceT90=Avg((F('ListedStockInfo__FinalPriceT') - F('ListedStockInfo__FinalPriceT90')) / F('ListedStockInfo__FinalPriceT90') * 100))
     else:
         logger.info("Default 검색시작")
         logger.info("종목명 검색시작")
 
         temp_IndustryType = listedstockinfo.objects.filter(StockName__iexact=kw2).values_list('IndustryType', flat=True).order_by('-IndustryType')[:1]
-
         industryperfanaly_list = stockbarcodedata.objects.select_related('ListedStockInfo', 'AntBuySellInfo', 'ForeignBuySellInfo', 'InstituteBuySellInfo').filter(trade_date=temp_trade_date).filter(ListedStockInfo__IndustryType=temp_IndustryType).order_by(F('ListedStockInfo__MarketCap').desc(nulls_last=True))
-
         industry_Avg = stockbarcodedata.objects.select_related('ListedStockInfo').filter(trade_date=temp_trade_date).filter(ListedStockInfo__IndustryType=temp_IndustryType).aggregate(PER=Avg('ListedStockInfo__PER'), EPS=Avg('ListedStockInfo__EPS'), PBR=Avg('ListedStockInfo__PBR'), DivRate=Avg('ListedStockInfo__DivRate'), FinalPriceT1=Avg((F('ListedStockInfo__FinalPriceT') - F('ListedStockInfo__FinalPriceT1')) / F('ListedStockInfo__FinalPriceT1') * 100), FinalPriceT7=Avg((F('ListedStockInfo__FinalPriceT') - F('ListedStockInfo__FinalPriceT7')) / F('ListedStockInfo__FinalPriceT7') * 100), FinalPriceT30=Avg((F('ListedStockInfo__FinalPriceT') - F('ListedStockInfo__FinalPriceT30')) / F('ListedStockInfo__FinalPriceT30') * 100), FinalPriceT90=Avg((F('ListedStockInfo__FinalPriceT') - F('ListedStockInfo__FinalPriceT90')) / F('ListedStockInfo__FinalPriceT90') * 100))
 
     paginator = Paginator(industryperfanaly_list, 10)
