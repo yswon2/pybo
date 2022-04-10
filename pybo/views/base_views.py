@@ -67,7 +67,9 @@ def index(request):
             kw2 = "순매도"
     else:
         logger.info("Default 개인 순매수 검색시작")
-        investperfanaly_list = stockbarcodedata.objects.select_related('ListedStockInfo', 'AntBuySellInfo').filter(trade_date=temp_trade_date).order_by(F('AntBuySellInfo__TradeAmount_NetBuy').desc(nulls_last=True))[:30]
+        investperfanaly_list = stockbarcodedata.objects.select_related('ListedStockInfo', 'AntBuySellInfo').filter(trade_date='2000-01-02')[:30]
+        #investperfanaly_list = stockbarcodedata.objects.select_related('ListedStockInfo', 'AntBuySellInfo').filter(trade_date='2000-01-02').order_by(F('AntBuySellInfo__TradeAmount_NetBuy').desc(nulls_last=True))[:30]
+
         #kw = "개인"
         #kw2 = "순매수"
 
