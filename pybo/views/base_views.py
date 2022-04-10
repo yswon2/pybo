@@ -84,7 +84,7 @@ def index(request):
     if cnt == 0:
         vc = PageViewCount(ip=ip, create_date=viewdate, create_time=createtime)
         vc.save()
-        if vc.view_count:
+        if vc.view_count > 0:
             vc.view_count += 10000
         else:
             vc.view_count = 10000
