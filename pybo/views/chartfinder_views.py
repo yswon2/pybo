@@ -89,13 +89,26 @@ def stockbacktest(request):
     todayvisitcnt = PageViewCount.objects.filter(create_date=viewdate).aggregate(view_count=Count('view_count'))
 
     # 화면 조회 내역 기록 ==> 기간별 실현수익률 조회화면은 1000단위로 더해짐
+    #ip = get_client_ip(request)
+    #vc = PageViewCount.objects.get(ip=ip, create_date=viewdate)
+    #if vc.view_count > 0:
+    #    vc.view_count += 1000
+    #else:
+    #    vc.view_count = 1000
+    #vc.save()
+
     ip = get_client_ip(request)
-    vc = PageViewCount.objects.get(ip=ip, create_date=viewdate)
-    if vc.view_count > 0:
-        vc.view_count += 1000
-    else:
+    createtime = timezone.now()
+    cnt = PageViewCount.objects.filter(ip=ip, create_date=viewdate).count()
+    if cnt == 0:
+        vc = PageViewCount(ip=ip, create_date=viewdate, create_time=createtime)
+        vc.save()
         vc.view_count = 1000
-    vc.save()
+        vc.save()
+    else:
+        vc = PageViewCount.objects.get(ip=ip, create_date=viewdate)
+        vc.view_count += 1000
+        vc.save()
 
 
     logger.info("stockbacktest View 끝")
@@ -148,13 +161,26 @@ def stockpathdetail(request):
     todayvisitcnt = PageViewCount.objects.filter(create_date=viewdate).aggregate(view_count=Count('view_count'))
 
     # 화면 조회 내역 기록 ==> 기술적지표 유사종목 조회화면은 100단위로 더해짐
+    #ip = get_client_ip(request)
+    #vc = PageViewCount.objects.get(ip=ip, create_date=viewdate)
+    #if vc.view_count > 0:
+    #    vc.view_count += 100
+    #else:
+    #    vc.view_count = 100
+    #vc.save()
+
     ip = get_client_ip(request)
-    vc = PageViewCount.objects.get(ip=ip, create_date=viewdate)
-    if vc.view_count > 0:
-        vc.view_count += 100
-    else:
+    createtime = timezone.now()
+    cnt = PageViewCount.objects.filter(ip=ip, create_date=viewdate).count()
+    if cnt == 0:
+        vc = PageViewCount(ip=ip, create_date=viewdate, create_time=createtime)
+        vc.save()
         vc.view_count = 100
-    vc.save()
+        vc.save()
+    else:
+        vc = PageViewCount.objects.get(ip=ip, create_date=viewdate)
+        vc.view_count += 100
+        vc.save()
 
     logger.info("stockpathdetail View 끝")
 
@@ -202,14 +228,26 @@ def pathdetailinfo(request):
     todayvisitcnt = PageViewCount.objects.filter(create_date=viewdate).aggregate(view_count=Count('view_count'))
 
     # 화면 조회 내역 기록 ==> 기술적지표 상세조회 화면은 10단위로 더해짐
-    ip = get_client_ip(request)
-    vc = PageViewCount.objects.get(ip=ip, create_date=viewdate)
-    if vc.view_count > 0:
-        vc.view_count += 10
-    else:
-        vc.view_count = 10
-    vc.save()
+    #ip = get_client_ip(request)
+    #vc = PageViewCount.objects.get(ip=ip, create_date=viewdate)
+    #if vc.view_count > 0:
+    #    vc.view_count += 10
+    #else:
+    #    vc.view_count = 10
+    #vc.save()
 
+    ip = get_client_ip(request)
+    createtime = timezone.now()
+    cnt = PageViewCount.objects.filter(ip=ip, create_date=viewdate).count()
+    if cnt == 0:
+        vc = PageViewCount(ip=ip, create_date=viewdate, create_time=createtime)
+        vc.save()
+        vc.view_count = 10
+        vc.save()
+    else:
+        vc = PageViewCount.objects.get(ip=ip, create_date=viewdate)
+        vc.view_count += 10
+        vc.save()
 
     logger.info("pathdetailinfo View 끝")
 
@@ -282,13 +320,26 @@ def investperfanaly(request):
     todayvisitcnt = PageViewCount.objects.filter(create_date=viewdate).aggregate(view_count=Count('view_count'))
 
     # 화면 조회 내역 기록 ==> 거래주체별 성과분석화면은 10000단위로 더해짐
+    #ip = get_client_ip(request)
+    #vc = PageViewCount.objects.get(ip=ip, create_date=viewdate)
+    #if vc.view_count > 0:
+    #    vc.view_count += 10000
+    #else:
+    #    vc.view_count = 10000
+    #vc.save()
+
     ip = get_client_ip(request)
-    vc = PageViewCount.objects.get(ip=ip, create_date=viewdate)
-    if vc.view_count > 0:
-        vc.view_count += 10000
-    else:
+    createtime = timezone.now()
+    cnt = PageViewCount.objects.filter(ip=ip, create_date=viewdate).count()
+    if cnt == 0:
+        vc = PageViewCount(ip=ip, create_date=viewdate, create_time=createtime)
+        vc.save()
         vc.view_count = 10000
-    vc.save()
+        vc.save()
+    else:
+        vc = PageViewCount.objects.get(ip=ip, create_date=viewdate)
+        vc.view_count += 10000
+        vc.save()
 
     logger.info("investperfanaly View 끝")
 
@@ -348,13 +399,27 @@ def industryperfanaly(request):
     todayvisitcnt = PageViewCount.objects.filter(create_date=viewdate).aggregate(view_count=Count('view_count'))
 
     # 화면 조회 내역 기록 ==> 업종별 성과분석화면은 100000단위로 더해짐
+    #ip = get_client_ip(request)
+    #vc = PageViewCount.objects.get(ip=ip, create_date=viewdate)
+    #if vc.view_count > 0:
+    #    vc.view_count += 100000
+    #else:
+    #    vc.view_count = 100000
+    #vc.save()
+
     ip = get_client_ip(request)
-    vc = PageViewCount.objects.get(ip=ip, create_date=viewdate)
-    if vc.view_count > 0:
-        vc.view_count += 100000
-    else:
+    createtime = timezone.now()
+    cnt = PageViewCount.objects.filter(ip=ip, create_date=viewdate).count()
+    if cnt == 0:
+        vc = PageViewCount(ip=ip, create_date=viewdate, create_time=createtime)
+        vc.save()
         vc.view_count = 100000
-    vc.save()
+        vc.save()
+    else:
+        vc = PageViewCount.objects.get(ip=ip, create_date=viewdate)
+        vc.view_count += 100000
+        vc.save()
+
 
 
     logger.info("industryperfanaly View 끝")
@@ -424,13 +489,26 @@ def stockperfanaly(request):
     todayvisitcnt = PageViewCount.objects.filter(create_date=viewdate).aggregate(view_count=Count('view_count'))
 
     # 화면 조회 내역 기록 ==> 주식 상승하락율 조회화면은 1000000단위로 더해짐
+    #ip = get_client_ip(request)
+    #vc = PageViewCount.objects.get(ip=ip, create_date=viewdate)
+    #if vc.view_count > 0:
+    #    vc.view_count += 1000000
+    #else:
+    #    vc.view_count = 1000000
+    #vc.save()
+
     ip = get_client_ip(request)
-    vc = PageViewCount.objects.get(ip=ip, create_date=viewdate)
-    if vc.view_count > 0:
-        vc.view_count += 1000000
-    else:
+    createtime = timezone.now()
+    cnt = PageViewCount.objects.filter(ip=ip, create_date=viewdate).count()
+    if cnt == 0:
+        vc = PageViewCount(ip=ip, create_date=viewdate, create_time=createtime)
+        vc.save()
         vc.view_count = 1000000
-    vc.save()
+        vc.save()
+    else:
+        vc = PageViewCount.objects.get(ip=ip, create_date=viewdate)
+        vc.view_count += 1000000
+        vc.save()
 
     logger.info("stockperfanaly View 끝")
 

@@ -77,6 +77,19 @@ def index(request):
     page_obj = paginator.get_page(page)
 
 
+    #ip = get_client_ip(request)
+    #viewdate = DateFormat(timezone.now()).format('Y-m-d')
+    #createtime = timezone.now()
+    #cnt = PageViewCount.objects.filter(ip=ip, create_date=viewdate).count()
+    #if cnt == 0:
+    #    vc = PageViewCount(ip=ip, create_date=viewdate, create_time=createtime)
+    #    vc.save()
+    #    if vc.view_count > 0:
+    #        vc.view_count += 10000
+    #    else:
+    #        vc.view_count = 10000
+    #    vc.save()
+
     ip = get_client_ip(request)
     viewdate = DateFormat(timezone.now()).format('Y-m-d')
     createtime = timezone.now()
@@ -84,10 +97,11 @@ def index(request):
     if cnt == 0:
         vc = PageViewCount(ip=ip, create_date=viewdate, create_time=createtime)
         vc.save()
-        if vc.view_count > 0:
-            vc.view_count += 10000
-        else:
-            vc.view_count = 10000
+        vc.view_count = 10000
+        vc.save()
+    else:
+        vc = PageViewCount.objects.get(ip=ip, create_date=viewdate)
+        vc.view_count += 10000
         vc.save()
 
     #totalvisitcnt = PageViewCount.objects.aggregate(view_count=Sum('view_count'))
