@@ -18,8 +18,53 @@ logger = logging.getLogger('pybo')
 def index(request):
     '''
       investperfanaly 목록 출력
-     '''
+    '''
 
+    logger.info("INFO 레벨로 출력")
+
+    #입력 파라미터
+    page = request.GET.get('page', '1')
+    kw = request.GET.get('kw', '')
+    totalvisitcnt = request.GET.get('totalvisitcnt', '0')
+    todayvisitcnt = request.GET.get('todayvisitcnt', '0')
+
+    question_list = Question.objects.order_by('-notice', '-create_date')
+    if kw:
+        question_list = question_list.filter(
+            Q(subject__icontains=kw) |
+            Q(content__icontains=kw) |
+            Q(author__username__icontains=kw) |
+            Q(answer__author__username__icontains=kw)
+        ).distinct()
+
+    paginator = Paginator(question_list, 10)
+    page_obj = paginator.get_page(page)
+
+    ip = get_client_ip(request)
+    viewdate = DateFormat(timezone.now()).format('Y-m-d')
+    createtime = timezone.now()
+    cnt = PageViewCount.objects.filter(ip=ip, create_date=viewdate).count()
+    if cnt == 0:
+        vc = PageViewCount(ip=ip, create_date=viewdate, create_time=createtime)
+        vc.save()
+        vc.view_count = 1
+        vc.save()
+    else:
+        vc = PageViewCount.objects.get(ip=ip, create_date=viewdate)
+        vc.view_count += 1
+        vc.save()
+
+    #totalvisitcnt = PageViewCount.objects.aggregate(view_count=Sum('view_count'))
+    #todayvisitcnt = PageViewCount.objects.filter(create_date=viewdate).aggregate(view_count=Sum('view_count'))
+    totalvisitcnt = PageViewCount.objects.aggregate(view_count=Count('view_count'))
+    todayvisitcnt = PageViewCount.objects.filter(create_date=viewdate).aggregate(view_count=Count('view_count'))
+
+    context = {'question_list':page_obj, 'page': page, 'kw': kw, 'totalvisitcnt':totalvisitcnt, 'todayvisitcnt':todayvisitcnt }
+    #context = {'question_list':question_list}
+
+    return render(request, 'pybo/question_list.html', context)
+
+'''
     logger.info("investperfanaly View 시작")
 
     #입력 파라미터
@@ -123,52 +168,6 @@ def index(request):
     context = {'investperfanaly_list':page_obj, 'page':page, 'kw':kw, 'kw2':kw2, 'totalvisitcnt':totalvisitcnt, 'todayvisitcnt':todayvisitcnt }
 
     return render(request, 'pybo/investperfanaly.html', context)
-
-
-
-'''
-    logger.info("INFO 레벨로 출력")
-
-    #입력 파라미터
-    page = request.GET.get('page', '1')
-    kw = request.GET.get('kw', '')
-    totalvisitcnt = request.GET.get('totalvisitcnt', '0')
-    todayvisitcnt = request.GET.get('todayvisitcnt', '0')
-
-    question_list = Question.objects.order_by('-notice', '-create_date')
-    if kw:
-        question_list = question_list.filter(
-            Q(subject__icontains=kw) |
-            Q(content__icontains=kw) |
-            Q(author__username__icontains=kw) |
-            Q(answer__author__username__icontains=kw)
-        ).distinct()
-
-    paginator = Paginator(question_list, 10)
-    page_obj = paginator.get_page(page)
-
-    ip = get_client_ip(request)
-    viewdate = DateFormat(timezone.now()).format('Y-m-d')
-    createtime = timezone.now()
-    cnt = PageViewCount.objects.filter(ip=ip, create_date=viewdate).count()
-    if cnt == 0:
-        vc = PageViewCount(ip=ip, create_date=viewdate, create_time=createtime)
-        vc.save()
-        if vc.view_count:
-            vc.view_count += 1
-        else:
-            vc.view_count = 1
-        vc.save()
-
-    #totalvisitcnt = PageViewCount.objects.aggregate(view_count=Sum('view_count'))
-    #todayvisitcnt = PageViewCount.objects.filter(create_date=viewdate).aggregate(view_count=Sum('view_count'))
-    totalvisitcnt = PageViewCount.objects.aggregate(view_count=Count('view_count'))
-    todayvisitcnt = PageViewCount.objects.filter(create_date=viewdate).aggregate(view_count=Count('view_count'))
-
-    context = {'question_list':page_obj, 'page': page, 'kw': kw, 'totalvisitcnt':totalvisitcnt, 'todayvisitcnt':todayvisitcnt }
-    #context = {'question_list':question_list}
-
-    return render(request, 'pybo/question_list.html', context)
 '''
 
 
