@@ -89,12 +89,12 @@
                             <td class="col-2 align-items-start"><div style="height: 100%; line-height: 100%; font-size:1em;">{{ pathdetailinfo.ClosePrice|floatformat:"0" }}</div></td>
                             <td class="col-2 align-items-start" bgcolor="black"><div style="height: 100%; line-height: 100%; font-size:0.9em;"><b><font color="white">전일대비 수익률</font></b></div></td>
                             <td class="col-2 align-items-start"><div style="height: 100%; line-height: 100%; font-size:1em;">{{ pathdetailinfo.ListedStockInfo.FinalPriceT|sub:pathdetailinfo.ListedStockInfo.FinalPriceT1|div:pathdetailinfo.ListedStockInfo.FinalPriceT1|mul:100|floatformat:"1" }} %</div></td>
-                            <td class="col-2 align-items-start" bgcolor="black"><div style="height: 100%; line-height: 100%; font-size:1em;"><b><font color="white">거래량</font></b></div></td>
-                            <td class="col-2 align-items-start"><div style="height: 100%; line-height: 100%; font-size:1em;">{{ pathdetailinfo.StockPriceInfo.TradeVolume|floatformat:"0" }}</div></td>
+                            <td class="col-2 align-items-start" bgcolor="black"><div style="height: 100%; line-height: 100%; font-size:1em;"><b><font color="white">거래량(천)</font></b></div></td>
+                            <td class="col-2 align-items-start"><div style="height: 100%; line-height: 100%; font-size:1em;">{{ pathdetailinfo.StockPriceInfo.TradeVolume|div:1000|floatformat:"0" }}</div></td>
                         </tr>
                         <tr class="thead-dark text-center">
-                            <td class="col-2 align-items-start" bgcolor="black"><div style="height: 100%; line-height: 100%; font-size:0.9em;"><b><font color="white">당일공매도수량</font></b></div></td>
-                            <td class="col-2 align-items-start"><div style="height: 100%; line-height: 100%; font-size:1em;">{{ pathdetailinfo.ListedStockInfo.TodayShortTradeNum|floatformat:"0" }}</div></td>
+                            <td class="col-2 align-items-start" bgcolor="black"><div style="height: 100%; line-height: 100%; font-size:0.9em;"><b><font color="white">당일공매도수량(천)</font></b></div></td>
+                            <td class="col-2 align-items-start"><div style="height: 100%; line-height: 100%; font-size:1em;">{{ pathdetailinfo.ListedStockInfo.TodayShortTradeNum|div:1000|floatformat:"0" }}</div></td>
                             <td class="col-2 align-items-start" bgcolor="black"><div style="height: 100%; line-height: 100%; font-size:0.9em;"><b><font color="white">당일공매도비중</font></b></div></td>
                             <td class="col-2 align-items-start"><div style="height: 100%; line-height: 100%; font-size:1em;">{{ pathdetailinfo.ListedStockInfo.TodayShortTradeRate|floatformat:"2" }} %</div></td>
                             <td class="col-2 align-items-start" bgcolor="black"><div style="height: 100%; line-height: 100%; font-size:0.9em;"><b><font color="white">당일공매도금액(억)</font></b></div></td>
