@@ -27,7 +27,7 @@
                     {% if kw == ""  %}
                     <!-- 구글 상단광고  -->
                     <div class="row justify-content-center my-3">
-                        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5997522744771647"
+<!--                        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5997522744771647"
                              crossorigin="anonymous"></script>
                         <ins class="adsbygoogle"
                              style="display:inline-block;width:728px;height:90px"
@@ -35,12 +35,25 @@
                              data-ad-slot="6903182059"></ins>
                         <script>
                              (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>-->
+                        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5997522744771647"
+                             crossorigin="anonymous"></script>
+                        <!-- 상세화면상단 -->
+                        <ins class="adsbygoogle"
+                             style="display:inline-block;width:728px;height:90px"
+                             data-ad-client="ca-pub-5997522744771647"
+                             data-ad-slot="7945378945"></ins>
+                        <script>
+                             (adsbygoogle = window.adsbygoogle || []).push({});
                         </script>
                     </div>
+
+
                     {% endif %}
 
                     <div class="row justify-content-end my-3">
-                        <div class="col-4 input-group">
+                        <div class="col-sm-12 col-lg-4 input-group">
+<!--                        <div class="col-4 input-group">    -->
                             <input type="text"  title="종목코드 또는 종목명을 입력하세요 예:A005930"  style="text-transform: uppercase;" class="form-control kw"  placeholder="주식코드 or 주식명" value="{{ kw|upper|default_if_none:'' }}">
                             <div class="input-group-append">
                                 <button class="btn btn-primary pull-right" type="button" id="btn_search">찾기</button>
@@ -75,10 +88,29 @@
                             <td class="col-2 align-items-start" bgcolor="black"><div style="height: 100%; line-height: 100%; font-size:1em;"><b><font color="white">종가</font></b></div></td>
                             <td class="col-2 align-items-start"><div style="height: 100%; line-height: 100%; font-size:1em;">{{ pathdetailinfo.ClosePrice|floatformat:"0" }}</div></td>
                             <td class="col-2 align-items-start" bgcolor="black"><div style="height: 100%; line-height: 100%; font-size:0.9em;"><b><font color="white">전일대비 수익률</font></b></div></td>
-                            <td class="col-2 align-items-startcenter"><div style="height: 100%; line-height: 100%; font-size:1em;">{{ pathdetailinfo.ListedStockInfo.FinalPriceT|sub:pathdetailinfo.ListedStockInfo.FinalPriceT1|div:pathdetailinfo.ListedStockInfo.FinalPriceT1|mul:100|floatformat:"1" }} %</div></td>
-                            <td class="col-2 align-items-start" bgcolor="black"><div style="height: 100%; line-height: 100%; font-size:1em;"><b><font color="white">봉타입</font></b></div></td>
-                            <td class="col-2 align-items-start"><div style="height: 100%; line-height: 100%; font-size:1em;">{{ pathdetailinfo.BarType }}</div></td>
+                            <td class="col-2 align-items-start"><div style="height: 100%; line-height: 100%; font-size:1em;">{{ pathdetailinfo.ListedStockInfo.FinalPriceT|sub:pathdetailinfo.ListedStockInfo.FinalPriceT1|div:pathdetailinfo.ListedStockInfo.FinalPriceT1|mul:100|floatformat:"1" }} %</div></td>
+                            <td class="col-2 align-items-start" bgcolor="black"><div style="height: 100%; line-height: 100%; font-size:1em;"><b><font color="white">거래량</font></b></div></td>
+                            <td class="col-2 align-items-start"><div style="height: 100%; line-height: 100%; font-size:1em;">{{ pathdetailinfo.StockPriceInfo.TradeVolume|floatformat:"0" }}</div></td>
                         </tr>
+                        <tr class="thead-dark text-center">
+                            <td class="col-2 align-items-start" bgcolor="black"><div style="height: 100%; line-height: 100%; font-size:0.9em;"><b><font color="white">당일공매도수량</font></b></div></td>
+                            <td class="col-2 align-items-start"><div style="height: 100%; line-height: 100%; font-size:1em;">{{ pathdetailinfo.ListedStockInfo.TodayShortTradeNum|floatformat:"0" }}</div></td>
+                            <td class="col-2 align-items-start" bgcolor="black"><div style="height: 100%; line-height: 100%; font-size:0.9em;"><b><font color="white">당일공매도비중</font></b></div></td>
+                            <td class="col-2 align-items-start"><div style="height: 100%; line-height: 100%; font-size:1em;">{{ pathdetailinfo.ListedStockInfo.TodayShortTradeRate|floatformat:"2" }} %</div></td>
+                            <td class="col-2 align-items-start" bgcolor="black"><div style="height: 100%; line-height: 100%; font-size:0.9em;"><b><font color="white">당일공매도금액(억)</font></b></div></td>
+                            <td class="col-2 align-items-start"><div style="height: 100%; line-height: 100%; font-size:1em;">{{ pathdetailinfo.ListedStockInfo.TodayShortTradeAmount|div:100000000|floatformat:"1" }}</div></td>
+                        </tr>
+                        <tr class="thead-dark text-center">
+                            <td class="col-2 align-items-start" bgcolor="black"><div style="height: 100%; line-height: 100%; font-size:0.9em;"><b><font color="white">전체공매도잔고(억)</font></b></div></td>
+                            <td class="col-2 align-items-start"><div style="height: 100%; line-height: 100%; font-size:1em;">{{ pathdetailinfo.ListedStockInfo.ShortSellAmont|div:100000000|floatformat:"1" }}</div></td>
+                            <td class="col-2 align-items-start" bgcolor="black"><div style="height: 100%; line-height: 100%; font-size:0.9em;"><b><font color="white">공매도잔고비중(%)</font></b></div></td>
+                            <td class="col-2 align-items-start"><div style="height: 100%; line-height: 100%; font-size:1em;">{{ pathdetailinfo.ListedStockInfo.ShortSellRate|floatformat:"2" }} %</div></td>
+                            <td class="col-2 align-items-start" bgcolor="black"><div style="height: 100%; line-height: 100%; font-size:0.9em;"><b><font color="white">외국인지분율(%)</font></b></div></td>
+                            <td class="col-2 align-items-start"><div style="height: 100%; line-height: 100%; font-size:1em;">{{ pathdetailinfo.ListedStockInfo.ForeignStockRate|floatformat:"2" }}</div></td>
+
+                        </tr>
+
+
                         <tr class="thead-dark text-center">
                             <td class="col-2 align-items-start" bgcolor="black"><div style="height: 100%; line-height: 100%; font-size:0.9em;"><b><font color="white">스토캐스틱지표</font></b></div></td>
                             {% if pathdetailinfo.StochasticFlag == None or pathdetailinfo.StochasticFlag == ""  %}
@@ -129,7 +161,6 @@
                             <td class="col-2 align-items-start"><div style="height: 100%; line-height: 100%; font-size:1em;">{{ pathdetailinfo.ListedStockInfo.DivRate|floatformat:"2" }} %</div></td>
                         </tr>
 
-
                         <tr class="thead-dark text-center">
                             <td class="col-2 align-items-start" bgcolor="black" colspan='6' ><b><font color="white"> 유사차트종목 검색결과(종목수 : {{ pathdetailinfo.StockBarcodePerfTotal.BarFinalCode_Cnt }}  ,  {{ pathdetailinfo.trade_date }} 기준)</font></b></td>
                         </tr>
@@ -177,13 +208,23 @@
                     {% if kw == ""  %}
                     <!-- 구글 하단광고  -->
                     <div class="row justify-content-center my-4">
-                        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5997522744771647"
+<!--                        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5997522744771647"
                              crossorigin="anonymous"></script>
-                        <!-- 사이트하단 -->
+                        &lt;!&ndash; 사이트하단 &ndash;&gt;
                         <ins class="adsbygoogle"
                              style="display:inline-block;width:728px;height:90px"
                              data-ad-client="ca-pub-5997522744771647"
                              data-ad-slot="1312502504"></ins>
+                        <script>
+                             (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>-->
+                        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5997522744771647"
+                             crossorigin="anonymous"></script>
+                        <!-- 상세화면하단 -->
+                        <ins class="adsbygoogle"
+                             style="display:inline-block;width:728px;height:90px"
+                             data-ad-client="ca-pub-5997522744771647"
+                             data-ad-slot="6500984075"></ins>
                         <script>
                              (adsbygoogle = window.adsbygoogle || []).push({});
                         </script>

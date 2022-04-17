@@ -28,6 +28,7 @@ urlpatterns = [
     path('investperfanaly/', chartfinder_views.investperfanaly, name='investperfanaly'),
     path('industryperfanaly/', chartfinder_views.industryperfanaly, name='industryperfanaly'),
     path('stockperfanaly/', chartfinder_views.stockperfanaly, name='stockperfanaly'),
+    path('stockshortsellanaly/', chartfinder_views.stockshortsellanaly, name='stockshortsellanaly'),
 ]
 
 

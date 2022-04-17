@@ -210,13 +210,13 @@ def pathdetailinfo(request):
     if kw:
         if (kw[0:1] != 'A' and kw[0:1] != 'a'):
             logger.info("주식명 검색 시작")
-            pathdetailinfo_list = stockbarcodedata.objects.select_related('StockBarcodePerfTotal', 'ListedStockInfo', 'AntBuySellInfo', 'ForeignBuySellInfo', 'InstituteBuySellInfo').all().filter(StockName__iexact=kw).filter(trade_date=kw2).order_by('-trade_date')
+            pathdetailinfo_list = stockbarcodedata.objects.select_related('StockBarcodePerfTotal', 'StockPriceInfo', 'ListedStockInfo', 'AntBuySellInfo', 'ForeignBuySellInfo', 'InstituteBuySellInfo').all().filter(StockName__iexact=kw).filter(trade_date=kw2).order_by('-trade_date')
         else:
             logger.info("주식코드 검색 시작")
-            pathdetailinfo_list = stockbarcodedata.objects.select_related('StockBarcodePerfTotal', 'ListedStockInfo', 'AntBuySellInfo', 'ForeignBuySellInfo', 'InstituteBuySellInfo').all().filter(StockCode__icontains=kw).filter(trade_date=kw2).order_by('-trade_date')
+            pathdetailinfo_list = stockbarcodedata.objects.select_related('StockBarcodePerfTotal', 'StockPriceInfo', 'ListedStockInfo', 'AntBuySellInfo', 'ForeignBuySellInfo', 'InstituteBuySellInfo').all().filter(StockCode__icontains=kw).filter(trade_date=kw2).order_by('-trade_date')
     else:
         logger.info("Default 검색 시작")
-        pathdetailinfo_list = stockbarcodedata.objects.select_related('StockBarcodePerfTotal', 'ListedStockInfo', 'AntBuySellInfo', 'ForeignBuySellInfo', 'InstituteBuySellInfo').all().filter(StockCode__icontains='A005930').filter(trade_date=kw2).order_by('-trade_date')
+        pathdetailinfo_list = stockbarcodedata.objects.select_related('StockBarcodePerfTotal', 'StockPriceInfo', 'ListedStockInfo', 'AntBuySellInfo', 'ForeignBuySellInfo', 'InstituteBuySellInfo').all().filter(StockCode__icontains='A005930').filter(trade_date=kw2).order_by('-trade_date')
 
     paginator = Paginator(pathdetailinfo_list, 10)
     page_obj = paginator.get_page(page)
@@ -515,6 +515,67 @@ def stockperfanaly(request):
     context = {'stockperfanaly_list':page_obj, 'page':page, 'kw':kw, 'kw2':kw2, 'totalvisitcnt':totalvisitcnt, 'todayvisitcnt':todayvisitcnt}
 
     return render(request, 'pybo/stockperfanaly.html', context)
+
+
+
+
+
+def stockshortsellanaly(request):
+    '''
+     stockshortsellanaly 목록 출력
+    '''
+
+    logger.info("stockperfanaly View 시작")
+
+    #입력 파라미터
+    page = request.GET.get('page', '1')
+    kw = request.GET.get('kw', '')
+    kw2 = request.GET.get('kw2', '')
+
+    totalvisitcnt = request.GET.get('totalvisitcnt', '0')
+    todayvisitcnt = request.GET.get('todayvisitcnt', '0')
+
+    temp_trade_date = stockbarcodedata.objects.all().filter(StockCode='A005930').values_list('trade_date', flat=True).order_by('-trade_date')[:1]
+
+    logger.info("주식 수익률 검색시작")
+
+    if kw != '':
+        logger.info("종목검색시작")
+        stockshortsellanaly_list = stockbarcodedata.objects.select_related('ListedStockInfo', 'StockPriceInfo', 'AntBuySellInfo', 'ForeignBuySellInfo', 'InstituteBuySellInfo').filter(trade_date=temp_trade_date).filter(StockName__iexact=kw).annotate(PriceT7Rtn=(F('ListedStockInfo__FinalPriceT') - F('ListedStockInfo__FinalPriceT7')) / F('ListedStockInfo__FinalPriceT7') * 100, PriceT30Rtn=(F('ListedStockInfo__FinalPriceT') - F('ListedStockInfo__FinalPriceT30')) / F('ListedStockInfo__FinalPriceT30') * 100, PriceT90Rtn=(F('ListedStockInfo__FinalPriceT') - F('ListedStockInfo__FinalPriceT90')) / F('ListedStockInfo__FinalPriceT90') * 100)
+    else:
+        logger.info("Default 검색시작")
+        stockshortsellanaly_list = stockbarcodedata.objects.select_related('ListedStockInfo', 'StockPriceInfo', 'AntBuySellInfo', 'ForeignBuySellInfo', 'InstituteBuySellInfo').filter(trade_date=temp_trade_date).annotate(PriceT7Rtn=(F('ListedStockInfo__FinalPriceT') - F('ListedStockInfo__FinalPriceT7')) / F('ListedStockInfo__FinalPriceT7') * 100, PriceT30Rtn=(F('ListedStockInfo__FinalPriceT') - F('ListedStockInfo__FinalPriceT30')) / F('ListedStockInfo__FinalPriceT30') * 100, PriceT90Rtn=(F('ListedStockInfo__FinalPriceT') - F('ListedStockInfo__FinalPriceT90')) / F('ListedStockInfo__FinalPriceT90') * 100).order_by('-ListedStockInfo__ShortSellRate')[:50]
+
+    paginator = Paginator(stockshortsellanaly_list, 10)
+    page_obj = paginator.get_page(page)
+
+    viewdate = DateFormat(timezone.now()).format('Y-m-d')
+    #totalvisitcnt = PageViewCount.objects.aggregate(view_count=Sum('view_count'))
+    #todayvisitcnt = PageViewCount.objects.filter(create_date=viewdate).aggregate(view_count=Sum('view_count'))
+    totalvisitcnt = PageViewCount.objects.aggregate(view_count=Count('view_count'))
+    todayvisitcnt = PageViewCount.objects.filter(create_date=viewdate).aggregate(view_count=Count('view_count'))
+
+    ip = get_client_ip(request)
+    createtime = timezone.now()
+    cnt = PageViewCount.objects.filter(ip=ip, create_date=viewdate).count()
+    if cnt == 0:
+        vc = PageViewCount(ip=ip, create_date=viewdate, create_time=createtime)
+        vc.save()
+        vc.view_count = 10000000
+        vc.save()
+    else:
+        vc = PageViewCount.objects.get(ip=ip, create_date=viewdate)
+        vc.view_count += 10000000
+        vc.save()
+
+    logger.info("stockshortsellanaly View 끝")
+
+    context = {'stockshortsellanaly_list':page_obj, 'page':page, 'kw':kw, 'totalvisitcnt':totalvisitcnt, 'todayvisitcnt':todayvisitcnt}
+
+    return render(request, 'pybo/stockshortsellanaly.html', context)
+
+
+
 
 
 

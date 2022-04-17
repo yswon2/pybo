@@ -179,6 +179,16 @@ class listedstockinfo(models.Model):
     DivRate = models.FloatField(default=0)
     IndustryType = models.CharField(null=True, blank=True, max_length=15)
 
+    ForeignStockNo = models.FloatField(default=0)
+    ForeignStockRate = models.FloatField(default=0)
+    ShortSellRate = models.FloatField(default=0)
+    ShortSellNum = models.FloatField(default=0)
+    ShortSellAmont = models.FloatField(default=0)
+
+    TodayShortTradeNum = models.FloatField(default=0)
+    TodayShortTradeAmount = models.FloatField(default=0)
+    TodayTotalTradeAmount = models.FloatField(default=0)
+    TodayShortTradeRate = models.FloatField(default=0)
 
 
 class AntBuySellInfo(models.Model):

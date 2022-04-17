@@ -1,0 +1,209 @@
+{% extends 'base.html' %}
+{% load pybo_filter %}
+{% load mathfilters %}
+{% block content %}
+
+<div class="loader"></div>
+
+<div class="container mt-3" id="body-wrapper">
+    <div id="body-content">
+        <!-- Sidebar -->
+        <div class="row">
+            <div class="col-sm-12 col-md-2 col-lg-2 p-0">
+                {% include "sidebar.html" %}
+            </div>
+            <!-- Page Content -->
+            <div class="col-sm-12 col-md-10 col-lg-10 p-0">
+                <div class="container my-3">
+                    <div class="page-header bg-primary text-white" >
+                      <h2><span class="badge badge-pill badge-primary">*</span>주식별 공매도 잔고  <small> - 공매도 순위</small></h2>
+                    </div>
+
+                    {% if kw == ""  %}
+                    <!-- 구글 상단광고  -->
+                    <div class="row justify-content-center my-3">
+                        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5997522744771647"
+                             crossorigin="anonymous"></script>
+                        <!-- 공매도상단 -->
+                        <ins class="adsbygoogle"
+                             style="display:inline-block;width:728px;height:90px"
+                             data-ad-client="ca-pub-5997522744771647"
+                             data-ad-slot="8329017162"></ins>
+                        <script>
+                             (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                    </div>
+                    {% endif %}
+
+                    <div class="row justify-content-end my-3">
+                        <div class="col-sm-12 col-lg-4  input-group">
+                            <input type="text" title="종목코드 또는 종목명을 입력하세요 예:A005930" style="text-transform: uppercase;" class="form-control kw"  placeholder="주식코드 or 주식명" value="{{ kw|upper|default_if_none:'' }}">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary pull-right" type="button" id="btn_search">찾기</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <table class="table table-striped w-auto" >
+                        <thead>
+                        <tr class="thead-dark text-center align-items-center">
+                            <th class="col-1 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.8em;">기준일</div></th>
+                            <th class="col-0.9 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.8em;">주식코드</div></th>
+                            <th class="col-1 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:1em;">주식명</div></th>
+                            <th class="col-1 align-items-center" rowspan='1'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.8em;">시가총액</div></th>
+                            <th class="col-1 align-items-center" rowspan='1'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.8em;">외국인</div></th>
+                            <th class="col-0.9 align-items-center" rowspan='1'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.8em;">공매도잔고</div></th>
+                            <th class="col-0.9 align-items-center" rowspan='1'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.8em;">공매도잔고</div></th>
+                            <th class="col-1.0 align-items-center" rowspan='1'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.8em;">당일전체</div></th>
+                            <th class="col-1.0 align-items-center" rowspan='1'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.8em;">당일공매도</div></th>
+                            <th class="col-1.0 align-items-center" rowspan='1'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.8em;">당일공매도</div></th>
+                            <th class="col-1.1 align-items-center" colspan='3'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.9em;">기간수익률</div></th>
+                        </tr>
+                        <tr class="thead-dark text-center align-items-center">
+                            <th class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.8em;">(조)</div></th>
+                            <th class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.8em;">비중(%)</div></th>
+                            <th class="col-0.9"><div style="height: 100%; line-height: 100%; font-size:0.8em;">비중(%)</div></th>
+                            <th class="col-0.9"><div style="height: 100%; line-height: 100%; font-size:0.8em;">(억)</div></th>
+                            <th class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.8em;">거래대금(억)</div></th>
+                            <th class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.8em;">거래대금(억)</div></th>
+                            <th class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.8em;">비중(%)</div></th>
+                            <th class="col-1.1"><div style="height: 100%; line-height: 100%; font-size:0.8em;">7일</div></th>
+                            <th class="col-1.1"><div style="height: 100%; line-height: 100%; font-size:0.8em;">30일</div></th>
+                            <th class="col-1.1"><div style="height: 100%; line-height: 100%; font-size:0.8em;">90일</div></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% if stockshortsellanaly_list %}
+                        {% for stockshortsellanaly in stockshortsellanaly_list %}
+                        <tr class="text-center align-items-center">
+                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ stockshortsellanaly.trade_date|date:'Y-m-d'  }}</div></td>
+                            <td class="col-0.9"><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ stockshortsellanaly.StockCode }}</div></td>
+                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ stockshortsellanaly.StockName }}</div></td>
+                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:1em;">{{ stockshortsellanaly.ListedStockInfo.MarketCap|div:1000000000000|floatformat:"1" }}</div></td>
+                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ stockshortsellanaly.ListedStockInfo.ForeignStockRate|floatformat:"2" }}</div></td>
+                            <td class="col-0.9"><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ stockshortsellanaly.ListedStockInfo.ShortSellRate|floatformat:"2" }}</div></td>
+                            <td class="col-0.9"><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ stockshortsellanaly.ListedStockInfo.ShortSellAmont|div:100000000|floatformat:"0" }}</div></td>
+                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ stockshortsellanaly.ListedStockInfo.TodayTotalTradeAmount|div:100000000|floatformat:"0" }}</div></td>
+                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ stockshortsellanaly.ListedStockInfo.TodayShortTradeAmount|div:100000000|floatformat:"0" }}</div></td>
+                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ stockshortsellanaly.ListedStockInfo.TodayShortTradeRate|floatformat:"2" }}</div></td>
+                            <td class="col-1.1"><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ stockshortsellanaly.PriceT7Rtn|floatformat:"1" }} % </div></td>
+                            <td class="col-1.1"><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ stockshortsellanaly.PriceT30Rtn|floatformat:"1" }} % </div></td>
+                            <td class="col-1.1"><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ stockshortsellanaly.PriceT90Rtn|floatformat:"1" }} % </div></td>
+
+                        </tr>
+                        {% endfor %}
+                        {% else %}
+                        <tr>
+                            <td colspan="12"><div style="text-align: center; height: 20px; line-height: 20px;">데이터가 없습니다.</div></td>
+                        </tr>
+                        {% endif %}
+                        </tbody>
+                    </table>
+
+                    {% if kw == ""  %}
+                    <!-- 구글 하단광고  -->
+                    <div class="row justify-content-center my-4">
+                        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5997522744771647"
+                             crossorigin="anonymous"></script>
+                        <!-- 공매도하단 -->
+                        <ins class="adsbygoogle"
+                             style="display:inline-block;width:728px;height:90px"
+                             data-ad-client="ca-pub-5997522744771647"
+                             data-ad-slot="2370167372"></ins>
+                        <script>
+                             (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                    </div>
+                    {% endif %}
+
+                    <!-- 페이징처리 시작 -->
+                    <ul class="pagination justify-content-center">
+                        {% if stockshortsellanaly_list.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" data-page="{{ stockperfanaly_list.previous_page_number }}" href="#">이전</a>
+                        </li>
+                        {% else %}
+                        <li class="page-item disabled">
+                            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
+                        </li>
+                        {% endif %}
+                        <!-- 페이지 리스트 -->
+                        {% for page_number in stockshortsellanaly_list.paginator.page_range %}
+                        {% if page_number >= stockshortsellanaly_list.number|add:-5 and page_number <= stockshortsellanaly_list.number|add:5 %}
+                            {% if page_number == stockshortsellanaly_list.number %}
+                            <li class="page-item active" aria-current="page">
+                                <a class="page-link" data-page="{{ page_number }}" href="#">{{ page_number }}</a>
+                            </li>
+                            {% else %}
+                            <li class="page-item">
+                                <a class="page-link" data-page="{{ page_number }}" href="#">{{ page_number }}</a>
+                            </li>
+                            {% endif %}
+                        {% endif %}
+                        {% endfor %}
+                        <!-- 다음 페이지 -->
+                        {% if stockshortsellanaly_list.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" data-page="{{ stockperfanaly_list.next_page_number }}" href="#" >다음</a>
+                        </li>
+                        {% else %}
+                        <li class="page-item disabled">
+                            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                    <!-- 페이징처리 끝 -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<form id="searchForm" method="get" action="{% url 'stockshortsellanaly' %}">
+    <input type="hidden" id="kw" name="kw" value="{{ kw|default_if_none:'' }}">
+    <input type="hidden" id="page" name="page" value="{{ page }}">
+</form>
+
+{% endblock %}
+
+
+{% block script %}
+<script type='text/javascript'>
+$(document).ready(function(){
+    $(".page-link").on('click', function() {
+        //location.reload();
+        $('.loader').show();
+        $(".page-link").css({ 'pointer-events': 'none' });
+        $("#btn_search").attr('disabled', true);
+        $("#page").val($(this).data("page"));
+        $("#searchForm").submit();
+    });
+
+
+    $("#btn_search").on('click', function() {
+        //location.reload();
+        $('.loader').show();
+        $("#btn_search").attr('disabled', true);
+        $(".page-link").css({ 'pointer-events': 'none' });
+        $("#kw").val($(".kw").val());
+        $("#kw2").val($(".kw2").val());
+        $("#page").val(1);
+        $("#searchForm").submit();
+    });
+
+});
+
+
+
+$(window).on('load', function() {
+     $('.loader').hide();
+});
+
+</script>
+
+{% endblock %}
+
+
+
+
