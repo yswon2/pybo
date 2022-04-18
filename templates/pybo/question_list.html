@@ -81,20 +81,6 @@
                         </tbody>
                     </table>
 
-                    <!-- 구글 하단광고  -->
-                    <div class="row justify-content-center my-4">
-                        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5997522744771647"
-                             crossorigin="anonymous"></script>
-                        <!-- 사이트하단 -->
-                        <ins class="adsbygoogle"
-                             style="display:inline-block;width:728px;height:90px"
-                             data-ad-client="ca-pub-5997522744771647"
-                             data-ad-slot="1312502504"></ins>
-                        <script>
-                             (adsbygoogle = window.adsbygoogle || []).push({});
-                        </script>
-                    </div>
-
                     <!-- 페이징처리 시작 -->
                     <ul class="pagination justify-content-center">
                         {% if question_list.has_previous %}
@@ -137,6 +123,21 @@
                     </ul>
                     <!-- 페이징처리 끝 -->
                     <a href="{% url 'pybo:question_create' %}" class="btn btn-success pull-right">질문 등록</a>
+
+                    <!-- 구글 하단광고  -->
+                    <div class="row justify-content-center my-4">
+                        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5997522744771647"
+                             crossorigin="anonymous"></script>
+                        <!-- 사이트하단 -->
+                        <ins class="adsbygoogle"
+                             style="display:inline-block;width:728px;height:90px"
+                             data-ad-client="ca-pub-5997522744771647"
+                             data-ad-slot="1312502504"></ins>
+                        <script>
+                             (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                    </div>
+
                 </div>
             </div>
         </div>
