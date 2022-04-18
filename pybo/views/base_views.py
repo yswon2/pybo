@@ -201,14 +201,28 @@ def qna(request):
     #totalvisitcnt = PageViewCount.objects.aggregate(view_count=Sum('view_count'))
     #todayvisitcnt = PageViewCount.objects.filter(create_date=viewdate).aggregate(view_count=Sum('view_count'))
 
-    # 화면 조회 내역 기록 ==> 자유게시판 조회화면은 1단위로 더해짐
     ip = get_client_ip(request)
-    vc = PageViewCount.objects.get(ip=ip, create_date=viewdate)
-    if vc.view_count > 0:
-        vc.view_count += 1
-    else:
+    viewdate = DateFormat(timezone.now()).format('Y-m-d')
+    createtime = timezone.now()
+    cnt = PageViewCount.objects.filter(ip=ip, create_date=viewdate).count()
+    if cnt == 0:
+        vc = PageViewCount(ip=ip, create_date=viewdate, create_time=createtime)
+        vc.save()
         vc.view_count = 1
-    vc.save()
+        vc.save()
+    else:
+        vc = PageViewCount.objects.get(ip=ip, create_date=viewdate)
+        vc.view_count += 1
+        vc.save()
+
+    # 화면 조회 내역 기록 ==> 자유게시판 조회화면은 1단위로 더해짐
+    #ip = get_client_ip(request)
+    #vc = PageViewCount.objects.get(ip=ip, create_date=viewdate)
+    #if vc.view_count > 0:
+    #    vc.view_count += 1
+    #else:
+    #    vc.view_count = 1
+    #vc.save()
 
 
     context = {'question_list':page_obj, 'page': page, 'kw': kw, 'totalvisitcnt':totalvisitcnt, 'todayvisitcnt':todayvisitcnt}
