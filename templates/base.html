@@ -24,9 +24,9 @@
 
     <style>
     .loader {
-    border: 16px solid #f3f3f3;
+    border: 16px solid gray;
     border-radius: 50%;
-    border-top: 16px solid #3498db;
+    border-top: 16px solid blue;
     width: 120px;
     height: 120px;
     opacity: 0.7;
@@ -36,8 +36,26 @@
     top:50%;
     left:50%;
     transform:translate(-50%,-50%);
-    box-shadow: rgba(0, 0, 0, 0.7) 0 0 0 9999px;
+    box-shadow : rgba(0,0,0,0.7) 0 0 0 9999px;
+    z-index : 1000;
     }
+
+
+/*    .loader {
+    border: 10px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 10px solid #3498db;
+    width: 100px;
+    height: 100px;
+    opacity: 0.7;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    box-shadow: rgba(0, 0, 0, 0.7) 0 0 0 9999px;
+    } */
 
     /* Safari */
     @-webkit-keyframes spin {
@@ -90,6 +108,11 @@
     <meta name="description" content=" 개별주식의 실현수익률 조회,   보유주식의 유사차트 종목 리스트 조회하고 성과분석,
     거래주체별 순매수, 순매도 상위종목 리스트 조회 성과분석,    업종내 주식들의 평균 PER, PBR, 시가배당률 값 및 기간별 평균 수익률 조회">
     <meta name="keyword" content="기술적분석, 과거실현수익률, 유사차트 검색, 주식업종별 PER조회, 거래주체별 성과분석">
+
+    <meta property="og:title" content="StockTracker" />
+    <meta property="og:description" content="주식관련 분석정보 사이트" />
+    <meta property="og:image" content="https://imgur.com/BaGhIO8" />
+
     <title>StockpathTracker</title>
 </head>
 <body>

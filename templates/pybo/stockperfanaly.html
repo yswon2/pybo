@@ -16,6 +16,10 @@
             <div class="col-sm-12 col-md-10 col-lg-10 p-0">
                 <div class="container my-3">
 
+                    <div class="page-header bg-primary text-white" >
+                      <h2><span class="badge badge-pill badge-primary">*</span>주식별 상승/하락률 조회  <small> - 기간별 상승/하락률 순위</small></h2>
+                    </div>
+
                     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5997522744771647"
                          crossorigin="anonymous"></script>
                     <!-- 상승하락상단 -->
@@ -28,10 +32,6 @@
                     <script>
                          (adsbygoogle = window.adsbygoogle || []).push({});
                     </script>
-
-                    <div class="page-header bg-primary text-white" >
-                      <h2><span class="badge badge-pill badge-primary">*</span>주식별 상승/하락률 조회  <small> - 기간별 상승/하락률 순위</small></h2>
-                    </div>
 
                     <div class="row justify-content-end my-3">
                          <div class="col-sm-6 col-lg-3 input-group">
@@ -56,16 +56,13 @@
                         </div>
                     </div>
 
-                    <table class="table table-striped w-auto" >
+                    <table class="col-sm-12 table table-striped" >
                         <thead>
                         <tr class="thead-dark text-center align-items-center">
-                            <th class="col-1 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.8em;">기준일</div></th>
-                            <th class="col-1 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.8em;">주식코드</div></th>
                             <th class="col-1 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:1em;">주식명</div></th>
-                            <th class="col-1 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:1em;">업종</div></th>
                             <th class="col-1 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.9em;">시가총액(조)</div></th>
                             <th class="col-1 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.9em;">거래량(천)</div></th>
-                            <th class="col-1 align-items-center" rowspan='1'><div style="text-align: center; height: 100%; line-height: 100%; font-size:1em;">최근일</div></th>
+                            <th class="col-1 align-items-center" rowspan='1'><div style="text-align: center; height: 100%; line-height: 100%; font-size:1em;">최근</div></th>
                             {% if kw2 == "7일" %}
                                 <th class="col-1 align-items-center" rowspan='1'><div style="text-align: center; height: 100%; line-height: 100%; font-size:1em;">7일전</div></th>
                             {% elif kw2 == "30일" %}
@@ -74,7 +71,7 @@
                                  <th class="col-1 align-items-center" rowspan='1'><div style="text-align: center; height: 100%; line-height: 100%; font-size:1em;">90일전</div></th>
                             {% endif %}
 
-                            <th class="col-1 align-items-center" colspan='3'><div style="text-align: center; height: 100%; line-height: 100%; font-size:1em;">1개월 순매수금액</div></th>
+                            <th class="col-1 align-items-center" colspan='3'><div style="text-align: center; height: 100%; line-height: 100%; font-size:1em;">1개월 순매수</div></th>
                             <th class="col-1 align-items-center" rowspan='1'><div style="text-align: center; height: 100%; line-height: 100%; font-size:1em;">수익율</div></th>
                         </tr>
                         <tr class="thead-dark text-center align-items-center">
@@ -96,10 +93,7 @@
                         {% if stockperfanaly_list %}
                         {% for stockperfanaly in stockperfanaly_list %}
                         <tr class="text-center align-items-center">
-                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ stockperfanaly.trade_date|date:'Y-m-d'  }}</div></td>
-                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ stockperfanaly.StockCode }}</div></td>
                             <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ stockperfanaly.StockName }}</div></td>
-                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ stockperfanaly.ListedStockInfo.IndustryType }}</div></td>
                             <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:1em;">{{ stockperfanaly.ListedStockInfo.MarketCap|div:1000000000000|floatformat:"2" }}</div></td>
                             <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ stockperfanaly.StockPriceInfo.TradeVolume|div:1000|floatformat:"0" }}</div></td>
                             <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ stockperfanaly.ClosePrice|floatformat:"0" }}</div></td>

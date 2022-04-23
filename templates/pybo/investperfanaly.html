@@ -16,6 +16,10 @@
             <div class="col-sm-12 col-md-10 col-lg-10 p-0">
                 <div class="container my-3">
 
+                    <div class="page-header bg-primary text-white" >
+                      <h2><span class="badge badge-pill badge-primary">*</span>거래주체별 성과분석   <small> - 1개월 순매수 금액, 실현수익률</small></h2>
+                    </div>
+
                     <!-- 구글 상단광고  -->
                     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5997522744771647"
                          crossorigin="anonymous"></script>
@@ -29,10 +33,6 @@
                     <script>
                          (adsbygoogle = window.adsbygoogle || []).push({});
                     </script>
-
-                    <div class="page-header bg-primary text-white" >
-                      <h2><span class="badge badge-pill badge-primary">*</span>거래주체별 성과분석   <small> - 1개월 순매수 금액, 실현수익률</small></h2>
-                    </div>
 
                     <div class="row justify-content-end my-3">
                          <div class="col-sm-6 col-lg-2 input-group">
@@ -57,25 +57,24 @@
                          </div>
                     </div>
 
-                    <table class="table table-striped" >
+                    <table class="col-sm-12 table table-striped" >
                         <thead>
                         <tr class="thead-dark text-center align-items-center">
                             <th class="col-1.5 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:1em;">기준일</div></th>
-                            <th class="col-1.5 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:1em;">주식코드</div></th>
                             <th class="col-1.5 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:1em;">주식명</div></th>
                             <th class="col-1.5 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:1em;">종가</div></th>
                             <th class="col-1.5 align-items-center" colspan='3'><div style="text-align: center; height: 100%; line-height: 100%; font-size:1em;">1개월 순매수금액 (원)</div></th>
-                            <th class="col-1.5 align-items-center" colspan='3'><div style="text-align: center; height: 100%; line-height: 100%; font-size:1em;">수익율(기준일대비)</div></th>
+                            <th class="col-1.0 align-items-center" colspan='3'><div style="text-align: center; height: 100%; line-height: 100%; font-size:1em;">수익율(기준일대비)</div></th>
                         </tr>
                         <tr class="thead-dark text-center align-items-center">
                             {% if kw == "개인" %}
-                                <th class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:1em;">개인</div></th>
-                                <th class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:1em;">외국인</div></th>
-                                <th class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:1em;">기관</div></th>
+                                <th class="col-1.5"><div style="height: 100%; line-height: 100%; font-size:1em;">개인</div></th>
+                                <th class="col-1.5"><div style="height: 100%; line-height: 100%; font-size:1em;">외국인</div></th>
+                                <th class="col-1.5"><div style="height: 100%; line-height: 100%; font-size:1em;">기관</div></th>
                             {% elif kw == "외국인" %}
-                                <th class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:1em;">외국인</div></th>
-                                <th class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:1em;">기관</div></th>
-                                <th class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:1em;">개인</div></th>
+                                <th class="col-1.5"><div style="height: 100%; line-height: 100%; font-size:1em;">외국인</div></th>
+                                <th class="col-1.5"><div style="height: 100%; line-height: 100%; font-size:1em;">기관</div></th>
+                                <th class="col-1.5"><div style="height: 100%; line-height: 100%; font-size:1em;">개인</div></th>
                             {% else %}
                                 <th class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:1em;">기관</div></th>
                                 <th class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:1em;">외국인</div></th>
@@ -90,8 +89,7 @@
                         {% if investperfanaly_list %}
                         {% for investperfanaly in investperfanaly_list %}
                         <tr class="text-center align-items-center">
-                            <td><div style="height: 100%; line-height: 100%; font-size:1em;">{{ investperfanaly.trade_date|date:'Y-m-d'  }}</div></td>
-                            <td><div style="height: 100%; line-height: 100%; font-size:1em;">{{ investperfanaly.StockCode }}</div></td>
+                            <td><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ investperfanaly.trade_date|date:'Y-m-d'  }}</div></td>
                             <td><div style="height: 100%; line-height: 100%; font-size:1em;">{{ investperfanaly.StockName }}</div></td>
                             <td><div style="height: 100%; line-height: 100%; font-size:1em;">{{ investperfanaly.ClosePrice|floatformat:"0" }}</div></td>
                             {% if kw == "개인" %}
