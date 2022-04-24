@@ -57,32 +57,44 @@
                          </div>
                     </div>
 
-                    <table class="col-sm-12 table table-striped" >
+                    <table class="col-sm-12 table table-striped" style="table-layout: auto; width: 100%; table-layout: fixed">
+                        <colgroup>
+                            <col width="10%" />
+                            <col width="20%" />
+                            <col width="10%" />
+                            <col width="10%" />
+                            <col width="10%" />
+                            <col width="10%" />
+                            <col width="10%" />
+                            <col width="10%" />
+                            <col width="10%" />
+                        </colgroup>
+
                         <thead>
                         <tr class="thead-dark text-center align-items-center">
-                            <th class="col-1.5 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:1em;">기준일</div></th>
-                            <th class="col-1.5 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:1em;">주식명</div></th>
-                            <th class="col-1.5 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:1em;">종가</div></th>
-                            <th class="col-1.5 align-items-center" colspan='3'><div style="text-align: center; height: 100%; line-height: 100%; font-size:1em;">1개월 순매수금액 (원)</div></th>
-                            <th class="col-1.0 align-items-center" colspan='3'><div style="text-align: center; height: 100%; line-height: 100%; font-size:1em;">수익율(기준일대비)</div></th>
+                            <th class="col-1.5 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.9em;">기준일</div></th>
+                            <th class="col-1.5 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.9em;">주식명</div></th>
+                            <th class="col-1.5 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.9em;">종가</div></th>
+                            <th class="col-1.5 align-items-center" colspan='3'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.9em;">1개월 순매수금액 (원)</div></th>
+                            <th class="col-1.0 align-items-center" colspan='3'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.9em;">수익율(기준일대비)</div></th>
                         </tr>
                         <tr class="thead-dark text-center align-items-center">
                             {% if kw == "개인" %}
-                                <th class="col-1.5"><div style="height: 100%; line-height: 100%; font-size:1em;">개인</div></th>
-                                <th class="col-1.5"><div style="height: 100%; line-height: 100%; font-size:1em;">외국인</div></th>
-                                <th class="col-1.5"><div style="height: 100%; line-height: 100%; font-size:1em;">기관</div></th>
+                                <th class="col-1.5"><div style="height: 100%; line-height: 100%; font-size:0.8em;">개인</div></th>
+                                <th class="col-1.5"><div style="height: 100%; line-height: 100%; font-size:0.8em;">외국인</div></th>
+                                <th class="col-1.5"><div style="height: 100%; line-height: 100%; font-size:0.8em;">기관</div></th>
                             {% elif kw == "외국인" %}
-                                <th class="col-1.5"><div style="height: 100%; line-height: 100%; font-size:1em;">외국인</div></th>
-                                <th class="col-1.5"><div style="height: 100%; line-height: 100%; font-size:1em;">기관</div></th>
-                                <th class="col-1.5"><div style="height: 100%; line-height: 100%; font-size:1em;">개인</div></th>
+                                <th class="col-1.5"><div style="height: 100%; line-height: 100%; font-size:0.8em;">외국인</div></th>
+                                <th class="col-1.5"><div style="height: 100%; line-height: 100%; font-size:0.8em;">기관</div></th>
+                                <th class="col-1.5"><div style="height: 100%; line-height: 100%; font-size:0.8em;">개인</div></th>
                             {% else %}
-                                <th class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:1em;">기관</div></th>
-                                <th class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:1em;">외국인</div></th>
-                                <th class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:1em;">개인</div></th>
+                                <th class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.8em;">기관</div></th>
+                                <th class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.8em;">외국인</div></th>
+                                <th class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.8em;">개인</div></th>
                             {% endif %}
-                            <th class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:1em;">1일</div></th>
-                            <th class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:1em;">7일</div></th>
-                            <th class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:1em;">30일</div></th>
+                            <th class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.8em;">1일</div></th>
+                            <th class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.8em;">7일</div></th>
+                            <th class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.8em;">30일</div></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -90,8 +102,8 @@
                         {% for investperfanaly in investperfanaly_list %}
                         <tr class="text-center align-items-center">
                             <td><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ investperfanaly.trade_date|date:'Y-m-d'  }}</div></td>
-                            <td><div style="height: 100%; line-height: 100%; font-size:1em;">{{ investperfanaly.StockName }}</div></td>
-                            <td><div style="height: 100%; line-height: 100%; font-size:1em;">{{ investperfanaly.ClosePrice|floatformat:"0" }}</div></td>
+                            <td><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ investperfanaly.StockName }}</div></td>
+                            <td><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ investperfanaly.ClosePrice|floatformat:"0" }}</div></td>
                             {% if kw == "개인" %}
                                 <td><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ investperfanaly.AntBuySellInfo.TradeAmount_NetBuy|div:100000000|floatformat:"0" }} 억</div></td>
                                 <td><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ investperfanaly.ForeignBuySellInfo.TradeAmount_NetBuy|div:100000000|floatformat:"0" }} 억 </div></td>
@@ -105,9 +117,9 @@
                                 <td><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ investperfanaly.ForeignBuySellInfo.TradeAmount_NetBuy|div:100000000|floatformat:"0" }} 억 </div></td>
                                 <td><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ investperfanaly.AntBuySellInfo.TradeAmount_NetBuy|div:100000000|floatformat:"0" }} 억 </div></td>
                             {% endif %}
-                            <td><div style="height: 100%; line-height: 100%; font-size:1em;">{{ investperfanaly.ListedStockInfo.FinalPriceT|sub:investperfanaly.ListedStockInfo.FinalPriceT1|div:investperfanaly.ListedStockInfo.FinalPriceT1|mul:100|floatformat:"1" }} % </div></td>
-                            <td><div style="height: 100%; line-height: 100%; font-size:1em;">{{ investperfanaly.ListedStockInfo.FinalPriceT|sub:investperfanaly.ListedStockInfo.FinalPriceT7|div:investperfanaly.ListedStockInfo.FinalPriceT7|mul:100|floatformat:"1" }} % </div></td>
-                            <td><div style="height: 100%; line-height: 100%; font-size:1em;">{{ investperfanaly.ListedStockInfo.FinalPriceT|sub:investperfanaly.ListedStockInfo.FinalPriceT30|div:investperfanaly.ListedStockInfo.FinalPriceT30|mul:100|floatformat:"1" }} % </div></td>
+                            <td><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ investperfanaly.ListedStockInfo.FinalPriceT|sub:investperfanaly.ListedStockInfo.FinalPriceT1|div:investperfanaly.ListedStockInfo.FinalPriceT1|mul:100|floatformat:"1" }} % </div></td>
+                            <td><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ investperfanaly.ListedStockInfo.FinalPriceT|sub:investperfanaly.ListedStockInfo.FinalPriceT7|div:investperfanaly.ListedStockInfo.FinalPriceT7|mul:100|floatformat:"1" }} % </div></td>
+                            <td><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ investperfanaly.ListedStockInfo.FinalPriceT|sub:investperfanaly.ListedStockInfo.FinalPriceT30|div:investperfanaly.ListedStockInfo.FinalPriceT30|mul:100|floatformat:"1" }} % </div></td>
                         </tr>
                         {% endfor %}
                         {% else %}

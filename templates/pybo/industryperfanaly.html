@@ -91,17 +91,30 @@
                         </div>
                     </div>
 
-                    <table class="col-sm-12 table table-striped" >
+                    <table class="col-sm-12 table table-striped" style="table-layout: auto; width: 100%; table-layout: fixed">
+                        <colgroup>
+                            <col width="15%" />
+                            <col width="10%" />
+                            <col width="9%" />
+                            <col width="8%" />
+                            <col width="10%" />
+                            <col width="8%" />
+                            <col width="8%" />
+                            <col width="8%" />
+                            <col width="8%" />
+                            <col width="8%" />
+                            <col width="8%" />
+                        </colgroup>
+
                         <thead>
                         <tr class="thead-dark text-center align-items-center">
-                            <th class="col-1.0 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.9em;">주식코드</div></th>
                             <th class="col-1.0 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.9em;">주식명</div></th>
                             <th class="col-1.0 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.9em;">종가</div></th>
-                            <th class="col-1.0 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.9em;">시가총액<br>(조)</div></th>
-                            <th class="col-1.0 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:1em;">PER</div></th>
-                            <th class="col-1.0 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:1em;">EPS</div></th>
-                            <th class="col-1.0 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:1em;">PBR</div></th>
-                            <th class="col-1.0 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:1em;">배당율</div></th>
+                            <th class="col-1.0 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.8em;">시가총액<br>(조)</div></th>
+                            <th class="col-1.0 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.9em;">PER</div></th>
+                            <th class="col-1.0 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.9em;">EPS</div></th>
+                            <th class="col-1.0 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.9em;">PBR</div></th>
+                            <th class="col-1.0 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.8em;">배당율</div></th>
                             <th class="col-1.0 align-items-center" colspan='4'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.8em;">수익율(기준일대비)</div></th>
                         </tr>
                         <tr class="thead-dark text-center align-items-center">
@@ -111,12 +124,11 @@
                             <th class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.8em;">90일</div></th>
                         </tr>
                         <tr class="thead-dark text-center align-items-center">
-                            <th class="col-1.0"><div style="height: 90%; line-height: 100%; font-size:0.8em;">평균</div></th>
                             <th class="col-1.0"><div style="height: 90%; line-height: 100%; font-size:0.8em;">{{ kw }}</div></th>
-                            <th class="col-1.0"><div style="height: 90%; line-height: 100%; font-size:1em;"></div></th>
-                            <th class="col-1.0"><div style="height: 90%; line-height: 100%; font-size:1em;"></div></th>
-                            <th class="col-1.0"><div style="height: 90%; line-height: 100%; font-size:0.8em;">{{ industry_Avg.PER|floatformat:"1" }}</div></th>
-                            <th class="col-1.0"><div style="height: 90%; line-height: 100%; font-size:0.8em;">{{ industry_Avg.EPS|floatformat:"1" }}</div></th>
+                            <th class="col-1.0"><div style="height: 90%; line-height: 100%; font-size:0.8em;">평균</div></th>
+                            <th class="col-1.0"><div style="height: 90%; line-height: 100%; font-size:0.9em;"></div></th>
+                            <th class="col-1.0"><div style="height: 90%; line-height: 100%; font-size:0.8em;">{{ industry_Avg.PER|floatformat:"0" }}</div></th>
+                            <th class="col-1.0"><div style="height: 90%; line-height: 100%; font-size:0.8em;">{{ industry_Avg.EPS|floatformat:"0" }}</div></th>
                             <th class="col-1.0"><div style="height: 90%; line-height: 100%; font-size:0.8em;">{{ industry_Avg.PBR|floatformat:"1" }}</div></th>
                             <th class="col-1.0"><div style="height: 90%; line-height: 100%; font-size:0.8em;">{{ industry_Avg.DivRate|floatformat:"1" }} % </div></th>
                             <th class="col-1.0"><div style="height: 90%; line-height: 100%; font-size:0.8em;">{{ industry_Avg.FinalPriceT1|floatformat:"1" }} % </div></th>
@@ -129,18 +141,17 @@
                         {% if industryperfanaly_list %}
                         {% for industryperfanaly in industryperfanaly_list %}
                         <tr class="text-center align-items-center">
-                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ industryperfanaly.StockCode }}</div></td>
-                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ industryperfanaly.StockName }}</div></td>
-                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:1em;">{{ industryperfanaly.ClosePrice|floatformat:"0" }}</div></td>
-                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:1em;">{{ industryperfanaly.ListedStockInfo.MarketCap|div:1000000000000|floatformat:"2" }}</div></td>
-                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:1em;">{{ industryperfanaly.ListedStockInfo.PER|floatformat:"1" }} </div></td>
-                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:1em;">{{ industryperfanaly.ListedStockInfo.EPS|floatformat:"0" }} </div></td>
-                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:1em;">{{ industryperfanaly.ListedStockInfo.PBR|floatformat:"1" }} </div></td>
-                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:1em;">{{ industryperfanaly.ListedStockInfo.DivRate|floatformat:"1" }} % </div></td>
-                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ industryperfanaly.ListedStockInfo.FinalPriceT|sub:industryperfanaly.ListedStockInfo.FinalPriceT1|div:industryperfanaly.ListedStockInfo.FinalPriceT1|mul:100|floatformat:"1" }} % </div></td>
-                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ industryperfanaly.ListedStockInfo.FinalPriceT|sub:industryperfanaly.ListedStockInfo.FinalPriceT7|div:industryperfanaly.ListedStockInfo.FinalPriceT7|mul:100|floatformat:"1" }} % </div></td>
-                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ industryperfanaly.ListedStockInfo.FinalPriceT|sub:industryperfanaly.ListedStockInfo.FinalPriceT30|div:industryperfanaly.ListedStockInfo.FinalPriceT30|mul:100|floatformat:"1" }} % </div></td>
-                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ industryperfanaly.ListedStockInfo.FinalPriceT|sub:industryperfanaly.ListedStockInfo.FinalPriceT90|div:industryperfanaly.ListedStockInfo.FinalPriceT90|mul:100|floatformat:"1" }} % </div></td>
+                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ industryperfanaly.StockName }}</div></td>
+                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ industryperfanaly.ClosePrice|floatformat:"0" }}</div></td>
+                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ industryperfanaly.ListedStockInfo.MarketCap|div:1000000000000|floatformat:"0" }}</div></td>
+                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ industryperfanaly.ListedStockInfo.PER|floatformat:"0" }} </div></td>
+                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ industryperfanaly.ListedStockInfo.EPS|floatformat:"0" }} </div></td>
+                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ industryperfanaly.ListedStockInfo.PBR|floatformat:"1" }} </div></td>
+                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ industryperfanaly.ListedStockInfo.DivRate|floatformat:"1" }} % </div></td>
+                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ industryperfanaly.ListedStockInfo.FinalPriceT|sub:industryperfanaly.ListedStockInfo.FinalPriceT1|div:industryperfanaly.ListedStockInfo.FinalPriceT1|mul:100|floatformat:"1" }} % </div></td>
+                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ industryperfanaly.ListedStockInfo.FinalPriceT|sub:industryperfanaly.ListedStockInfo.FinalPriceT7|div:industryperfanaly.ListedStockInfo.FinalPriceT7|mul:100|floatformat:"1" }} % </div></td>
+                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ industryperfanaly.ListedStockInfo.FinalPriceT|sub:industryperfanaly.ListedStockInfo.FinalPriceT30|div:industryperfanaly.ListedStockInfo.FinalPriceT30|mul:100|floatformat:"1" }} % </div></td>
+                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ industryperfanaly.ListedStockInfo.FinalPriceT|sub:industryperfanaly.ListedStockInfo.FinalPriceT90|div:industryperfanaly.ListedStockInfo.FinalPriceT90|mul:100|floatformat:"1" }} % </div></td>
                         </tr>
                         {% endfor %}
                         {% else %}

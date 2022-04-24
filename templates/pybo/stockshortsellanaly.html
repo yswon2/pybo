@@ -57,24 +57,39 @@
                         </div>
                     </div>
 
-                    <table class="col-sm-12 table table-striped" >
+                    <table class="col-sm-12 table table-striped" style="table-layout: auto; width: 100%; table-layout: fixed" >
+
+                        <colgroup>
+                            <col width="16%" />
+                            <col width="8%" />
+                            <col width="8%" />
+                            <col width="8%" />
+                            <col width="10%" />
+                            <col width="12%" />
+                            <col width="8%" />
+                            <col width="8%" />
+                            <col width="8%" />
+                            <col width="8%" />
+                            <col width="8%" />
+                        </colgroup>
+
                         <thead>
                         <tr class="thead-dark text-center align-items-center">
                             <th class="col-1 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:1em;">주식명</div></th>
-                            <th class="col-1 align-items-center" rowspan='1'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.8em;">시가총액</div></th>
-                            <th class="col-1 align-items-center" rowspan='1'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.8em;">외국인</div></th>
-                            <th class="col-0.9 align-items-center" colspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.8em;">공매도잔고</div></th>
-                            <th class="col-1.0 align-items-center" rowspan='1'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.8em;">당일</div></th>
-                            <th class="col-1.0 align-items-center" colspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.8em;">당일공매도</div></th>
+                            <th class="col-1 align-items-center" rowspan='1'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.7em;">시가</div></th>
+                            <th class="col-1 align-items-center" rowspan='1'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.7em;">외국인</div></th>
+                            <th class="col-0.9 align-items-center" colspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.7em;">공매도잔고</div></th>
+                            <th class="col-1.0 align-items-center" rowspan='1'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.7em;">당일거래</div></th>
+                            <th class="col-1.0 align-items-center" colspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.7em;">당일공매도</div></th>
                             <th class="col-1.1 align-items-center" colspan='3'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.9em;">기간수익률</div></th>
                         </tr>
                         <tr class="thead-dark text-center align-items-center">
-                            <th class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.8em;">(조)</div></th>
+                            <th class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.8em;">총액(조)</div></th>
                             <th class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.8em;">비중(%)</div></th>
                             <th class="col-0.9"><div style="height: 100%; line-height: 100%; font-size:0.8em;">비중(%)</div></th>
-                            <th class="col-0.9"><div style="height: 100%; line-height: 100%; font-size:0.8em;">(억)</div></th>
-                            <th class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.8em;">거래대금(억)</div></th>
-                            <th class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.8em;">거래대금(억)</div></th>
+                            <th class="col-0.9"><div style="height: 100%; line-height: 100%; font-size:0.8em;">금액(억)</div></th>
+                            <th class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.7em;">금액(억)</div></th>
+                            <th class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.7em;">금액(억)</div></th>
                             <th class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.8em;">비중(%)</div></th>
                             <th class="col-1.1"><div style="height: 100%; line-height: 100%; font-size:0.8em;">7일</div></th>
                             <th class="col-1.1"><div style="height: 100%; line-height: 100%; font-size:0.8em;">30일</div></th>
@@ -86,13 +101,13 @@
                         {% for stockshortsellanaly in stockshortsellanaly_list %}
                         <tr class="text-center align-items-center">
                             <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ stockshortsellanaly.StockName }}</div></td>
-                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:1em;">{{ stockshortsellanaly.ListedStockInfo.MarketCap|div:1000000000000|floatformat:"1" }}</div></td>
-                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ stockshortsellanaly.ListedStockInfo.ForeignStockRate|floatformat:"2" }}</div></td>
-                            <td class="col-0.9"><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ stockshortsellanaly.ListedStockInfo.ShortSellRate|floatformat:"2" }}</div></td>
-                            <td class="col-0.9"><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ stockshortsellanaly.ListedStockInfo.ShortSellAmont|div:100000000|floatformat:"0" }}</div></td>
-                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ stockshortsellanaly.ListedStockInfo.TodayTotalTradeAmount|div:100000000|floatformat:"0" }}</div></td>
-                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ stockshortsellanaly.ListedStockInfo.TodayShortTradeAmount|div:100000000|floatformat:"0" }}</div></td>
-                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ stockshortsellanaly.ListedStockInfo.TodayShortTradeRate|floatformat:"2" }}</div></td>
+                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ stockshortsellanaly.ListedStockInfo.MarketCap|div:1000000000000|floatformat:"1" }}</div></td>
+                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ stockshortsellanaly.ListedStockInfo.ForeignStockRate|floatformat:"0" }}</div></td>
+                            <td class="col-0.9"><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ stockshortsellanaly.ListedStockInfo.ShortSellRate|floatformat:"1" }}</div></td>
+                            <td class="col-0.9"><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ stockshortsellanaly.ListedStockInfo.ShortSellAmont|div:100000000|floatformat:"0" }}</div></td>
+                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ stockshortsellanaly.ListedStockInfo.TodayTotalTradeAmount|div:100000000|floatformat:"0" }}</div></td>
+                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ stockshortsellanaly.ListedStockInfo.TodayShortTradeAmount|div:100000000|floatformat:"0" }}</div></td>
+                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ stockshortsellanaly.ListedStockInfo.TodayShortTradeRate|floatformat:"1" }}</div></td>
                             <td class="col-1.1"><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ stockshortsellanaly.PriceT7Rtn|floatformat:"1" }} % </div></td>
                             <td class="col-1.1"><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ stockshortsellanaly.PriceT30Rtn|floatformat:"1" }} % </div></td>
                             <td class="col-1.1"><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ stockshortsellanaly.PriceT90Rtn|floatformat:"1" }} % </div></td>
