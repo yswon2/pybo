@@ -14,12 +14,12 @@
             </div>
             <!-- Page Content -->
             <div class="col-sm-12 col-md-10 col-lg-10 p-0">
+
+                <div class="page-header bg-primary text-white" >
+                    <h2><span class="badge badge-pill badge-primary">*</span>업종별 성과분석   <small> - 업종내 주식 PER, 기간수익률 정보</small></h2>
+                </div>
+
                 <div class="container my-3">
-
-                    <div class="page-header bg-primary text-white" >
-                      <h2><span class="badge badge-pill badge-primary">*</span>업종별 성과분석   <small> - 업종내 주식 PER, 기간수익률 정보</small></h2>
-                    </div>
-
                     <!-- 구글 상단광고  -->
                     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5997522744771647"
                          crossorigin="anonymous"></script>
@@ -111,9 +111,9 @@
                             <th class="col-1.0 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.9em;">주식명</div></th>
                             <th class="col-1.0 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.9em;">종가</div></th>
                             <th class="col-1.0 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.8em;">시가총액<br>(조)</div></th>
-                            <th class="col-1.0 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.9em;">PER</div></th>
-                            <th class="col-1.0 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.9em;">EPS</div></th>
-                            <th class="col-1.0 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.9em;">PBR</div></th>
+                            <th class="col-1.0 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.8em;">PER</div></th>
+                            <th class="col-1.0 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.8em;">EPS</div></th>
+                            <th class="col-1.0 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.8em;">PBR</div></th>
                             <th class="col-1.0 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.8em;">배당율</div></th>
                             <th class="col-1.0 align-items-center" colspan='4'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.8em;">수익율(기준일대비)</div></th>
                         </tr>
@@ -128,7 +128,7 @@
                             <th class="col-1.0"><div style="height: 90%; line-height: 100%; font-size:0.8em;">평균</div></th>
                             <th class="col-1.0"><div style="height: 90%; line-height: 100%; font-size:0.9em;"></div></th>
                             <th class="col-1.0"><div style="height: 90%; line-height: 100%; font-size:0.8em;">{{ industry_Avg.PER|floatformat:"0" }}</div></th>
-                            <th class="col-1.0"><div style="height: 90%; line-height: 100%; font-size:0.8em;">{{ industry_Avg.EPS|floatformat:"0" }}</div></th>
+                            <th class="col-1.0"><div style="height: 90%; line-height: 100%; font-size:0.7em;">{{ industry_Avg.EPS|floatformat:"0" }}</div></th>
                             <th class="col-1.0"><div style="height: 90%; line-height: 100%; font-size:0.8em;">{{ industry_Avg.PBR|floatformat:"1" }}</div></th>
                             <th class="col-1.0"><div style="height: 90%; line-height: 100%; font-size:0.8em;">{{ industry_Avg.DivRate|floatformat:"1" }} % </div></th>
                             <th class="col-1.0"><div style="height: 90%; line-height: 100%; font-size:0.8em;">{{ industry_Avg.FinalPriceT1|floatformat:"1" }} % </div></th>

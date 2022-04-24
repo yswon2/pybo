@@ -14,11 +14,12 @@
             </div>
             <!-- Page Content -->
             <div class="col-sm-12 col-md-10 col-lg-10 p-0">
-                <div class="container my-3">
 
-                    <div class="page-header bg-primary text-white" >
-                      <h2><span class="badge badge-pill badge-primary">*</span>거래주체별 성과분석   <small> - 1개월 순매수 금액, 실현수익률</small></h2>
-                    </div>
+                <div class="page-header bg-primary text-white" >
+                    <h2><span class="badge badge-pill badge-primary">*</span>거래주체별 성과분석   <small> - 1개월 순매수 금액, 실현수익률</small></h2>
+                </div>
+
+                <div class="container my-3">
 
                     <!-- 구글 상단광고  -->
                     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5997522744771647"
@@ -103,19 +104,19 @@
                         <tr class="text-center align-items-center">
                             <td><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ investperfanaly.trade_date|date:'Y-m-d'  }}</div></td>
                             <td><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ investperfanaly.StockName }}</div></td>
-                            <td><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ investperfanaly.ClosePrice|floatformat:"0" }}</div></td>
+                            <td><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ investperfanaly.ClosePrice|floatformat:"0" }}</div></td>
                             {% if kw == "개인" %}
-                                <td><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ investperfanaly.AntBuySellInfo.TradeAmount_NetBuy|div:100000000|floatformat:"0" }} 억</div></td>
-                                <td><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ investperfanaly.ForeignBuySellInfo.TradeAmount_NetBuy|div:100000000|floatformat:"0" }} 억 </div></td>
-                                <td><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ investperfanaly.InstituteBuySellInfo.TradeAmount_NetBuy|div:100000000|floatformat:"0" }} 억 </div></td>
+                                <td><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ investperfanaly.AntBuySellInfo.TradeAmount_NetBuy|div:1000000000000|floatformat:"2" }}조</div></td>
+                                <td><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ investperfanaly.ForeignBuySellInfo.TradeAmount_NetBuy|div:1000000000000|floatformat:"2" }}조 </div></td>
+                                <td><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ investperfanaly.InstituteBuySellInfo.TradeAmount_NetBuy|div:1000000000000|floatformat:"2" }}조 </div></td>
                             {% elif kw == "외국인" %}
-                                <td><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ investperfanaly.ForeignBuySellInfo.TradeAmount_NetBuy|div:100000000|floatformat:"0" }} 억 </div></td>
-                                <td><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ investperfanaly.InstituteBuySellInfo.TradeAmount_NetBuy|div:100000000|floatformat:"0" }} 억 </div></td>
-                                <td><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ investperfanaly.AntBuySellInfo.TradeAmount_NetBuy|div:100000000|floatformat:"0" }} 억 </div></td>
+                                <td><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ investperfanaly.ForeignBuySellInfo.TradeAmount_NetBuy|div:1000000000000|floatformat:"2" }}조 </div></td>
+                                <td><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ investperfanaly.InstituteBuySellInfo.TradeAmount_NetBuy|div:1000000000000|floatformat:"2" }}조 </div></td>
+                                <td><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ investperfanaly.AntBuySellInfo.TradeAmount_NetBuy|div:1000000000000|floatformat:"2" }}조 </div></td>
                             {% else %}
-                                <td><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ investperfanaly.InstituteBuySellInfo.TradeAmount_NetBuy|div:100000000|floatformat:"0" }} 억 </div></td>
-                                <td><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ investperfanaly.ForeignBuySellInfo.TradeAmount_NetBuy|div:100000000|floatformat:"0" }} 억 </div></td>
-                                <td><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ investperfanaly.AntBuySellInfo.TradeAmount_NetBuy|div:100000000|floatformat:"0" }} 억 </div></td>
+                                <td><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ investperfanaly.InstituteBuySellInfo.TradeAmount_NetBuy|div:1000000000000|floatformat:"2" }}조 </div></td>
+                                <td><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ investperfanaly.ForeignBuySellInfo.TradeAmount_NetBuy|div:1000000000000|floatformat:"2" }}조 </div></td>
+                                <td><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ investperfanaly.AntBuySellInfo.TradeAmount_NetBuy|div:1000000000000|floatformat:"2" }}조 </div></td>
                             {% endif %}
                             <td><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ investperfanaly.ListedStockInfo.FinalPriceT|sub:investperfanaly.ListedStockInfo.FinalPriceT1|div:investperfanaly.ListedStockInfo.FinalPriceT1|mul:100|floatformat:"1" }} % </div></td>
                             <td><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ investperfanaly.ListedStockInfo.FinalPriceT|sub:investperfanaly.ListedStockInfo.FinalPriceT7|div:investperfanaly.ListedStockInfo.FinalPriceT7|mul:100|floatformat:"1" }} % </div></td>
