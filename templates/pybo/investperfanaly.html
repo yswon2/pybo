@@ -60,8 +60,8 @@
                     <table class="col-sm-12 table table-striped" style="table-layout: auto; width: 100%; table-layout: fixed">
                         <colgroup>
                             <col width="10%" />
-                            <col width="20%" />
-                            <col width="10%" />
+                            <col width="17%" />
+                            <col width="13%" />
                             <col width="10%" />
                             <col width="10%" />
                             <col width="10%" />
@@ -75,7 +75,7 @@
                             <th class="col-1.5 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.9em;">기준일</div></th>
                             <th class="col-1.5 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.9em;">주식명</div></th>
                             <th class="col-1.5 align-items-center" rowspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.9em;">종가</div></th>
-                            <th class="col-1.5 align-items-center" colspan='3'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.9em;">1개월 순매수금액 (원)</div></th>
+                            <th class="col-1.5 align-items-center" colspan='3'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.9em;">1개월 순매수금액(원)</div></th>
                             <th class="col-1.0 align-items-center" colspan='3'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.9em;">수익율(기준일대비)</div></th>
                         </tr>
                         <tr class="thead-dark text-center align-items-center">
@@ -103,7 +103,7 @@
                         <tr class="text-center align-items-center">
                             <td><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ investperfanaly.trade_date|date:'Y-m-d'  }}</div></td>
                             <td><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ investperfanaly.StockName }}</div></td>
-                            <td><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ investperfanaly.ClosePrice|floatformat:"0" }}</div></td>
+                            <td><div style="height: 100%; line-height: 100%; font-size:0.8em; word-break: break-all; ">{{ investperfanaly.ClosePrice|floatformat:"0" }}</div></td>
                             {% if kw == "개인" %}
                                 <td><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ investperfanaly.AntBuySellInfo.TradeAmount_NetBuy|div:1000000000000|floatformat:"2" }}조</div></td>
                                 <td><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ investperfanaly.ForeignBuySellInfo.TradeAmount_NetBuy|div:1000000000000|floatformat:"2" }}조 </div></td>
@@ -117,9 +117,9 @@
                                 <td><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ investperfanaly.ForeignBuySellInfo.TradeAmount_NetBuy|div:1000000000000|floatformat:"2" }}조 </div></td>
                                 <td><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ investperfanaly.AntBuySellInfo.TradeAmount_NetBuy|div:1000000000000|floatformat:"2" }}조 </div></td>
                             {% endif %}
-                            <td><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ investperfanaly.ListedStockInfo.FinalPriceT|sub:investperfanaly.ListedStockInfo.FinalPriceT1|div:investperfanaly.ListedStockInfo.FinalPriceT1|mul:100|floatformat:"1" }} % </div></td>
-                            <td><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ investperfanaly.ListedStockInfo.FinalPriceT|sub:investperfanaly.ListedStockInfo.FinalPriceT7|div:investperfanaly.ListedStockInfo.FinalPriceT7|mul:100|floatformat:"1" }} % </div></td>
-                            <td><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ investperfanaly.ListedStockInfo.FinalPriceT|sub:investperfanaly.ListedStockInfo.FinalPriceT30|div:investperfanaly.ListedStockInfo.FinalPriceT30|mul:100|floatformat:"1" }} % </div></td>
+                            <td><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ investperfanaly.ListedStockInfo.FinalPriceT|sub:investperfanaly.ListedStockInfo.FinalPriceT1|div:investperfanaly.ListedStockInfo.FinalPriceT1|mul:100|floatformat:"1" }} % </div></td>
+                            <td><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ investperfanaly.ListedStockInfo.FinalPriceT|sub:investperfanaly.ListedStockInfo.FinalPriceT7|div:investperfanaly.ListedStockInfo.FinalPriceT7|mul:100|floatformat:"1" }} % </div></td>
+                            <td><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ investperfanaly.ListedStockInfo.FinalPriceT|sub:investperfanaly.ListedStockInfo.FinalPriceT30|div:investperfanaly.ListedStockInfo.FinalPriceT30|mul:100|floatformat:"1" }} % </div></td>
                         </tr>
                         {% endfor %}
                         {% else %}

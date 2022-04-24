@@ -94,11 +94,11 @@
                     <table class="col-sm-12 table table-striped" style="table-layout: auto; width: 100%; table-layout: fixed">
                         <colgroup>
                             <col width="15%" />
-                            <col width="10%" />
+                            <col width="12%" />
                             <col width="9%" />
-                            <col width="8%" />
-                            <col width="10%" />
-                            <col width="8%" />
+                            <col width="7%" />
+                            <col width="12%" />
+                            <col width="7%" />
                             <col width="8%" />
                             <col width="8%" />
                             <col width="8%" />
@@ -134,7 +134,7 @@
                             <th class="col-1.0"><div style="height: 90%; line-height: 100%; font-size:0.8em;">{{ industry_Avg.FinalPriceT1|floatformat:"1" }} % </div></th>
                             <th class="col-1.0"><div style="height: 90%; line-height: 100%; font-size:0.8em;">{{ industry_Avg.FinalPriceT7|floatformat:"1" }} % </div></th>
                             <th class="col-1.0"><div style="height: 90%; line-height: 100%; font-size:0.8em;">{{ industry_Avg.FinalPriceT30|floatformat:"1" }} % </div></th>
-                            <th class="col-1.0"><div style="height: 90%; line-height: 100%; font-size:0.8em;">{{ industry_Avg.FinalPriceT90|floatformat:"1" }} % </div></th>
+                            <th class="col-1.0"><div style="height: 90%; line-height: 100%; font-size:0.8em;">{{ industry_Avg.FinalPriceT90|floatformat:"0" }} % </div></th>
                          </tr>
                         </thead>
                         <tbody>
@@ -142,12 +142,12 @@
                         {% for industryperfanaly in industryperfanaly_list %}
                         <tr class="text-center align-items-center">
                             <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ industryperfanaly.StockName }}</div></td>
-                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ industryperfanaly.ClosePrice|floatformat:"0" }}</div></td>
-                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ industryperfanaly.ListedStockInfo.MarketCap|div:1000000000000|floatformat:"0" }}</div></td>
-                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ industryperfanaly.ListedStockInfo.PER|floatformat:"0" }} </div></td>
-                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ industryperfanaly.ListedStockInfo.EPS|floatformat:"0" }} </div></td>
-                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ industryperfanaly.ListedStockInfo.PBR|floatformat:"1" }} </div></td>
-                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.9em;">{{ industryperfanaly.ListedStockInfo.DivRate|floatformat:"1" }} % </div></td>
+                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.7em; word-break: break-all; ">{{ industryperfanaly.ClosePrice|floatformat:"0" }}</div></td>
+                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ industryperfanaly.ListedStockInfo.MarketCap|div:1000000000000|floatformat:"0" }}</div></td>
+                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ industryperfanaly.ListedStockInfo.PER|floatformat:"0" }} </div></td>
+                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.7em; word-break: break-all; ">{{ industryperfanaly.ListedStockInfo.EPS|floatformat:"0" }} </div></td>
+                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ industryperfanaly.ListedStockInfo.PBR|floatformat:"1" }} </div></td>
+                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ industryperfanaly.ListedStockInfo.DivRate|floatformat:"1" }} % </div></td>
                             <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ industryperfanaly.ListedStockInfo.FinalPriceT|sub:industryperfanaly.ListedStockInfo.FinalPriceT1|div:industryperfanaly.ListedStockInfo.FinalPriceT1|mul:100|floatformat:"1" }} % </div></td>
                             <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ industryperfanaly.ListedStockInfo.FinalPriceT|sub:industryperfanaly.ListedStockInfo.FinalPriceT7|div:industryperfanaly.ListedStockInfo.FinalPriceT7|mul:100|floatformat:"1" }} % </div></td>
                             <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ industryperfanaly.ListedStockInfo.FinalPriceT|sub:industryperfanaly.ListedStockInfo.FinalPriceT30|div:industryperfanaly.ListedStockInfo.FinalPriceT30|mul:100|floatformat:"1" }} % </div></td>

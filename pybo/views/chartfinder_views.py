@@ -276,9 +276,7 @@ def investperfanaly(request):
     todayvisitcnt = request.GET.get('todayvisitcnt', '0')
 
     if kw == '개인':
-
         temp_trade_date = stockbarcodedata.objects.all().filter(StockCode='A005930').values_list('trade_date', flat=True).order_by('-trade_date')[:1]
-
         if kw2 == '순매수':
             logger.info("개인 순매수 검색시작")
             investperfanaly_list = stockbarcodedata.objects.select_related('ListedStockInfo', 'AntBuySellInfo').filter(trade_date=temp_trade_date).order_by(F('AntBuySellInfo__TradeAmount_NetBuy').desc(nulls_last=True))[:30]
@@ -290,9 +288,7 @@ def investperfanaly(request):
             kw = "개인"
             kw2 = "순매도"
     elif kw == '외국인':
-
         temp_trade_date = stockbarcodedata.objects.all().filter(StockCode='A005930').values_list('trade_date', flat=True).order_by('-trade_date')[:1]
-
         if kw2 == '순매수':
             logger.info("외국인 순매수 검색시작")
             investperfanaly_list = stockbarcodedata.objects.select_related('ListedStockInfo', 'ForeignBuySellInfo').filter(trade_date=temp_trade_date).order_by(F('ForeignBuySellInfo__TradeAmount_NetBuy').desc(nulls_last=True))[:30]
@@ -304,9 +300,7 @@ def investperfanaly(request):
             kw = "외국인"
             kw2 = "순매도"
     elif kw == '기관':
-
         temp_trade_date = stockbarcodedata.objects.all().filter(StockCode='A005930').values_list('trade_date', flat=True).order_by('-trade_date')[:1]
-
         if kw2 == '순매수':
             logger.info("기관 순매수 검색시작")
             investperfanaly_list = stockbarcodedata.objects.select_related('ListedStockInfo', 'InstituteBuySellInfo').filter(trade_date=temp_trade_date).order_by(F('InstituteBuySellInfo__TradeAmount_NetBuy').desc(nulls_last=True))[:30]
