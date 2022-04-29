@@ -61,7 +61,7 @@
                         <colgroup>
                             <col width="16%" />
                             <col width="10%" />
-                            <col width="10%" />
+                            <col width="12%" />
                             <col width="12%" />
                             <col width="12%" />
                             <col width="10%" />
@@ -108,7 +108,7 @@
                         <tr class="text-center align-items-center">
                             <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ stockperfanaly.StockName }}</div></td>
                             <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ stockperfanaly.ListedStockInfo.MarketCap|div:1000000000000|floatformat:"1" }}</div></td>
-                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ stockperfanaly.StockPriceInfo.TradeVolume|div:1000|floatformat:"0" }}</div></td>
+                            <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.8em; word-break: break-all; ">{{ stockperfanaly.StockPriceInfo.TradeVolume|div:1000|floatformat:"0" }}</div></td>
                             <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.8em; word-break: break-all; ">{{ stockperfanaly.ClosePrice|floatformat:"0" }}</div></td>
                             {% if kw2 == "7일" %}
                                 <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.8em; word-break: break-all; ">{{ stockperfanaly.ListedStockInfo.FinalPriceT7|floatformat:"0" }}</div></td>

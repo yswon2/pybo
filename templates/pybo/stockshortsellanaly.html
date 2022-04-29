@@ -60,10 +60,10 @@
 
                     <table class="col-sm-12 table table-striped" style="table-layout: auto; width: 100%; table-layout: fixed" >
                         <colgroup>
-                            <col width="15%" />
+                            <col width="16%" />
                             <col width="8%" />
                             <col width="8%" />
-                            <col width="8%" />
+                            <col width="10%" />
                             <col width="10%" />
                             <col width="10%" />
                             <col width="8%" />
@@ -79,9 +79,9 @@
                             <th class="col-1 align-items-center" rowspan='1'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.7em;">시가</div></th>
                             <th class="col-1 align-items-center" rowspan='1'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.7em;">외국인</div></th>
                             <th class="col-0.9 align-items-center" colspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.7em;">공매도잔고</div></th>
-                            <th class="col-1.0 align-items-center" rowspan='1'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.7em;">당일거래</div></th>
+                            <th class="col-1.0 align-items-center" rowspan='1'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.6em;">당일거래</div></th>
                             <th class="col-1.0 align-items-center" colspan='2'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.7em;">당일공매도</div></th>
-                            <th class="col-1.1 align-items-center" colspan='3'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.9em;">기간수익률</div></th>
+                            <th class="col-1.1 align-items-center" colspan='3'><div style="text-align: center; height: 100%; line-height: 100%; font-size:0.8em;">기간수익률</div></th>
                         </tr>
                         <tr class="thead-dark text-center align-items-center">
                             <th class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.8em;">총액(조)</div></th>
@@ -91,9 +91,9 @@
                             <th class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.7em;">금액(억)</div></th>
                             <th class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.7em;">금액(억)</div></th>
                             <th class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.7em;">비중(%)</div></th>
-                            <th class="col-1.1"><div style="height: 100%; line-height: 100%; font-size:0.8em;">7일</div></th>
-                            <th class="col-1.1"><div style="height: 100%; line-height: 100%; font-size:0.7em;">30일</div></th>
-                            <th class="col-1.1"><div style="height: 100%; line-height: 100%; font-size:0.7em;">90일</div></th>
+                            <th class="col-1.1"><div style="height: 100%; line-height: 100%; font-size:0.7em;">7일(%)</div></th>
+                            <th class="col-1.1"><div style="height: 100%; line-height: 100%; font-size:0.7em;">30일(%)</div></th>
+                            <th class="col-1.1"><div style="height: 100%; line-height: 100%; font-size:0.7em;">90일(%)</div></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -104,13 +104,13 @@
                             <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ stockshortsellanaly.ListedStockInfo.MarketCap|div:1000000000000|floatformat:"1" }}</div></td>
                             <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ stockshortsellanaly.ListedStockInfo.ForeignStockRate|floatformat:"0" }}</div></td>
                             <td class="col-0.9"><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ stockshortsellanaly.ListedStockInfo.ShortSellRate|floatformat:"1" }}</div></td>
-                            <td class="col-0.9"><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ stockshortsellanaly.ListedStockInfo.ShortSellAmont|div:100000000|floatformat:"0" }}</div></td>
+                            <td class="col-0.9"><div style="height: 100%; line-height: 100%; font-size:0.8em; word-break: break-all; ">{{ stockshortsellanaly.ListedStockInfo.ShortSellAmont|div:100000000|floatformat:"0" }}</div></td>
                             <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ stockshortsellanaly.ListedStockInfo.TodayTotalTradeAmount|div:100000000|floatformat:"0" }}</div></td>
                             <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ stockshortsellanaly.ListedStockInfo.TodayShortTradeAmount|div:100000000|floatformat:"0" }}</div></td>
                             <td class="col-1.0"><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ stockshortsellanaly.ListedStockInfo.TodayShortTradeRate|floatformat:"1" }}</div></td>
-                            <td class="col-1.1"><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ stockshortsellanaly.PriceT7Rtn|floatformat:"1" }} % </div></td>
-                            <td class="col-1.1"><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ stockshortsellanaly.PriceT30Rtn|floatformat:"1" }} % </div></td>
-                            <td class="col-1.1"><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ stockshortsellanaly.PriceT90Rtn|floatformat:"1" }} % </div></td>
+                            <td class="col-1.1"><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ stockshortsellanaly.PriceT7Rtn|floatformat:"1" }} </div></td>
+                            <td class="col-1.1"><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ stockshortsellanaly.PriceT30Rtn|floatformat:"1" }} </div></td>
+                            <td class="col-1.1"><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ stockshortsellanaly.PriceT90Rtn|floatformat:"1" }} </div></td>
 
                         </tr>
                         {% endfor %}
