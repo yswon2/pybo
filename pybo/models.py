@@ -307,3 +307,69 @@ class stockbarcodedata(models.Model):
     ForeignBuySellInfo = models.ForeignKey(ForeignBuySellInfo, on_delete=models.DO_NOTHING, db_constraint=False, null=True)
     InstituteBuySellInfo = models.ForeignKey(InstituteBuySellInfo, on_delete=models.DO_NOTHING, db_constraint=False, null=True)
 
+
+class twinstockbarcodeperfreturn(models.Model):
+
+    trade_date = models.DateField(null=False, blank=False)
+    StockCode = models.CharField(null=False, blank=False,  max_length=20)
+    StockName = models.CharField(null=True, blank=True, max_length=100)
+    MarketType = models.CharField(null=False, blank=False, max_length=15)
+    ClosePrice = models.FloatField()
+    BarFinalCode = models.CharField(null=True, blank=True, max_length=20)
+    BarFinalCodeDtl = models.CharField(null=True, blank=True, max_length=20)
+    Day1PL = models.FloatField()
+    Day1Return = models.FloatField()
+    ClosePriceAft1 = models.FloatField()
+    Day7PL = models.FloatField()
+    Day7Return = models.FloatField()
+    ClosePriceAft7 = models.FloatField()
+    Day30PL = models.FloatField()
+    Day30Return = models.FloatField()
+    ClosePriceAft30 = models.FloatField()
+    Day90PL = models.FloatField()
+    Day90Return = models.FloatField()
+    ClosePriceAft90 = models.FloatField()
+    Day180PL = models.FloatField()
+    Day180Return = models.FloatField()
+    ClosePriceAft180 = models.FloatField()
+    Day360PL = models.FloatField()
+    Day360Return = models.FloatField()
+    ClosePriceAft360 = models.FloatField()
+    TodayPL = models.FloatField(null=True, blank=True)
+    TodayReturn = models.FloatField(null=True, blank=True)
+
+    StockBarcode_ID = models.CharField(null=False, blank=False, primary_key=True, max_length=150, default='')
+
+
+class twinstockbarcodedata(models.Model):
+
+    trade_date = models.DateField(null=False, blank=False)
+    StockCode = models.CharField(null=False, blank=False, max_length=20)
+    StockName = models.CharField(null=True, blank=True, max_length=100)
+    MarketType = models.CharField(null=False, blank=False, max_length=15)
+    ClosePrice = models.FloatField()
+    BarType = models.CharField(null=True, blank=True, max_length=20)
+    BarLengthType = models.CharField(null=True, blank=True, max_length=20)
+    HammerType = models.CharField(null=True, blank=True, max_length=20)
+    StochasticFlag = models.CharField(null=True, blank=True, max_length=20)
+    BolingerBandPos = models.CharField(null=True, blank=True, max_length=20)
+    VolumeFlag = models.CharField(null=True, blank=True, max_length=20)
+    MACDFlag = models.CharField(null=True, blank=True, max_length=20)
+    StrategyCond = models.CharField(null=True, blank=True, max_length=20)
+    STDevStochasticFlag = models.CharField(null=True, blank=True, max_length=20)
+    BarFinalCode = models.CharField(null=False, blank=False, max_length=20, default='')
+    BarFinalCodeDtl = models.CharField(null=True, blank=True, max_length=20)
+    StochasticCrossFlag = models.CharField(null=True, blank=True, max_length=20)
+
+    StockBarcode_ID = models.CharField(null=False, blank=False, primary_key=True, max_length=150, default='')
+
+    TwinStockBarcodePerfReturn = models.ForeignKey(twinstockbarcodeperfreturn, on_delete=models.CASCADE, default='')
+    StockBarcodePerfTotal = models.ForeignKey(stockbarcodeperftotal, on_delete=models.DO_NOTHING, db_constraint=False, null=True)
+    ListedStockInfo = models.ForeignKey(listedstockinfo, on_delete=models.DO_NOTHING, db_constraint=False, null=True)
+    StockPriceInfo = models.ForeignKey(stockpriceinfo, on_delete=models.DO_NOTHING, db_constraint=False, null=True)
+    StockCalcData = models.ForeignKey(stockcalcdata, on_delete=models.DO_NOTHING, db_constraint=False, null=True)
+
+    AntBuySellInfo = models.ForeignKey(AntBuySellInfo, on_delete=models.DO_NOTHING, db_constraint=False, null=True)
+    ForeignBuySellInfo = models.ForeignKey(ForeignBuySellInfo, on_delete=models.DO_NOTHING, db_constraint=False, null=True)
+    InstituteBuySellInfo = models.ForeignKey(InstituteBuySellInfo, on_delete=models.DO_NOTHING, db_constraint=False, null=True)
+

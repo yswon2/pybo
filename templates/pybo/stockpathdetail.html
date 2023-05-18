@@ -87,12 +87,12 @@
                             <td><div style="height: 100%; line-height: 100%; font-size:0.7em;">{{ stockpathdetail.trade_date|date:'Y-m-d' }}</div></td>
                             <td><div style="height: 100%; line-height: 100%; font-size:0.7em;">{{ stockpathdetail.StockName }}</div></td>
                             <td><div style="height: 100%; line-height: 100%; font-size:0.7em; word-break: break-all; ">{{ stockpathdetail.ClosePrice|floatformat:"0" }}</div></td>
-                            <td><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ stockpathdetail.StockBarcodePerfReturn.TodayReturn|mul:100|floatformat:"0" }} % </div></td>
-                            <td><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ stockpathdetail.StockBarcodePerfReturn.Day7Return|mul:100|floatformat:"0" }} % </div></td>
-                            <td><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ stockpathdetail.StockBarcodePerfReturn.Day30Return|mul:100|floatformat:"0" }} % </div></td>
-                            <td><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ stockpathdetail.StockBarcodePerfReturn.Day90Return|mul:100|floatformat:"0" }} % </div></td>
-                            <td><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ stockpathdetail.StockBarcodePerfReturn.Day180Return|mul:100|floatformat:"0" }} % </div></td>
-                            <td><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ stockpathdetail.StockBarcodePerfReturn.Day360Return|mul:100|floatformat:"0" }} % </div></td>
+                            <td><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ stockpathdetail.TwinStockBarcodePerfReturn.TodayReturn|mul:100|floatformat:"0" }} % </div></td>
+                            <td><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ stockpathdetail.TwinStockBarcodePerfReturn.Day7Return|mul:100|floatformat:"0" }} % </div></td>
+                            <td><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ stockpathdetail.TwinStockBarcodePerfReturn.Day30Return|mul:100|floatformat:"0" }} % </div></td>
+                            <td><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ stockpathdetail.TwinStockBarcodePerfReturn.Day90Return|mul:100|floatformat:"0" }} % </div></td>
+                            <td><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ stockpathdetail.TwinStockBarcodePerfReturn.Day180Return|mul:100|floatformat:"0" }} % </div></td>
+                            <td><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ stockpathdetail.TwinStockBarcodePerfReturn.Day360Return|mul:100|floatformat:"0" }} % </div></td>
                             <td><div style="height: 100%; line-height: 100%; font-size:0.8em;">{{ stockpathdetail.StockBarcodePerfTotal.BarFinalCode_Cnt }}</div></td>
                         </tr>
                         {% endfor %}
