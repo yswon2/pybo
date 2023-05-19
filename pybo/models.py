@@ -81,8 +81,8 @@ class stockbarcodeperfreturn(models.Model):
     Day360PL = models.FloatField()
     Day360Return = models.FloatField()
     ClosePriceAft360 = models.FloatField()
-    TodayPL = models.FloatField(null=True, blank=True)
-    TodayReturn = models.FloatField(null=True, blank=True)
+    TodayPL = models.FloatField(null=True,)
+    TodayReturn = models.FloatField(null=True)
 
     StockBarcode_ID = models.CharField(null=False, blank=False, primary_key=True, max_length=150, default='')
 
@@ -357,7 +357,7 @@ class twinstockbarcodedata(models.Model):
     MACDFlag = models.CharField(null=True, blank=True, max_length=20)
     StrategyCond = models.CharField(null=True, blank=True, max_length=20)
     STDevStochasticFlag = models.CharField(null=True, blank=True, max_length=20)
-    BarFinalCode = models.CharField(null=False, blank=False, max_length=20, default='')
+    BarFinalCode = models.CharField(null=False, blank=False, max_length=20)
     BarFinalCodeDtl = models.CharField(null=True, blank=True, max_length=20)
     StochasticCrossFlag = models.CharField(null=True, blank=True, max_length=20)
 
